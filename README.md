@@ -140,7 +140,7 @@ The minimum required version is [CMake 3.16](https://cmake.org/files/v3.16/ "Dow
 ![Github code size](https://img.shields.io/github/languages/code-size/fibercrypto/fibercryptowallet-qt.svg "Code size")
 ![Github repository size](https://img.shields.io/github/repo-size/fibercrypto/fibercryptowallet-qt.svg "Repository size")
 ![Github file count](https://img.shields.io/github/directory-file-count/fibercrypto/fibercryptowallet-qt.svg "File count")
-![Github .go file count](https://img.shields.io/github/directory-file-count/fibercrypto/fibercryptowallet-qt/*.svg?color=blue&extension=go&label=.go%20files.svg ".go file count")
+![Github .cpp file count](https://img.shields.io/github/directory-file-count/fibercrypto/fibercryptowallet-qt/*.svg?color=blue&extension=cpp&label=.cpp%20files.svg ".cpp file count")
 ![Github .qml file count](https://img.shields.io/github/directory-file-count/fibercrypto/fibercryptowallet-qt/*.svg?color=blue&extension=qml&label=.qml%20files ".qml file count")
 
 
