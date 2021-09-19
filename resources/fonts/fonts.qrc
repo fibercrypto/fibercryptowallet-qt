@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/fonts">
+        <file>code-new-roman/code-new-roman.otf</file>
+        <file>hemi-head/hemi-head.ttf</file>
+    </qresource>
+</RCC>

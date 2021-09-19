@@ -1,0 +1,27 @@
+<RCC>
+    <qresource prefix="/ui">
+        <file>qml/splash.qml</file>
+        <file>qml/main.qml</file>
+        <file>qml/Components/ApplicationWindowContent.qml</file>
+        <file>qml/Components/Pages/PageCreateWallet.qml</file>
+        <file>qml/Components/Pages/PageOverview.qml</file>
+        <file>qml/Components/Pages/PageWallets.qml</file>
+        <file>qml/Components/Delegates/DelegateWallet.qml</file>
+        <file>qml/Components/Delegates/DelegateWalletAddress.qml</file>
+        <file>qml/Components/Dialogs/DialogAbout.qml</file>
+        <file>qml/Components/Dialogs/DialogAboutQt.qml</file>
+        <file>qml/Components/Dialogs/DialogAboutLicense.qml</file>
+        <file>qml/Components/Dialogs/DialogSimpleInput.qml</file>
+        <file>qml/Components/Dialogs/DialogContent/ContentAbout.qml</file>
+        <file>qml/Components/Dialogs/DialogContent/ContentAboutQt.qml</file>
+        <file>qml/Components/Dialogs/DialogContent/ContentAboutLicense.qml</file>
+        <file>qml/Components/Custom/CustomMenuBar.qml</file>
+        <file>qml/Components/Custom/CustomMenuItem.qml</file>
+        <file>qml/Components/Custom/CustomScrollBar.qml</file>
+        <file>qml/Components/Custom/CustomSwitch.qml</file>
+        <file>qml/Components/Controls/TextArea.qml</file>
+        <file>qml/Components/Controls/TextField.qml</file>
+        <file>qml/Components/Controls/+Material/TextArea.qml</file>
+        <file>qml/Components/Controls/+Material/TextField.qml</file>
+    </qresource>
+</RCC>
