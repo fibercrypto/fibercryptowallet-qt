@@ -1,15 +1,15 @@
-<a href="https://t.me/fibercrypto"> <img src="resources/images/icons/github-related/telegram.svg" height=18 title="Follow us on Telegram"></a>
+<a href="https://t.me/fibercrypto"> <img src="resources/images/github-related/telegram.svg" height=18 title="Follow us on Telegram"></a>
 <a href="https://github.com/fibercrypto/fibercryptowallet-qt"> <img src="resources/images/icons/appIcon/appIcon.png" height=96 align="right"></a>
 
 # FiberCrypto Wallet
 
 **Multi-coin cryptocurrency wallet**
 
-[![License: GPL v3](resources/images/icons/github-related/license-gplv3.svg)](LICENSE.GPLv3 "GPL v3")
-[![Built with Qt](resources/images/icons/github-related/built-with-qt.svg)](https://qt.io "The Qt Company")
-[![Open-source](resources/images/icons/github-related/open-source.svg)](https://github.com "Open-source")
-[![WIP](resources/images/icons/github-related/wip.svg)](https://github.com/fibercrypto/fibercryptowallet-qt/issues "WIP: Check issues")
-[![Contributions welcome](resources/images/icons/github-related/contributions-welcome.svg)](CONTRIBUTING.md "Contributions are welcome")
+[![License: GPL v3](resources/images/github-related/license-gplv3.svg)](LICENSE.GPLv3 "GPL v3")
+[![Built with Qt](resources/images/github-related/built-with-qt.svg)](https://qt.io "The Qt Company")
+[![Open-source](resources/images/github-related/open-source.svg)](https://github.com "Open-source")
+[![WIP](resources/images/github-related/wip.svg)](https://github.com/fibercrypto/fibercryptowallet-qt/issues "WIP: Check issues")
+[![Contributions welcome](resources/images/github-related/contributions-welcome.svg)](CONTRIBUTING.md "Contributions are welcome")
 
 :star: Star us on GitHub — it really helps!
 
@@ -51,7 +51,7 @@
 
 ## Releases
 
-[![Releases](resources/images/icons/github-related/releases.svg)](https://GitHub.com/fibercrypto/fibercryptowallet-qt/releases/ "Releases")
+[![Releases](resources/images/github-related/releases.svg)](https://GitHub.com/fibercrypto/fibercryptowallet-qt/releases/ "Releases")
 
 As of today, no releases has been published yet. However, a compilable tag was published. Releases are planned for the following platforms: *Windows*, *macOS*, *Linux*, *Android*, *iOS* and *Raspberry Pi*. In the long term, we also want to release for *watchOS*, *AsteroidOS* and more embedded devices.
 
@@ -59,7 +59,7 @@ As of today, no releases has been published yet. However, a compilable tag was p
 
 **Desktop platforms:**
 
-Release type | ![Win](resources/images/icons/github-related/windows.svg "Windows") | ![mac](resources/images/icons/github-related/macos.svg "macOS") | ![linux](resources/images/icons/github-related/linux.svg "Linux")
+Release type | ![Win](resources/images/github-related/windows.svg "Windows") | ![mac](resources/images/github-related/macos.svg "macOS") | ![linux](resources/images/github-related/linux.svg "Linux")
 -------------------------------------------|--------------------|--------------------|--------------------
 Source code *(compilable)*                 | No                 | No                 | No 
 Installer *(recommended)*                  | No                 | No                 | No
@@ -68,7 +68,7 @@ Portable<br> *(static, single executable)* | No                 | No            
 
 **Mobile platforms:**
 
-Release type | ![droid](resources/images/icons/github-related/android.svg "Android") | ![ios](resources/images/icons/github-related/ios.svg "iOS")
+Release type | ![droid](resources/images/github-related/android.svg "Android") | ![ios](resources/images/github-related/ios.svg "iOS")
 -------------------------------------------|--------------------|--------------------
 Source code *(compilable)*                 | No                 | No
 Default *(Store)*                          | No                 | No
@@ -76,7 +76,7 @@ Alternative                                | No                 | No
 
 **Embedded platforms:**
 
-Release type | ![raspi](resources/images/icons/github-related/raspberry-pi.svg "Raspberry Pi")
+Release type | ![raspi](resources/images/github-related/raspberry-pi.svg "Raspberry Pi")
 -------------------------------------------|--------------------
 Source code *(compilable)*                 | No
 Installer *(recommended)*                  | No
@@ -88,7 +88,7 @@ Portable<br> *(static, single executable)* | No
 
 ### Build System
 
-[![CMake](resources/images/icons/github-related/cmake.svg)](https://cmake.org/ "CMake")
+[![CMake](resources/images/github-related/cmake.svg)](https://cmake.org/ "CMake")
 
 The minimum required version is [CMake 3.16](https://cmake.org/files/v3.16/ "Download CMake 3.16"), but we always recommend the [latest version](https://cmake.org/download/ "Download CMake") available.
 
@@ -97,8 +97,8 @@ The minimum required version is [CMake 3.16](https://cmake.org/files/v3.16/ "Dow
 
 <table>
      <tr><td style="width:90px"><a href="https://qt.io/"><img src="resources/images/icons/qt_logo_green_rgb.svg" title="The Qt Company"></a></td><td>This project uses the <a href="https://www.qt.io/" title="The Qt Company">Qt framework</a> for the frontend. The minimum required version is <a href="https://download.qt.io/archive/qt/6.0/6.0.0/" title="Download Qt 6.0.0">Qt 6.0.0</a>, but we always recommend using the <a href="https://download.qt.io/archive/qt/" title="Download latest version">latest version</a> available.</td></tr>
-     <tr><td style="width:90px"><a href="https://golang.org/"><img src="resources/images/icons/github-related/go.svg" title="The Go Programming Language"></a></td><td>This project uses <a href="https://golang.org/" title="The Go Programming Language">Go</a> for the backend. The minimum required version is <a href="https://blog.golang.org/go1.13/" title="Go 1.13 is released - The Go Blog">Go 1.13</a>, but we always recommend using the <a href="https://golang.org/dl/" title="Download latest version">latest version</a> available.</td></tr>
-     <tr><td style="width:90px"><a href="https://imagemagick.org/"><img src="resources/images/icons/github-related/image-magick.svg" title="Image Magick"></a></td><td>Windows requires the command line tool <tt>convert</tt> (or <tt>magick convert</tt>, depending of the version used), that comes with the open-source <a href="https://imagemagick.org" title="Image Magick">ImageMagick</a> project in order to build the icon. A default icon is always provided, so this is not neccesary unless it's going to be replaced.</td></tr>
+     <tr><td style="width:90px"><a href="https://golang.org/"><img src="resources/images/github-related/go.svg" title="The Go Programming Language"></a></td><td>This project uses <a href="https://golang.org/" title="The Go Programming Language">Go</a> for the backend. The minimum required version is <a href="https://blog.golang.org/go1.13/" title="Go 1.13 is released - The Go Blog">Go 1.13</a>, but we always recommend using the <a href="https://golang.org/dl/" title="Download latest version">latest version</a> available.</td></tr>
+     <tr><td style="width:90px"><a href="https://imagemagick.org/"><img src="resources/images/github-related/image-magick.svg" title="Image Magick"></a></td><td>Windows requires the command line tool <tt>convert</tt> (or <tt>magick convert</tt>, depending of the version used), that comes with the open-source <a href="https://imagemagick.org" title="Image Magick">ImageMagick</a> project in order to build the icon. A default icon is always provided, so this is not neccesary unless it's going to be replaced.</td></tr>
 </table>
 
 
@@ -145,10 +145,10 @@ The minimum required version is [CMake 3.16](https://cmake.org/files/v3.16/ "Dow
 
 
 ## License
-[![License: GPL v3](resources/images/icons/github-related/license-gplv3.svg)](LICENSE.GPLv3 "GPL v3")
+[![License: GPL v3](resources/images/github-related/license-gplv3.svg)](LICENSE.GPLv3 "GPL v3")
 
 <h2>
 WIP
 </h2>
 
-[![WIP](resources/images/icons/github-related/wip.svg)](https://github.com/fibercrypto/fibercryptowallet-qt/issues "WIP: Check issues")
+[![WIP](resources/images/github-related/wip.svg)](https://github.com/fibercrypto/fibercryptowallet-qt/issues "WIP: Check issues")
