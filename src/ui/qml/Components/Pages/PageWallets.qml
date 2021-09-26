@@ -63,6 +63,17 @@ ListView {
             }
         }
         Connections {
+            id: connectionEditWallet
+            enabled: false
+            target: dialogSimpleInput
+            function onAccepted() {
+                console.log("Editing wallet")
+                // var qwallet = walletManager.editWallet(fileName, name)
+                // walletModel.editWallet(index, qwallet.name, encryptionEnabled, qwallet.sky, qwallet.coinHours )
+                connectionEditWallet.enabled = false
+            }
+        }
+        Connections {
             id: connectionToggleEncryption
             enabled: false
             target: dialogSimpleInput
@@ -79,16 +90,32 @@ ListView {
         }
 
         onAddAddressesRequested: {
-            dialogSimpleInput.inputType = encryptionEnabled ? Dialogs.DialogSimpleInput.InputType.NumberText : Dialogs.DialogSimpleInput.InputType.Number
+            dialogSimpleInput.inputType = encryptionEnabled ? Dialogs.DialogSimpleInput.InputType.TextNumber : Dialogs.DialogSimpleInput.InputType.Number
             dialogSimpleInput.promptMessage = qsTr("Enter number of addresses")
 
             dialogSimpleInput.numericValue = 1
 
             dialogSimpleInput.textPlaceholder = qsTr("Wallet's password")
-            dialogSimpleInput.textEchoMode = encryptionEnabled ? TextField.Password : dialogSimpleInput.textEchoMode
+            dialogSimpleInput.textEchoMode = TextField.Password
             dialogSimpleInput.textValue = ""
 
             connectionAddAddress.enabled = true
+            dialogSimpleInput.open()
+        }
+
+        onEditWalletRequested: {
+            dialogSimpleInput.inputType = encryptionEnabled ? Dialogs.DialogSimpleInput.InputType.TextText : Dialogs.DialogSimpleInput.InputType.Text
+            dialogSimpleInput.promptMessage = ""
+
+            dialogSimpleInput.textPlaceholder = qsTr("Password")
+            dialogSimpleInput.textEchoMode = TextField.Password
+            dialogSimpleInput.textValue = ""
+
+            dialogSimpleInput.textPlaceholder2 = qsTr("Name")
+            dialogSimpleInput.textEchoMode2 = TextField.Normal
+            dialogSimpleInput.textValue2 = ""
+
+            connectionEditWallet.enabled = true
             dialogSimpleInput.open()
         }
 
