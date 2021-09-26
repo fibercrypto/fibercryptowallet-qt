@@ -17,21 +17,6 @@ Item {
     signal editWalletRequested()
     signal toggleEncryptionRequested()
 
-
-    onEditWalletRequested: {
-        // dialogEditWallet.originalWalletName = name
-        // dialogEditWallet.name = name
-        // dialogEditWallet.open()
-    }
-    onToggleEncryptionRequested: {
-        if (encryptionEnabled) {
-            // dialogGetPassword.addAddress = false
-            // dialogGetPassword.open()
-        } else {
-            // dialogSetPassword.open()
-        }
-    }
-
     width: parent ? parent.width : width
     height: itemDelegateMainButton.height
     clip: true
@@ -235,23 +220,9 @@ Item {
     }
 
     /*
-
-    DialogEditWallet {
-        id: dialogEditWallet
-        anchors.centerIn: Overlay.overlay
-
-        focus: true
-        modal: true
-
-        onAccepted: {
-            var qwallet = walletManager.editWallet(fileName, name)
-            walletModel.editWallet(index, qwallet.name, encryptionEnabled, qwallet.sky, qwallet.coinHours )
-        }
-    } // DialogEditWallet
-
-//    Backend.AddressModel {
-//        id: listAddresses
-//    }
+    Backend.AddressModel {
+        id: listAddresses
+    }
     Component.onCompleted: {
         listAddresses.updateModel(fileName)
         listAddresses.suscribe(fileName)
