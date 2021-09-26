@@ -83,7 +83,7 @@ Dialog {
             width: visible ? parent.width : 0
             height: visible ? implicitHeight : 0
             visible: inputType === DialogSimpleInput.InputType.TextText
-            focus: visible
+            focus: visible && inputType !== DialogSimpleInput.InputType.TextText
             placeholderText: "Start typing..."
         }
 
@@ -94,7 +94,7 @@ Dialog {
             width: visible ? parent.width : 0
             height: visible ? implicitHeight : 0
             visible: inputType !== DialogSimpleInput.InputType.Text && inputType !== DialogSimpleInput.InputType.TextText
-            focus: visible
+            focus: visible && inputType !== DialogSimpleInput.InputType.TextNumber
             from: 1
             to: 100
             value: 1
