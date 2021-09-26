@@ -107,8 +107,8 @@ ListView {
             dialogSimpleInput.inputType = encryptionEnabled ? Dialogs.DialogSimpleInput.InputType.TextText : Dialogs.DialogSimpleInput.InputType.Text
             dialogSimpleInput.promptMessage = ""
 
-            dialogSimpleInput.textPlaceholder = qsTr("Password")
-            dialogSimpleInput.textEchoMode = TextField.Password
+            dialogSimpleInput.textPlaceholder = encryptionEnabled ? qsTr("Password") : qsTr("Name")
+            dialogSimpleInput.textEchoMode = encryptionEnabled ? TextField.Password : TextField.Normal
             dialogSimpleInput.textValue = ""
 
             dialogSimpleInput.textPlaceholder2 = qsTr("Name")
