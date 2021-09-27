@@ -134,7 +134,7 @@ Item {
                 id: buttonAddAddress
 
                 x: 2
-                width: parent.width/4 - 1
+                width: ~~(parent.width/4) + ~~(parent.width/4) % 2 // ~~ to avoid subpixel alignment
                 text: qsTr("Add address")
                 icon.source: "qrc:/images/icons/actions/add.svg"
                 Material.accent: Material.Teal

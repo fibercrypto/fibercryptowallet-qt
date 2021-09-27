@@ -6,6 +6,9 @@
         <file>qml/Components/Pages/PageCreateWallet.qml</file>
         <file>qml/Components/Pages/PageOverview.qml</file>
         <file>qml/Components/Pages/PageWallets.qml</file>
+        <file>qml/Components/Pages/PageSend.qml</file>
+        <file>qml/Components/Pages/PageSendSimple.qml</file>
+        <file>qml/Components/Pages/PageSendAdvanced.qml</file>
         <file>qml/Components/Delegates/DelegateWallet.qml</file>
         <file>qml/Components/Delegates/DelegateWalletAddress.qml</file>
         <file>qml/Components/Dialogs/DialogAbout.qml</file>

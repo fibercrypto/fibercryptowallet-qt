@@ -26,10 +26,9 @@ Page {
         currentIndex: tabBar.currentIndex
 
         PageWallets { }
-        Page {}
+        PageSend {}
         Page {}
 
-//        PageSend { }
-//        PageHistory { }
+        //PageHistory { }
     }
 }

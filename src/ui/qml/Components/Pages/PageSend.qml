@@ -1,13 +1,9 @@
-import QtQuick 2.12
-import QtQuick.Controls 2.12
-import QtQuick.Controls.Material 2.12
-import QtQuick.Layouts 1.12
-import Transactions 1.0
-import Utils 1.0
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Controls.Material
 
-// Resource imports
-// import "qrc:/ui/src/ui/Dialogs"
-import "Dialogs/" // For quick UI development, switch back to resources when making a release
+import "../Dialogs" as Dialogs
+import "../Custom" as Custom
 
 Page {
     id: root
@@ -18,7 +14,7 @@ Page {
     property string walletEncrypted
     property string destinationAddress
     property string amount
-    property QTransaction txn
+    // property QTransaction txn
 
     footer: ToolBar {
         id: tabBarSend
@@ -28,13 +24,13 @@ Page {
         Material.elevation: 0
 
         ToolButton {
-            id: buttonAddWallet
+            id: buttonSend
             anchors.fill: parent
             text: qsTr("Send")
-            icon.source: "qrc:/images/resources/images/icons/send.svg"
+            icon.source: "qrc:/images/icons/actions/send.svg"
 
             onClicked: {
-
+                /*
                 var isEncrypted
                 var walletSelected
                 var walletSelecteds
@@ -77,99 +73,48 @@ Page {
                 dialogSendTransaction.outputs = txn.outputs
                 dialogSendTransaction.walletsAddresses = addrs
                 dialogSendTransaction.open()
-                
-                
+                */
             }
         }
-    }
+    } // ToolBar (footer)
 
-    GroupBox {
-        id: groupBox
+    Flickable {
+        id: flickable
 
-        readonly property real margins: 50
+        width: parent.width
+        height: parent.height
+        contentHeight: switchAdvancedMode.implicitHeight + (switchAdvancedMode.checked ? pageSendAdvanced.implicitHeight : pageSendSimple.implicitHeight)
 
-        anchors.fill: parent
-        anchors.topMargin: 10
-        anchors.leftMargin: margins
-        anchors.rightMargin: margins
-        anchors.bottomMargin: margins
-        implicitWidth: stackView.width
-        clip: true
-
-        label: SwitchDelegate {
+        SwitchDelegate {
             id: switchAdvancedMode
 
+            x: 10
+            y: 10
             text: qsTr("Advanced mode")
-
-            onToggled: {
-                if (checked) {
-                    stackView.push(componentAdvanced)
-                } else {
-                    stackView.pop()
-                }
-            }
         }
 
-        StackView {
-            id: stackView
+        PageSendSimple {
+            id: pageSendSimple
 
-            property string walletSelected
-            property string destinationAddress
-            property string amount
-            
-            anchors.fill: parent
-            initialItem: componentSimple
-            clip: true            
+            x: switchAdvancedMode.x
+            y: switchAdvancedMode.y + switchAdvancedMode.height + 10
+            width: parent.width - 2*x
+            activated: !switchAdvancedMode.checked
+        }
 
-            Component {
-                id: componentSimple
-                
-                ScrollView {
-                    id: scrollViewSimple
-                    property alias simplePage: simple
-                    contentWidth: simple.width
-                    contentHeight: simple.height
-                    clip: true
+        PageSendAdvanced {
+            id: pageSendAdvanced
 
-                    SubPageSendSimple {
-                        id: simple
+            x: switchAdvancedMode.x
+            y: switchAdvancedMode.y + switchAdvancedMode.height + 6
+            width: parent.width - 2*x
+            visible: !pageSendSimple.visible
+        }
 
-                        width: stackView.width
-                        onWalletSelectedChanged: {
-                            root.walletSelected = walletSelected
-                        }
-                        onAmountChanged: {
-                            root.amount = amount
-                        }
-                        onDestinationAddressChanged: {
-                            root.destinationAddress = destinationAddress
-                        }
-						onWalletEncryptedChanged: {
-							root.walletEncrypted = walletEncrypted
-						}
-                    }
-                }
-            }
+        ScrollBar.vertical: Custom.CustomScrollBar {}
+    } // Flickable
 
-            Component {
-                id: componentAdvanced
-
-                ScrollView {
-                    id: scrollViewAdvanced
-                    property alias advancedPage: advanced
-                    contentWidth: advanced.width
-                    contentHeight: advanced.height
-                    clip: true
-
-                    SubPageSendAdvanced {
-                        id: advanced
-                        width: stackView.width
-                    }
-                }
-            }
-        } // StackView
-    } // GroupBox
-
+    /*
     DialogSendTransaction {
         id: dialogSendTransaction
         anchors.centerIn: Overlay.overlay
@@ -211,4 +156,5 @@ Page {
             getPasswordDialog.open()
         }
     }
+    */
 }

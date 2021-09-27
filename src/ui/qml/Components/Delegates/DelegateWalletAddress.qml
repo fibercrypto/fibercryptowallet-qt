@@ -15,9 +15,7 @@ Item {
     }
 
     function genQR(data) {
-        console.log("Requesting QR...")
-        // dialogQR.setQRVars(data)
-        // dialogQR.open()
+        console.log("QR requested...")
     }
 
     implicitHeight: itemVisible ? 30 : 0
@@ -37,7 +35,7 @@ Item {
     ToolButton {
         id: toolButtonQR
 
-        x: labelNumber.x + labelNumber.width
+        x: labelNumber.x + ~~labelNumber.width // ~~ to avoid subpixel alignment
         y: (parent.height - height)/2
         width: visible ? implicitWidth : 0
         height: visible ? implicitHeight : 0
