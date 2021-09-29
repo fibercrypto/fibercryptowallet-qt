@@ -6,6 +6,7 @@ import FiberCryptoWallet as Backend
 
 import "../Delegates" as Delegates
 import "../Dialogs" as Dialogs
+import "../Custom" as Custom
 
 ListView {
     id: walletList
@@ -178,6 +179,8 @@ ListView {
         ListElement { name: "My eighth wallet";  hasHardwareWallet: true;  encryptionEnabled: false; sky: 2001; coinHours: 10628 }
         ListElement { name: "My nineth wallet";  hasHardwareWallet: false; encryptionEnabled: true;  sky: 93;   coinHours: 381 }
     }
+
+    ScrollBar.vertical: Custom.CustomScrollBar {}
 } // ListView
 
 //    DialogAddLoadWallet {
