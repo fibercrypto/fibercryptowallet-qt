@@ -9,8 +9,11 @@
         <file>qml/Components/Pages/PageSend.qml</file>
         <file>qml/Components/Pages/PageSendSimple.qml</file>
         <file>qml/Components/Pages/PageSendAdvanced.qml</file>
+        <file>qml/Components/Pages/PageHistory.qml</file>
         <file>qml/Components/Delegates/DelegateWallet.qml</file>
         <file>qml/Components/Delegates/DelegateWalletAddress.qml</file>
+        <file>qml/Components/Delegates/DelegateHistoryList.qml</file>
+        <file>qml/Components/Delegates/DelegateTransactionAddress.qml</file>
         <file>qml/Components/Dialogs/DialogAbout.qml</file>
         <file>qml/Components/Dialogs/DialogAboutQt.qml</file>
         <file>qml/Components/Dialogs/DialogAboutLicense.qml</file>

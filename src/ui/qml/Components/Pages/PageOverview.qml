@@ -27,8 +27,6 @@ Page {
 
         PageWallets { }
         PageSend {}
-        Page {}
-
-        //PageHistory { }
+        PageHistory { }
     }
 }

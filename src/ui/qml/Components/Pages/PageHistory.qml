@@ -1,70 +1,83 @@
-import QtQuick 2.12
-import QtQuick.Controls 2.12
-import QtQuick.Controls.Material 2.12
-import QtQuick.Layouts 1.12
-import HistoryModels 1.0
-import WalletsManager 1.0
+import QtQuick
+import QtQuick.Controls
 
-// Resource imports
-// import "qrc:/ui/src/ui/Dialogs"
-// import "qrc:/ui/src/ui/Delegates"
-import "Dialogs/" // For quick UI development, switch back to resources when making a release
-import "Delegates/" // For quick UI development, switch back to resources when making a release
+import "../Dialogs" as Dialogs
+import "../Delegates" as Delegates
+import "../Custom" as Custom
 
 Page {
-    id: root
+    id: pageHistory
 
-    GroupBox {
-        anchors.fill: parent
-        anchors.margins: 20
-        clip: true
+    SwitchDelegate {
+        id: switchDelegateFilters
 
-        label: RowLayout {
-            SwitchDelegate {
-                id: switchFilters
-                text: qsTr("Filters")
-                onClicked:{
-                    if (!checked) {
-                        modelTransactions.clear()
-                        modelTransactions.addMultipleTransactions(historyManager.getTransactions())
-                    }
-                    else {
-                        modelTransactions.clear()
-                        modelTransactions.addMultipleTransactions(historyManager.getTransactionsWithFilters())
-                    }
-                }
+        x: 10
+        y: 10
+        text: qsTr("Filters")
+        onClicked: {
+            if (!checked) {
+                console.log("Clear and add all transactions...")
+                //modelTransactions.clear()
+                //modelTransactions.addMultipleTransactions(historyManager.getTransactions())
             }
-            Button {
-                id: buttonFilters
-                flat: true
-                enabled: switchFilters.checked
-                highlighted: true
-                text: qsTr("Select filters")
-
-                onClicked: {
-                    toolTipFilters.open()
-                }
-            }
-        } // RowLayout (GroupBox label)
-
-        ScrollView {
-            anchors.fill: parent
-            clip: true
-            ListView {
-                id: listTransactions
-
-                model: modelTransactions
-                delegate: HistoryListDelegate {
-                    onClicked: {
-                        dialogTransactionDetails.open()
-                        listTransactions.currentIndex = index
-                    }
-                }
+            else {
+                console.log("Clear and add filtered transactions...")
+                //modelTransactions.clear()
+                //modelTransactions.addMultipleTransactions(historyManager.getTransactionsWithFilters())
             }
         }
-    } // GroupBox
+    }
+    Button {
+        id: buttonFilters
+
+        x: switchDelegateFilters.x + switchDelegateFilters.width + 10
+        y: switchDelegateFilters.y + (switchDelegateFilters.height - height)/2
+        enabled: switchDelegateFilters.checked
+        flat: true
+        highlighted: true
+        text: qsTr("Select filters")
+
+        onClicked: {
+            console.log("Opening filters...")
+            //toolTipFilters.open()
+        }
+    }
 
 
+    ListView {
+        id: listTransactions
+
+        y: switchDelegateFilters.y + switchDelegateFilters.height + 10
+        width: parent.width
+        height: parent.height - y
+        clip: true
+        model: modelTransactions
+
+        delegate: Delegates.DelegateHistoryList {
+            width: parent.width
+
+            onClicked: {
+                console.log("Opening transaction details")
+                //dialogTransactionDetails.open()
+                listTransactions.currentIndex = index
+            }
+        }
+
+        ScrollBar.vertical: Custom.CustomScrollBar {}
+    }
+
+    // TODO: Implement in the backend
+    ListModel {
+        id: modelTransactions
+        // Model type: Send, Receive
+        // Model status: Confirmed, Pending, Preview
+        ListElement { date: "24-02-2002 05:34"; type: 0; status: 0; amount: 10; hoursTraspassed: 200; hoursBurned: 150; transactionID: "2b37e0f7d8c26b"; addresses: "hd763jakcc63sj,hs6283hhhet,8dh272odnndmgu" }
+        ListElement { date: "15-12-2004 16:23"; type: 1; status: 2; amount: 14; hoursTraspassed: 315; hoursBurned: 150; transactionID: "7aueakjshduaww"; addresses: "adhkuawykd7wud,snajgbdjawy,bjasgydjawydsw" }
+        ListElement { date: "30-01-2015 11:08"; type: 1; status: 0; amount: 22; hoursTraspassed: 502; hoursBurned: 150; transactionID: "kmaueyiawudsah"; addresses: "kjshcnawunkjas,kjashdkuwau,kajsdnkuawdjss" }
+        ListElement { date: "01-08-2021 15:00"; type: 0; status: 1; amount: 11; hoursTraspassed: 203; hoursBurned: 150; transactionID: "iuasduyw7eyuas"; addresses: "jskhdna7yuakss,ksahdkaw8yd,kashdkuwndu73d" }
+    }
+
+    /*
     Dialog {
         id: toolTipFilters
 
@@ -131,5 +144,6 @@ Page {
             }
         }
     }
+    */
 
 }
