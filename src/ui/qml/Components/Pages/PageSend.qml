@@ -96,7 +96,7 @@ Page {
         PageSendSimple {
             id: pageSendSimple
 
-            x: switchAdvancedMode.x
+            x: switchAdvancedMode.x + 6
             y: switchAdvancedMode.y + switchAdvancedMode.height + 10
             width: parent.width - 2*x
             activated: !switchAdvancedMode.checked
@@ -105,7 +105,7 @@ Page {
         PageSendAdvanced {
             id: pageSendAdvanced
 
-            x: switchAdvancedMode.x
+            x: switchAdvancedMode.x + 6
             y: switchAdvancedMode.y + switchAdvancedMode.height + 6
             width: parent.width - 2*x
             visible: !pageSendSimple.visible
