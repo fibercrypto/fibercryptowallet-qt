@@ -14,13 +14,16 @@
         <file>qml/Components/Delegates/DelegateWalletAddress.qml</file>
         <file>qml/Components/Delegates/DelegateHistoryList.qml</file>
         <file>qml/Components/Delegates/DelegateTransactionAddress.qml</file>
+        <file>qml/Components/Delegates/DelegateInputOutput.qml</file>
         <file>qml/Components/Dialogs/DialogAbout.qml</file>
         <file>qml/Components/Dialogs/DialogAboutQt.qml</file>
         <file>qml/Components/Dialogs/DialogAboutLicense.qml</file>
         <file>qml/Components/Dialogs/DialogSimpleInput.qml</file>
+        <file>qml/Components/Dialogs/DialogTransactionDetails.qml</file>
         <file>qml/Components/Dialogs/DialogContent/ContentAbout.qml</file>
         <file>qml/Components/Dialogs/DialogContent/ContentAboutQt.qml</file>
         <file>qml/Components/Dialogs/DialogContent/ContentAboutLicense.qml</file>
+        <file>qml/Components/Dialogs/DialogContent/ContentTransactionDetails.qml</file>
         <file>qml/Components/Custom/CustomMenuBar.qml</file>
         <file>qml/Components/Custom/CustomMenuItem.qml</file>
         <file>qml/Components/Custom/CustomScrollBar.qml</file>

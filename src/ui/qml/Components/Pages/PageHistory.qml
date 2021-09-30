@@ -57,9 +57,16 @@ Page {
             width: parent.width
 
             onClicked: {
-                console.log("Opening transaction details")
-                //dialogTransactionDetails.open()
-                listTransactions.currentIndex = index
+                dialogTransactionDetails.date = modelDate
+                dialogTransactionDetails.type = modelType
+                dialogTransactionDetails.status = modelStatus
+                dialogTransactionDetails.amount = modelAmount
+                dialogTransactionDetails.hoursReceived = modelHoursReceived
+                dialogTransactionDetails.hoursBurned = modelHoursBurned
+                dialogTransactionDetails.transactionID = modelTransactionID
+                dialogTransactionDetails.inputs = modelInputs
+                dialogTransactionDetails.outputs = modelOutputs
+                dialogTransactionDetails.open()
             }
         }
 
@@ -104,30 +111,6 @@ Page {
             anchors.fill: parent
         }
     } // Dialog
-
-    DialogTransactionDetails {
-        id: dialogTransactionDetails
-
-        readonly property real maxHeight: expanded ? 590 : 370
-
-        anchors.centerIn: Overlay.overlay
-        width: applicationWindow.width > 640 ? 640 - 40 : applicationWindow.width - 40
-        height: applicationWindow.height > maxHeight ? maxHeight - 40 : applicationWindow.height - 40
-        Behavior on height { NumberAnimation { duration: 1000; easing.type: Easing.OutQuint } }
-
-        modal: true
-        focus: true
-
-        date: listTransactions.currentItem ? listTransactions.currentItem.modelDate : ""
-        status: listTransactions.currentItem ? listTransactions.currentItem.modelStatus : 0
-        type: listTransactions.currentItem ? listTransactions.currentItem.modelType : 0
-        amount: listTransactions.currentItem ? listTransactions.currentItem.modelAmount : ""
-        hoursReceived: listTransactions.currentItem ? listTransactions.currentItem.modelHoursReceived : 1 
-        hoursBurned: listTransactions.currentItem ?  listTransactions.currentItem.modelHoursBurned : 1 
-        transactionID: listTransactions.currentItem ? listTransactions.currentItem.modelTransactionID : "" 
-        modelInputs: listTransactions.currentItem ? listTransactions.currentItem.modelInputs : null
-        modelOutputs: listTransactions.currentItem ? listTransactions.currentItem.modelOutputs : null
-    }
 
     QTransactionList {
         id: modelTransactions

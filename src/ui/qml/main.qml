@@ -73,6 +73,19 @@ ApplicationWindow {
         modal: true
     }
 
+    // Other dialogs
+    Dialogs.DialogTransactionDetails {
+        id: dialogTransactionDetails
+
+        x: (applicationWindow.width - width)/2
+        y: (applicationWindow.height - height)/2 - menuBar.height
+        width: applicationWindow.width > 640 ? 640 - 40 : applicationWindow.width - 40
+        height: applicationWindow.height > implicitHeight + 40 ? implicitHeight : applicationWindow.height - 40
+
+        modal: true
+        focus: visible
+    }
+
     // Help dialogs
     Dialogs.DialogAbout {
         id: dialogAbout
