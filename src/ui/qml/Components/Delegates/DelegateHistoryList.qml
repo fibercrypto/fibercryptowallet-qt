@@ -7,7 +7,17 @@ import "../Delegates" as Delegates
 ItemDelegate {
     id: root
 
-    enum TransactionType { Send, Receive }
+    // this enums should be in the backend
+    enum TransactionStatus {
+        Confirmed,
+        Pending,
+        Preview
+    }
+    enum TransactionType {
+        Send,
+        Receive,
+        Internal
+    }
 
     property string modelDate: date // showld be date instead of string
     property int modelType: type
@@ -18,6 +28,8 @@ ItemDelegate {
     property string modelHoursBurned: hoursBurned
     property string modelTransactionID: transactionID
     property var modelAddresses: addresses.split(",")
+    property var modelInputs: addresses.split(",")
+    property var modelOutputs: addresses.split(",")
     //property QAddressList modelAddresses: addresses
     //property QAddressList modelInputs: inputs
     //property QAddressList modelOutputs: outputs
