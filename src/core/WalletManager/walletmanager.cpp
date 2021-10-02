@@ -1,16 +1,16 @@
-#include "walletcreator.h"
+#include "walletmanager.h"
 
-WalletCreator::WalletCreator(QObject *parent) : QObject(parent)
+WalletManager::WalletManager(QObject *parent) : QObject(parent)
 {
 
 }
 
-WalletCreator::Mode WalletCreator::getMode() const
+WalletManager::Mode WalletManager::getMode() const
 {
     return mode;
 }
 
-void WalletCreator::setMode(Mode newMode)
+void WalletManager::setMode(Mode newMode)
 {
     if (mode == newMode)
         return;
@@ -18,12 +18,12 @@ void WalletCreator::setMode(Mode newMode)
     emit modeChanged();
 }
 
-const QString &WalletCreator::getName() const
+const QString &WalletManager::getName() const
 {
     return name;
 }
 
-void WalletCreator::setName(const QString &newName)
+void WalletManager::setName(const QString &newName)
 {
     if (name == newName)
         return;
@@ -31,12 +31,12 @@ void WalletCreator::setName(const QString &newName)
     emit nameChanged();
 }
 
-const QString &WalletCreator::getSeed() const
+const QString &WalletManager::getSeed() const
 {
     return seed;
 }
 
-void WalletCreator::setSeed(const QString &newSeed)
+void WalletManager::setSeed(const QString &newSeed)
 {
     if (seed == newSeed)
         return;
@@ -44,12 +44,12 @@ void WalletCreator::setSeed(const QString &newSeed)
     emit seedChanged();
 }
 
-const QString &WalletCreator::getConfirmedSeed() const
+const QString &WalletManager::getConfirmedSeed() const
 {
     return confirmedSeed;
 }
 
-void WalletCreator::setConfirmedSeed(const QString &newConfirmedSeed)
+void WalletManager::setConfirmedSeed(const QString &newConfirmedSeed)
 {
     if (confirmedSeed == newConfirmedSeed)
         return;

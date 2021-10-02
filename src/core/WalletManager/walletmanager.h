@@ -1,9 +1,9 @@
-#ifndef WALLETCREATOR_H
-#define WALLETCREATOR_H
+#ifndef WALLETMANAGER_H
+#define WALLETMANAGER_H
 
 #include <QtQml>
 
-class WalletCreator : public QObject
+class WalletManager : public QObject
 {
     Q_OBJECT
     QML_ELEMENT
@@ -12,7 +12,7 @@ public:
     enum Mode { Create, Load };
     Q_ENUM(Mode)
 
-    explicit WalletCreator(QObject *parent = nullptr);
+    explicit WalletManager(QObject *parent = nullptr);
 
     Mode getMode() const;
     void setMode(Mode newMode);
@@ -44,4 +44,4 @@ private:
     Q_PROPERTY(QString confirmedSeed READ getConfirmedSeed WRITE setConfirmedSeed NOTIFY confirmedSeedChanged)
 };
 
-#endif // WALLETCREATOR_H
+#endif // WALLETMANAGER_H

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.16)
 
 project(FiberCryptoWallet VERSION 0.1 LANGUAGES CXX)
 
@@ -23,32 +23,18 @@ set(PROJECT_SOURCES
     resources/qt/qt.qrc
     # Source files
     src/main.cpp
-    src/core/WalletCreator/walletcreator.h
-    src/core/WalletCreator/walletcreator.cpp
+    src/core/WalletManager/walletmanager.h
+    src/core/WalletManager/walletmanager.cpp
 )
 
-if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(FiberCryptoWallet
-        MANUAL_FINALIZATION
-        ${PROJECT_SOURCES}
-    )
+qt_add_executable(FiberCryptoWallet
+    MANUAL_FINALIZATION
+    ${PROJECT_SOURCES}
+)
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET FiberCryptoWallet APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
 #                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
 # For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
-else()
-    if(ANDROID)
-        add_library(FiberCryptoWallet SHARED
-            ${PROJECT_SOURCES}
-        )
-# Define properties for Android with Qt 5 after find_package() calls as:
-#    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
-    else()
-        add_executable(FiberCryptoWallet
-          ${PROJECT_SOURCES}
-        )
-    endif()
-endif()
 
 target_compile_definitions(FiberCryptoWallet
   PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
@@ -56,20 +42,20 @@ target_link_libraries(FiberCryptoWallet
   PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick)
 
 set_target_properties(FiberCryptoWallet PROPERTIES
-    MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
+    MACOSX_BUNDLE_GUI_IDENTIFIER simelo.fibercryptowallet.com
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
-    QT_QML_MODULE_VERSION 1.0
-    QT_QML_MODULE_URI FiberCryptoWallet
 )
 
-if(QT_VERSION_MAJOR EQUAL 6)
-    qt_import_qml_plugins(FiberCryptoWallet)
-    qt_finalize_executable(FiberCryptoWallet)
-endif()
+qt_import_qml_plugins(FiberCryptoWallet)
+qt_finalize_executable(FiberCryptoWallet)
 
 target_include_directories(FiberCryptoWallet PRIVATE
-    src/core/WalletCreator
+    src/core/WalletManager
 )
 
-qt6_qml_type_registration(FiberCryptoWallet)
+qt_add_qml_module(FiberCryptoWallet
+    URI "Backend.Managers"
+    VERSION 1.0
+    SOURCES src/core/WalletManager/walletmanager.cpp src/core/WalletManager/walletmanager.h
+)

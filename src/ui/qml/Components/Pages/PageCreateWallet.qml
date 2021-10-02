@@ -4,15 +4,15 @@ import QtQuick.Controls.Material
 
 import "../Custom" as Custom
 
-import FiberCryptoWallet as Backend
+import Backend.Managers as BackendManagers
 
 Item {
     id: pageLoadCreateWallet
 
-    property alias mode: backendWalletCreator.mode
-    property alias name: backendWalletCreator.name
-    property alias seed: backendWalletCreator.seed
-    property alias confirmedSeed: backendWalletCreator.confirmedSeed
+    property alias mode: backendWalletManager.mode
+    property alias name: backendWalletManager.name
+    property alias seed: backendWalletManager.seed
+    property alias confirmedSeed: backendWalletManager.confirmedSeed
 
     signal walletCreationRequested()
     signal walletLoadingRequested()
@@ -20,8 +20,8 @@ Item {
     implicitWidth: 400
     implicitHeight: 400
 
-    Backend.WalletCreator {
-        id: backendWalletCreator
+    BackendManagers.WalletManager {
+        id: backendWalletManager
     }
     
     Column {
@@ -40,7 +40,7 @@ Item {
             textColor: Material.accent
 
             onToggled: {
-                pageLoadCreateWallet.mode = isInLeftSide ? Backend.WalletCreator.Create : Backend.WalletCreator.Load
+                pageLoadCreateWallet.mode = isInLeftSide ? BackendManagers.WalletManager.Create : BackendManagers.WalletManager.Load
             }
         }
 
@@ -53,12 +53,12 @@ Item {
 
             font.bold: true
             font.pointSize: Qt.application.font.pointSize * 1.2
-            text: pageLoadCreateWallet.mode === Backend.WalletCreator.Create ? qsTr("Create") : qsTr("Load")
+            text: pageLoadCreateWallet.mode === BackendManagers.WalletManager.Create ? qsTr("Create") : qsTr("Load")
             highlighted: true
-            enabled: pageLoadCreateWallet.mode === Backend.WalletCreator.Load || pageLoadCreateWallet.seed == pageLoadCreateWallet.confirmedSeed
+            enabled: pageLoadCreateWallet.mode === BackendManagers.WalletManager.Load || pageLoadCreateWallet.seed === pageLoadCreateWallet.confirmedSeed
             
             onClicked: {
-                if (backendWalletCreator.mode === Backend.WalletCreator.Create) {
+                if (backendWalletManager.mode === BackendManagers.WalletManager.Create) {
                     walletCreationRequested()
                 } else {
                     walletLoadingRequested()

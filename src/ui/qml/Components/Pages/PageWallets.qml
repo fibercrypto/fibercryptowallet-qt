@@ -2,8 +2,6 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Controls.Material
 
-import FiberCryptoWallet as Backend
-
 import "../Delegates" as Delegates
 import "../Dialogs" as Dialogs
 import "../Custom" as Custom

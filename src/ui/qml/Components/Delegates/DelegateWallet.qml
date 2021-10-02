@@ -3,8 +3,6 @@ import QtQuick.Controls
 import QtQuick.Controls.Material
 //import QtGraphicalEffects
 
-import FiberCryptoWallet as Backend
-
 import "../Dialogs/" as Dialogs
 
 Item {
