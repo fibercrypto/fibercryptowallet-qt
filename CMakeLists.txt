@@ -19,7 +19,7 @@ set(PROJECT_SOURCES
     src/ui/ui.qrc
     resources/images/images.qrc
     resources/fonts/fonts.qrc
-    resources/translations/translations.qrc
+    resources/i18n/translations.qrc
     resources/qt/qt.qrc
     # Source files
     src/main.cpp
