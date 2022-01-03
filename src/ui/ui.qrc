@@ -15,6 +15,7 @@
         <file>qml/Components/Delegates/DelegateHistoryList.qml</file>
         <file>qml/Components/Delegates/DelegateTransactionAddress.qml</file>
         <file>qml/Components/Delegates/DelegateInputOutput.qml</file>
+        <file>qml/Components/Delegates/DelegateDestinationList.qml</file>
         <file>qml/Components/Dialogs/DialogAbout.qml</file>
         <file>qml/Components/Dialogs/DialogAboutQt.qml</file>
         <file>qml/Components/Dialogs/DialogAboutLicense.qml</file>
@@ -27,6 +28,7 @@
         <file>qml/Components/Custom/CustomMenuBar.qml</file>
         <file>qml/Components/Custom/CustomMenuItem.qml</file>
         <file>qml/Components/Custom/CustomScrollBar.qml</file>
+        <file>qml/Components/Custom/CustomComboBoxPopupFilter.qml</file>
         <file>qml/Components/Custom/CustomSwitch.qml</file>
         <file>qml/Components/Controls/TextArea.qml</file>
         <file>qml/Components/Controls/TextField.qml</file>
