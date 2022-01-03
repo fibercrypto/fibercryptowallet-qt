@@ -43,13 +43,13 @@ Page {
     }
 
     visible: opacity > 0
+    enabled: visible
     implicitHeight: labelSendFrom.height + comboBoxWalletsSendFrom.height + comboBoxChangeSigner.height + labelSendTo.height + textFieldDestinationAddress.height + textFieldAmount.height + 80
 
     Label {
         id: labelSendFrom
 
         text: qsTr("Send from")
-        font.bold: true
     }
                 
     ComboBox {
@@ -58,7 +58,8 @@ Page {
         y: labelSendFrom.y + labelSendFrom.height + 6
         width: parent.width
         textRole: "name"
-        displayText: comboBoxWalletsSendFrom.model.wallets && comboBoxWalletsSendFrom.model.wallets[comboBoxWalletsSendFrom.currentIndex] && comboBoxWalletsSendFrom.model.wallets[comboBoxWalletsSendFrom.currentIndex].sky ? comboBoxWalletsSendFrom.model.wallets[comboBoxWalletsSendFrom.currentIndex].name + " - " + comboBoxWalletsSendFrom.model.wallets[comboBoxWalletsSendFrom.currentIndex].sky + " SKY (" + comboBoxWalletsSendFrom.model.wallets[comboBoxWalletsSendFrom.currentIndex].coinHours + " CoinHours)" : qsTr("Select a wallet")
+        displayText: currentIndex >= 0 && currentIndex < count && model.get(comboBoxWalletsSendFrom.currentIndex).sky ? model.get(comboBoxWalletsSendFrom.currentIndex).name + " - " + model.get(comboBoxWalletsSendFrom.currentIndex).sky + " SKY (" + model.get(comboBoxWalletsSendFrom.currentIndex).coinHours + " CoinHours)" : qsTr("Select a wallet")
+        // displayText: comboBoxWalletsSendFrom.model.wallets && comboBoxWalletsSendFrom.model.wallets[comboBoxWalletsSendFrom.currentIndex] && comboBoxWalletsSendFrom.model.wallets[comboBoxWalletsSendFrom.currentIndex].sky ? comboBoxWalletsSendFrom.model.wallets[comboBoxWalletsSendFrom.currentIndex].name + " - " + comboBoxWalletsSendFrom.model.wallets[comboBoxWalletsSendFrom.currentIndex].sky + " SKY (" + comboBoxWalletsSendFrom.model.wallets[comboBoxWalletsSendFrom.currentIndex].coinHours + " CoinHours)" : qsTr("Select a wallet")
         model: listWallets
 
         // Taken from Qt 5.13.0 source code:
@@ -78,10 +79,11 @@ Page {
         onPressedChanged: {
             //comboBoxWalletsSendFrom.model.updateModel(walletManager.getWallets())
         }
-        onActivated: {
-            pageSendSimple.walletSelected = comboBoxWalletsSendFrom.model.wallets[comboBoxWalletsSendFrom.currentIndex].fileName
-            pageSendSimple.walletSelectedName = comboBoxWalletsSendFrom.model.wallets[comboBoxWalletsSendFrom.currentIndex].name
-            pageSendSimple.walletEncrypted = comboBoxWalletsSendFrom.model.wallets[comboBoxWalletsSendFrom.currentIndex].encryptionEnabled
+        onActivated: function(index) {
+            currentIndex = index
+            pageSendSimple.walletSelected = comboBoxWalletsSendFrom.model.get(comboBoxWalletsSendFrom.currentIndex).fileName //comboBoxWalletsSendFrom.model.wallets[comboBoxWalletsSendFrom.currentIndex].fileName
+            pageSendSimple.walletSelectedName = comboBoxWalletsSendFrom.model.get(comboBoxWalletsSendFrom.currentIndex).name //comboBoxWalletsSendFrom.model.wallets[comboBoxWalletsSendFrom.currentIndex].name
+            pageSendSimple.walletEncrypted = comboBoxWalletsSendFrom.model.get(comboBoxWalletsSendFrom.currentIndex).encryptionEnabled //comboBoxWalletsSendFrom.model.wallets[comboBoxWalletsSendFrom.currentIndex].encryptionEnabled
             comboBoxChangeSigner.reset(pageSendSimple.walletSelected)
         }
     } // ComboBox (send from)
@@ -142,7 +144,6 @@ Page {
         x: labelSendFrom.x
         y: comboBoxChangeSigner.y + comboBoxChangeSigner.height + 12
         text: qsTr("Send to")
-        font.bold: true
     }
 
     Button {
@@ -205,17 +206,17 @@ Page {
     // Copypasted from PageWallets
     ListModel {
         id: listWallets
-        ListElement { name: "My first wallet";   hasHardwareWallet: false; encryptionEnabled: true;  sky: 5;    coinHours: 10 }
-        ListElement { name: "My second wallet";  hasHardwareWallet: false; encryptionEnabled: true;  sky: 300;  coinHours: 1049 }
-        ListElement { name: "My third wallet";   hasHardwareWallet: true;  encryptionEnabled: false; sky: 13;   coinHours: 201 }
+        ListElement { fileName: "/path/to/first.wlt";   name: "My first wallet";   hasHardwareWallet: false; encryptionEnabled: true;  sky: 5;    coinHours: 10 }
+        ListElement { fileName: "/path/to/second.wlt";  name: "My second wallet";  hasHardwareWallet: false; encryptionEnabled: true;  sky: 300;  coinHours: 1049 }
+        ListElement { fileName: "/path/to/third.wlt";   name: "My third wallet";   hasHardwareWallet: true;  encryptionEnabled: false; sky: 13;   coinHours: 201 }
 
-        ListElement { name: "My fourth wallet";  hasHardwareWallet: true;  encryptionEnabled: false; sky: 3941; coinHours: 6652 }
-        ListElement { name: "My fiveth wallet";  hasHardwareWallet: false; encryptionEnabled: true;  sky: 9;    coinHours: 35448 }
-        ListElement { name: "My sixth wallet";   hasHardwareWallet: true;  encryptionEnabled: true;  sky: 439;  coinHours: 685 }
+        ListElement { fileName: "/path/to/fourth.wlt";  name: "My fourth wallet";  hasHardwareWallet: true;  encryptionEnabled: false; sky: 3941; coinHours: 6652 }
+        ListElement { fileName: "/path/to/fiveth.wlt";  name: "My fiveth wallet";  hasHardwareWallet: false; encryptionEnabled: true;  sky: 9;    coinHours: 35448 }
+        ListElement { fileName: "/path/to/sixth.wlt";   name: "My sixth wallet";   hasHardwareWallet: true;  encryptionEnabled: true;  sky: 439;  coinHours: 685 }
 
-        ListElement { name: "My seventh wallet"; hasHardwareWallet: false; encryptionEnabled: true;  sky: 22;   coinHours: 315 }
-        ListElement { name: "My eighth wallet";  hasHardwareWallet: true;  encryptionEnabled: false; sky: 2001; coinHours: 10628 }
-        ListElement { name: "My nineth wallet";  hasHardwareWallet: false; encryptionEnabled: true;  sky: 93;   coinHours: 381 }
+        ListElement { fileName: "/path/to/seventh.wlt"; name: "My seventh wallet"; hasHardwareWallet: false; encryptionEnabled: true;  sky: 22;   coinHours: 315 }
+        ListElement { fileName: "/path/to/eighth.wlt";  name: "My eighth wallet";  hasHardwareWallet: true;  encryptionEnabled: false; sky: 2001; coinHours: 10628 }
+        ListElement { fileName: "/path/to/nineth.wlt";  name: "My nineth wallet";  hasHardwareWallet: false; encryptionEnabled: true;  sky: 93;   coinHours: 381 }
     }
 
     /*
