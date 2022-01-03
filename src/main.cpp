@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
     app.setOrganizationDomain("simelo.tech");
     app.setApplicationName("FiberCrypto Wallet");
     app.setApplicationVersion("0.1.0");
-    app.setWindowIcon(QIcon(":/images/icons/app/appIcon.svg"));
+    app.setWindowIcon(QIcon(":/images/icons/app/appIcon.png")); // svg
 
     QFontDatabase::addApplicationFont(":/fonts/hemi-head/hemi-head.ttf");
     QFontDatabase::addApplicationFont(":/fonts/code-new-roman/code-new-roman.otf");
