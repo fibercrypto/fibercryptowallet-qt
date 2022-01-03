@@ -6,7 +6,7 @@ import "../../Custom" as Custom
 Item {
     id: aboutQt
 
-    readonly property string qtVersionString: "6.2.0"
+    readonly property string qtVersionString: "6.2.2"
 
     implicitWidth: Math.max(imageQtLogo.width + labelAboutQt.implicitWidth > 400 ? 400 : imageQtLogo.width + labelAboutQt.implicitWidth)
     implicitHeight: flickable.contentHeight
