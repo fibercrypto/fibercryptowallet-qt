@@ -108,7 +108,7 @@ Page {
             x: switchAdvancedMode.x + 6
             y: switchAdvancedMode.y + switchAdvancedMode.height + 6
             width: parent.width - 2*x
-            visible: !pageSendSimple.visible
+            activated: !pageSendSimple.activated
         }
 
         ScrollBar.vertical: Custom.CustomScrollBar {}
