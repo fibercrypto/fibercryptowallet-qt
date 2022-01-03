@@ -11,7 +11,7 @@ MenuBar {
 
         CustomMenuItem {
             text: qsTr("About")
-            iconSource: "qrc:/images/icons/app/appIcon.svg"
+            iconSource: "qrc:/images/icons/app/appIcon.png" // svg
 
             onTriggered: aboutRequested()
             Shortcut {
