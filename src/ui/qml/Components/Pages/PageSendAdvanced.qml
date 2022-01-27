@@ -169,7 +169,7 @@ Page {
             if (!model) {
                 checkedElements = []
                 checkedElementsText = []
-                numberOfCheckedElements = 0
+                // numberOfCheckedElements = 0
             }
         }
 
@@ -281,7 +281,7 @@ Page {
             if (!model) {
                 checkedElements = []
                 checkedElementsText = []
-                numberOfCheckedElements = 0
+                // numberOfCheckedElements = 0
             }
         }
 
@@ -314,7 +314,7 @@ Page {
                 }
 
                 width: parent.width
-                text: comboBoxWalletsUnspentOutputsSendFrom.textRole ? (Array.isArray(comboBoxWalletsUnspentOutputsSendFrom.model) ? modelData[comboBoxWalletsUnspentOutputsSendFrom.textRole] + " - " + modelData["addressSky"] + " SKY (" + modelData["addressCoinHours"] + " CoinHours)" :model[comboBoxWalletsUnspentOutputsSendFrom.textRole] + " - " + model["addressSky"] + " SKY (" + model["addressCoinHours"] + " CoinHours)") : modelData
+                text: comboBoxWalletsUnspentOutputsSendFrom.textRole ? (Array.isArray(comboBoxWalletsUnspentOutputsSendFrom.model) ? modelData[comboBoxWalletsUnspentOutputsSendFrom.textRole] + " - " + modelData["addressSky"] + " SKY (" + modelData["addressCoinHours"] + " CoinHours)" : model[comboBoxWalletsUnspentOutputsSendFrom.textRole] + " - " + model["addressSky"] + " SKY (" + model["addressCoinHours"] + " CoinHours)") : modelData
                 font.family: "Code New Roman"
                 // Load the saved state when the delegate is recicled:
                 checked: comboBoxWalletsUnspentOutputsSendFrom.checkedElements.indexOf(index) >= 0
@@ -502,20 +502,20 @@ Page {
         ListElement { address: "vscytafdhsdhjxhcdjs"; addressSky: 0;    addressCoinHours: 35448 }
         ListElement { address: "dsjnhffaskdfhnkdjhu"; addressSky: 439;  addressCoinHours: 685 }
 
-        ListElement { address: "zsdfjsdhcmhjsdkfhjs"; addressSky: 0;   addressCoinHours: 315 }
-        ListElement { address: "oidhfkusjdhfnhadgfe"; addressSky: 0; addressCoinHours: 10628 }
+        ListElement { address: "zsdfjsdhcmhjsdkfhjs"; addressSky: 0;    addressCoinHours: 315 }
+        ListElement { address: "oidhfkusjdhfnhadgfe"; addressSky: 0;    addressCoinHours: 10628 }
         ListElement { address: "eydsjjfndshgnjsdehd"; addressSky: 93;   addressCoinHours: 381 }
     }
 
     ListModel {
         id: listOutputs
-        ListElement { address: "laskjdlwd2397duiqws"; addressSky: 58;    addressCoinHours: 44 }
-        ListElement { address: "n838wj9wksdnks92ksq"; addressSky: 102;  addressCoinHours: 1921 }
-        ListElement { address: "92kw0dsnsbfmidmr35k"; addressSky: 39;   addressCoinHours: 142 }
+        ListElement { outputID: "laskjdlwd2397duiqws"; addressSky: 58;   addressCoinHours: 44 }
+        ListElement { outputID: "n838wj9wksdnks92ksq"; addressSky: 102;  addressCoinHours: 1921 }
+        ListElement { outputID: "92kw0dsnsbfmidmr35k"; addressSky: 39;   addressCoinHours: 142 }
 
-        ListElement { address: "j483kwnsvaeqyeir84j"; addressSky: 3795; addressCoinHours: 3795 }
-        ListElement { address: "mk9275nd62nsarwropv"; addressSky: 6;    addressCoinHours: 21701 }
-        ListElement { address: "28a9dufme3n26big85m"; addressSky: 647;  addressCoinHours: 379 }
+        ListElement { outputID: "j483kwnsvaeqyeir84j"; addressSky: 3795; addressCoinHours: 3795 }
+        ListElement { outputID: "mk9275nd62nsarwropv"; addressSky: 6;    addressCoinHours: 21701 }
+        ListElement { outputID: "28a9dufme3n26big85m"; addressSky: 647;  addressCoinHours: 379 }
     }
 
     ListModel {
