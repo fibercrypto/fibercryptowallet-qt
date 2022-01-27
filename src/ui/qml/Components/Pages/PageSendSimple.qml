@@ -4,6 +4,7 @@ import QtQuick.Controls.Material
 
 import "../Dialogs" as Dialogs
 import "../Controls" as Controls
+import "../Custom" as Custom
 
 Page {
     id: pageSendSimple
@@ -55,6 +56,8 @@ Page {
     ComboBox {
         id: comboBoxWalletsSendFrom
 
+        property alias filterString: filterPopupWallets.filterText
+
         y: labelSendFrom.y + labelSendFrom.height + 6
         width: parent.width
         textRole: "name"
@@ -62,9 +65,21 @@ Page {
         // displayText: comboBoxWalletsSendFrom.model.wallets && comboBoxWalletsSendFrom.model.wallets[comboBoxWalletsSendFrom.currentIndex] && comboBoxWalletsSendFrom.model.wallets[comboBoxWalletsSendFrom.currentIndex].sky ? comboBoxWalletsSendFrom.model.wallets[comboBoxWalletsSendFrom.currentIndex].name + " - " + comboBoxWalletsSendFrom.model.wallets[comboBoxWalletsSendFrom.currentIndex].sky + " SKY (" + comboBoxWalletsSendFrom.model.wallets[comboBoxWalletsSendFrom.currentIndex].coinHours + " CoinHours)" : qsTr("Select a wallet")
         model: listWallets
 
+        popup: Custom.CustomComboBoxPopupFilter {
+            id: filterPopupWallets
+            comboBox: comboBoxWalletsSendFrom
+            filterPlaceholderText: qsTr("Filter wallets by name")
+        }
+
         // Taken from Qt 5.13.0 source code:
         delegate: MenuItem {
+            id: menuItemWalletsSendFrom
+
+            readonly property bool matchFilter: !comboBoxWalletsSendFrom.filterString || text.toLowerCase().includes(comboBoxWalletsSendFrom.filterString.toLowerCase())
+
             width: parent.width
+            height: matchFilter ? implicitHeight : 0
+            Behavior on height { NumberAnimation { easing.type: Easing.OutQuint } }
             text: comboBoxWalletsSendFrom.textRole ?
                       (Array.isArray(comboBoxWalletsSendFrom.model) ?
                            modelData[comboBoxWalletsSendFrom.textRole]
