@@ -1,61 +1,115 @@
-cmake_minimum_required(VERSION 3.21)
+cmake_minimum_required(VERSION 3.16)
 
 project(FiberCryptoWallet VERSION 0.1 LANGUAGES CXX)
 
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-
-set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
-
-set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Quick REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick REQUIRED)
+find_package(Qt6 6.2 COMPONENTS Quick REQUIRED)
 
+# The C/C++ source files
 set(PROJECT_SOURCES
+    # Source files
+    src/main.cpp
     # Resources
-    src/ui/ui.qrc
     resources/images/images.qrc
     resources/fonts/fonts.qrc
     resources/i18n/translations.qrc
     resources/qt/qt.qrc
-    # Source files
-    src/main.cpp
-    src/core/WalletManager/walletmanager.h
-    src/core/WalletManager/walletmanager.cpp
 )
 
-qt_add_executable(FiberCryptoWallet
-    MANUAL_FINALIZATION
+# The application
+qt_add_executable(appFiberCryptoWallet
     ${PROJECT_SOURCES}
 )
-# Define target properties for Android with Qt 6 as:
-#    set_property(TARGET FiberCryptoWallet APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
-#                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
-# For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
 
-target_compile_definitions(FiberCryptoWallet
-  PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
-target_link_libraries(FiberCryptoWallet
-  PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick)
-
-set_target_properties(FiberCryptoWallet PROPERTIES
-    MACOSX_BUNDLE_GUI_IDENTIFIER simelo.fibercryptowallet.com
-    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
-    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
+qt_add_qml_module(appFiberCryptoWallet
+    URI FiberCryptoWallet
+    VERSION 1.0
+    QML_FILES src/ui/qml/splash.qml src/ui/qml/main.qml
 )
 
-qt_import_qml_plugins(FiberCryptoWallet)
-qt_finalize_executable(FiberCryptoWallet)
+# QML modules
 
-target_include_directories(FiberCryptoWallet PRIVATE
+# The UI
+set(QML_SOURCES
+    src/ui/qml/Components/ApplicationWindowContent.qml
+    src/ui/qml/Components/Pages/PageCreateWallet.qml
+    src/ui/qml/Components/Pages/PageOverview.qml
+    src/ui/qml/Components/Pages/PageWallets.qml
+    src/ui/qml/Components/Pages/PageSend.qml
+    src/ui/qml/Components/Pages/PageSendSimple.qml
+    src/ui/qml/Components/Pages/PageSendAdvanced.qml
+    src/ui/qml/Components/Pages/PageHistory.qml
+    src/ui/qml/Components/Pages/PageTest.qml
+    src/ui/qml/Components/Delegates/DelegateWallet.qml
+    src/ui/qml/Components/Delegates/DelegateWalletAddress.qml
+    src/ui/qml/Components/Delegates/DelegateHistoryList.qml
+    src/ui/qml/Components/Delegates/DelegateTransactionAddress.qml
+    src/ui/qml/Components/Delegates/DelegateInputOutput.qml
+    src/ui/qml/Components/Delegates/DelegateDestinationList.qml
+    src/ui/qml/Components/Dialogs/DialogAbout.qml
+    src/ui/qml/Components/Dialogs/DialogAboutQt.qml
+    src/ui/qml/Components/Dialogs/DialogAboutLicense.qml
+    src/ui/qml/Components/Dialogs/DialogSimpleInput.qml
+    src/ui/qml/Components/Dialogs/DialogTransactionDetails.qml
+    src/ui/qml/Components/Dialogs/DialogContent/ContentAbout.qml
+    src/ui/qml/Components/Dialogs/DialogContent/ContentAboutQt.qml
+    src/ui/qml/Components/Dialogs/DialogContent/ContentAboutLicense.qml
+    src/ui/qml/Components/Dialogs/DialogContent/ContentTransactionDetails.qml
+    src/ui/qml/Components/Custom/CustomMenuBar.qml
+    src/ui/qml/Components/Custom/CustomMenuItem.qml
+    src/ui/qml/Components/Custom/CustomScrollBar.qml
+    src/ui/qml/Components/Custom/CustomComboBoxPopupFilter.qml
+    src/ui/qml/Components/Custom/CustomSwitch.qml
+    src/ui/qml/Components/Controls/TextArea.qml
+    src/ui/qml/Components/Controls/TextField.qml
+    src/ui/qml/Components/Controls/+Material/TextArea.qml
+    src/ui/qml/Components/Controls/+Material/TextField.qml
+)
+
+qt_add_qml_module(FiberCryptoUI
+    URI "FiberCrypto.UI"
+    VERSION 1.0
+    QML_FILES ${QML_SOURCES}
+    OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/FiberCrypto/UI
+)
+
+qt_add_qml_module(FiberCryptoManagers
+    URI "FiberCrypto.Managers"
+    VERSION 1.0
+    SOURCES src/core/WalletManager/walletmanager.h src/core/WalletManager/walletmanager.cpp
+    OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/FiberCrypto/Managers
+)
+
+qt_add_qml_module(FiberCryptoTestPlugin
+    URI "FiberCrypto.TestPlugin"
+    VERSION 1.0
+    SOURCES src/models/Template/templatemodel.h src/models/Template/templatemodel.cpp
+    OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/FiberCrypto/TestPlugin
+)
+
+# Include search paths for QML Type Registrations
+target_include_directories(FiberCryptoManagers PRIVATE
     src/core/WalletManager
 )
 
-qt_add_qml_module(FiberCryptoWallet
-    URI "Backend.Managers"
-    VERSION 1.0
-    SOURCES src/core/WalletManager/walletmanager.cpp src/core/WalletManager/walletmanager.h
+target_include_directories(FiberCryptoTestPlugin PRIVATE
+    src/models/Template
 )
+
+# Target properties
+set_target_properties(appFiberCryptoWallet PROPERTIES
+    MACOSX_BUNDLE_GUI_IDENTIFIER simelo.fibercryptowallet.com
+    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
+    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
+    MACOSX_BUNDLE TRUE
+    WIN32_EXECUTABLE TRUE
+)
+
+# Compile definitions
+target_compile_definitions(appFiberCryptoWallet
+    PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
+target_link_libraries(appFiberCryptoWallet
+    PRIVATE Qt6::Quick)
