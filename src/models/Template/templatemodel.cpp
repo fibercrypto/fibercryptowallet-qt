@@ -1,7 +1,5 @@
 #include "templatemodel.h"
 
-#include <QDebug>
-
 TemplateModel::TemplateModel(QObject *parent)
     : QAbstractListModel{parent}
 {
@@ -10,7 +8,7 @@ TemplateModel::TemplateModel(QObject *parent)
 
 QHash<int, QByteArray> TemplateModel::roleNames() const
 {
-    return {
+    return { // the role names as they are going to be used in QML
         { SomeNumberRole, "someNumber" },
         { SomeStringRole, "someString" }
     };
@@ -65,13 +63,14 @@ bool TemplateModel::setModelData(int row, const QVariant &value, int role)
     switch (role) {
     case SomeNumberRole:
         someData[row].first = value.toInt();
+        break;
     case SomeStringRole:
         someData[row].second = value.toString();
+        break;
     default:
         return false;
     }
 
-    qDebug() << someData;
     emit dataChanged(index(row), index(row), { role });
     return true;
 }
@@ -81,10 +80,9 @@ bool TemplateModel::insertItem(int row, int someNumber, const QString &someStrin
     if (row < 0 || row > someData.count()) {
         return false;
     }
-    beginInsertRows(QModelIndex(), someData.count(), someData.count());
+    beginInsertRows(QModelIndex(), row, row);
     someData.insert(row, { someNumber, someString });
     endInsertRows();
-    emit dataChanged(index(row), index(row), { SomeNumberRole, SomeStringRole });
     return true;
 }
 
