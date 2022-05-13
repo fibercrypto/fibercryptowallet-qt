@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
     }
 
     QQmlApplicationEngine engine;
-    const QUrl url(QStringLiteral("qrc:/ui/qml/splash.qml"));
+    const QUrl url(u"qrc:/FiberCryptoWallet/src/ui/qml/splash.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
         if (!obj && url == objUrl)
