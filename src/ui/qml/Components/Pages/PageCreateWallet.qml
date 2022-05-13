@@ -1,69 +1,53 @@
+import QtQml
 import QtQuick
 import QtQuick.Controls
-import QtQuick.Controls.Material
 
-import "../Custom" as Custom
-
-import Backend.Managers as BackendManagers
-
-Item {
-    id: pageLoadCreateWallet
-
-    property alias mode: backendWalletManager.mode
-    property alias name: backendWalletManager.name
-    property alias seed: backendWalletManager.seed
-    property alias confirmedSeed: backendWalletManager.confirmedSeed
+Page {
+    id: pageWelcome
 
     signal walletCreationRequested()
     signal walletLoadingRequested()
-    
-    implicitWidth: 400
-    implicitHeight: 400
 
-    BackendManagers.WalletManager {
-        id: backendWalletManager
+    // slideshow (a swipe view)?
+    Image {
+        id: imageWallpaper
+
+        y: -42
+        width: parent.width
+        height: ~~(parent.height * 0.4)
+
+        source: "qrc:/images/banners/1.jpg"
+        fillMode: Image.PreserveAspectCrop
     }
-    
-    Column {
-        anchors.fill: parent
-        spacing: 30
-        
-        Custom.CustomSwitch {
-            width: parent.width
-            height: 70
 
-            leftText: qsTr("New wallet")
-            rightText: qsTr("Load wallet")
+    Button {
+        id: buttonCreateWallet
+        x: ~~(parent.width - width)/2
+        y: imageWallpaper.y + imageWallpaper.height + ~~(parent.height - imageWallpaper.height - height)/2
+        width: parent.width > 540 ? 540 - 40 : parent.width - 40
+        height: implicitHeight * 2
 
-            backgroundColor: Material.accent
+        text: qsTr("Create new wallet")
+        highlighted: true
+        Material.elevation: 0
 
-            textColor: Material.accent
-
-            onToggled: {
-                pageLoadCreateWallet.mode = isInLeftSide ? BackendManagers.WalletManager.Create : BackendManagers.WalletManager.Load
-            }
+        onClicked: {
+            walletCreationRequested()
         }
+    }
 
-        Button {
-            id: buttonCreateLoadWallet
+    Button {
+        id: buttonLoadWallet
+        x: ~~(parent.width - width)/2
+        y: buttonCreateWallet.y + buttonCreateWallet.height + 10
+        width: parent.width > 540 ? 540 - 40 : parent.width - 40
 
-            anchors.horizontalCenter: parent.horizontalCenter
-            width: 120
-            height: 60
+        text: qsTr("Load existing wallet")
+        flat: true
+        highlighted: true
 
-            font.bold: true
-            font.pointSize: Qt.application.font.pointSize * 1.2
-            text: pageLoadCreateWallet.mode === BackendManagers.WalletManager.Create ? qsTr("Create") : qsTr("Load")
-            highlighted: true
-            enabled: pageLoadCreateWallet.mode === BackendManagers.WalletManager.Load || pageLoadCreateWallet.seed === pageLoadCreateWallet.confirmedSeed
-            
-            onClicked: {
-                if (backendWalletManager.mode === BackendManagers.WalletManager.Create) {
-                    walletCreationRequested()
-                } else {
-                    walletLoadingRequested()
-                }
-            }
+        onClicked: {
+            walletLoadingRequested()
         }
-    } // Column
+    }
 }

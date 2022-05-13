@@ -161,5 +161,6 @@
         <file>icons/license.svg</file>
         <file>icons/new_release_available.svg</file>
         <file>icons/night_mode.svg</file>
+        <file>banners/1.jpg</file>
     </qresource>
 </RCC>
