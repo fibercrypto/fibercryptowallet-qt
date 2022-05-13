@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 
-import "DialogContent" as DialogContent
+import FiberCrypto.UI as UI
 
 Dialog {
     id: dialogTransactionsDetails
@@ -24,7 +24,7 @@ Dialog {
         expanded = false
     }
 
-    DialogContent.ContentTransactionDetails {
+    UI.ContentTransactionDetails {
         id: transactionDetails
 
         width: parent.width

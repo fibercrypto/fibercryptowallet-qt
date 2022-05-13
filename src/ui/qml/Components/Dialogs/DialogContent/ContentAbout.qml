@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 
-import "../../Custom" as Custom
+import FiberCrypto.UI as UI
 
 Item {
     id: about
@@ -110,6 +110,6 @@ Item {
             } // Label
         } // Column
 
-        ScrollBar.vertical: Custom.CustomScrollBar {}
+        ScrollBar.vertical: UI.CustomScrollBar { }
     } // Flickable
 }

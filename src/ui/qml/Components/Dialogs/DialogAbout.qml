@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 
-import "DialogContent" as DialogContent
+import FiberCrypto.UI as UI
 
 Dialog {
     id: dialogAbout
@@ -15,7 +15,7 @@ Dialog {
         contentAbout.animate()
     }
 
-    DialogContent.ContentAbout {
+    UI.ContentAbout {
         id: contentAbout
 
         width: parent.width

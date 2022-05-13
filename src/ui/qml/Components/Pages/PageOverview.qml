@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 
 Page {
+    id: pageOverview
 
     header: TabBar {
         id: tabBar
@@ -26,7 +27,7 @@ Page {
         currentIndex: tabBar.currentIndex
 
         PageWallets { }
-        PageSend {}
+        PageSend { }
         PageHistory { }
     }
 }

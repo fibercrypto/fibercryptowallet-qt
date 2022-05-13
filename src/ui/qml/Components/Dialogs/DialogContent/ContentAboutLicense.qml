@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 
-import "../../Custom" as Custom
+import FiberCrypto.UI as UI
 
 Item {
     id: aboutLicense
@@ -18,7 +18,7 @@ Item {
         contentHeight: labelLicense.height
         clip: true
 
-        ScrollBar.vertical: Custom.CustomScrollBar {}
+        ScrollBar.vertical: UI.CustomScrollBar { }
 
         Label {
             id: labelLicense

@@ -16,8 +16,7 @@
 import QtQuick
 import QtQuick.Controls
 
-import "../Controls" as Controls
-import "../Custom" as Custom
+import FiberCrypto.UI as UI
 
 Dialog {
     id: dialogSimpleInput
@@ -60,12 +59,11 @@ Dialog {
             id: labelPrompt
 
             width: parent.width
-            height: visible ? implicitHeight : 0
-            visible: text
+            height: text ? implicitHeight : 0
             wrapMode: Label.Wrap
         }
 
-        Controls.TextField {
+        TextField {
             id: textField
 
             y: inputType === DialogSimpleInput.InputType.NumberText ? spinBox.y + spinBox.height + 4 : labelPrompt.y + labelPrompt.height + 4
@@ -73,10 +71,10 @@ Dialog {
             height: visible ? implicitHeight : 0
             visible: inputType !== DialogSimpleInput.InputType.Number
             focus: visible
-            placeholderText: "Start typing..."
+            placeholderText: qsTr("Start typing...")
         }
 
-        Controls.TextField {
+        TextField {
             id: textField2
 
             y: textField.y + textField.height + 4
@@ -84,7 +82,7 @@ Dialog {
             height: visible ? implicitHeight : 0
             visible: inputType === DialogSimpleInput.InputType.TextText
             focus: visible && inputType !== DialogSimpleInput.InputType.TextText
-            placeholderText: "Start typing..."
+            placeholderText: qsTr("Start typing...")
         }
 
         SpinBox {
@@ -101,6 +99,6 @@ Dialog {
             editable: true
         }
 
-        ScrollBar.vertical: Custom.CustomScrollBar {}
+        ScrollBar.vertical: UI.CustomScrollBar { }
     } // Flickable
 }

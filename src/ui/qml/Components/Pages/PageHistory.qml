@@ -1,9 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 
-import "../Dialogs" as Dialogs
-import "../Delegates" as Delegates
-import "../Custom" as Custom
+import FiberCrypto.UI as UI
 
 Page {
     id: pageHistory
@@ -53,8 +51,8 @@ Page {
         clip: true
         model: modelTransactions
 
-        delegate: Delegates.DelegateHistoryList {
-            width: parent.width
+        delegate: UI.DelegateHistoryList {
+            width: parent ? parent.width : 0
 
             onClicked: {
                 dialogTransactionDetails.date = modelDate
@@ -70,7 +68,7 @@ Page {
             }
         }
 
-        ScrollBar.vertical: Custom.CustomScrollBar {}
+        ScrollBar.vertical: UI.CustomScrollBar {}
     }
 
     // TODO: Implement in the backend

@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 
-import "DialogContent" as DialogContent
+import FiberCrypto.UI as UI
 
 Dialog {
     id: dialogAboutQt
@@ -9,7 +9,7 @@ Dialog {
     title: qsTr("About") + " Qt"
     standardButtons: Dialog.Close
 
-    DialogContent.ContentAboutQt {
+    UI.ContentAboutQt {
         id: contentAboutQt
 
         width: parent.width

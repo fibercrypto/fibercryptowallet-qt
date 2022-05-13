@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 
-import "DialogContent" as DialogContent
+import FiberCrypto.UI as UI
 
 Dialog {
     id: dialogAboutLicense
@@ -9,7 +9,7 @@ Dialog {
     title: qsTr("License")
     standardButtons: Dialog.Close
 
-    DialogContent.ContentAboutLicense {
+    UI.ContentAboutLicense {
         id: contentAboutLicense
 
         width: parent.width

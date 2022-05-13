@@ -2,8 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Controls.Material
 
-import "../../Delegates" as Delegates
-import "../../Custom" as Custom
+import FiberCrypto.UI as UI
 
 Item {
     id: contentTransactionDetails
@@ -161,11 +160,11 @@ Item {
             clip: true
             Material.foreground: Material.Grey
             model: listModelInputs
-            delegate: Delegates.DelegateInputOutput {
+            delegate: UI.DelegateInputOutput {
                 width: parent.width
             }
 
-            ScrollBar.vertical: Custom.CustomScrollBar {}
+            ScrollBar.vertical: UI.CustomScrollBar { }
         }
 
         Label {
@@ -188,11 +187,11 @@ Item {
             clip: true
             Material.foreground: Material.Grey
             model: listModelOutputs
-            delegate: Delegates.DelegateInputOutput {
+            delegate: UI.DelegateInputOutput {
                 width: parent.width
             }
 
-            ScrollBar.vertical: Custom.CustomScrollBar {}
+            ScrollBar.vertical: UI.CustomScrollBar { }
         }
     } // Item (inputs and outputs)
 
