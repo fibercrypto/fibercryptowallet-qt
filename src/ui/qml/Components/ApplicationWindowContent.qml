@@ -1,10 +1,23 @@
 import QtQuick
 import QtQuick.Controls
 
-import "Pages" as Pages
+import FiberCrypto.UI as UI
 
 Item {
     id: applicationWindowContent
+
+    enum AvailablePages { CreateWalletPage,  OverviewPage, TestPage }
+
+    property int currentPage: ApplicationWindowContent.AvailablePages.CreateWalletPage
+
+    function testPage() {
+        if (stackViewPages.depth > 1) {
+            stackViewPages.pop()
+        } else {
+            applicationWindowContent.currentPage = ApplicationWindowContent.AvailablePages.TestPage
+            stackViewPages.push(componentPageTest)
+        }
+    }
 
     StackView {
         id: stackViewPages
@@ -17,20 +30,20 @@ Item {
         id: componentPageCreateWallet
 
         Item {
-            Pages.PageCreateWallet {
+            UI.PageCreateWallet {
                 id: pageCreateWallet
-                x: (parent.width - width)/2
-                y: (parent.height - height)/2
-                width: 400
-                height: 400
+                width: parent.width
+                height: parent.height
 
                 onWalletCreationRequested: {
-                     stackViewPages.replace(componentPageOverview)
+                    stackViewPages.replace(componentPageOverview)
+                    applicationWindowContent.currentPage = ApplicationWindowContent.AvailablePages.OverviewPage
                     // walletManager.createUnencryptedWallet(pageCreateWallet.seed, pageCreateWallet.name, walletManager.getDefaultWalletType() ,0)
                 }
 
                 onWalletLoadingRequested:{
-                     stackViewPages.replace(componentPageOverview)
+                    stackViewPages.replace(componentPageOverview)
+                    applicationWindowContent.currentPage = ApplicationWindowContent.AvailablePages.OverviewPage
                     // walletManager.createUnencryptedWallet(pageCreateWallet.seed, pageCreateWallet.name, walletManager.getDefaultWalletType(), 10)
                 }
             }
@@ -40,7 +53,16 @@ Item {
     Component {
         id: componentPageOverview
 
-        Pages.PageOverview {
+        UI.PageOverview {
+            id: pageOverview
+        }
+    }
+
+    Component {
+        id: componentPageTest
+
+        UI.PageTest {
+            id: pageTest
         }
     }
 }
