@@ -2,9 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Controls.Material
 
-import "Components" as Components
-import "Components/Custom" as Custom
-import "Components/Dialogs" as Dialogs
+import FiberCrypto.UI as UI
 
 ApplicationWindow {
     id: applicationWindow
@@ -14,8 +12,13 @@ ApplicationWindow {
     visible: true
     title: Qt.application.name
 
-    menuBar: Custom.CustomMenuBar {
-        Material.elevation: 20
+    onClosing: Qt.quit() // Why the app does not close without this? Also, check if settings are saved properly
+
+    menuBar: UI.CustomMenuBar {
+        id: customMenuBar
+
+        foregroundColor: applicationWindowContent.currentPage === UI.ApplicationWindowContent.AvailablePages.CreateWalletPage ? customMenuBar.Material.dialogColor : applicationWindow.Material.foreground
+        backgroundColor: applicationWindowContent.currentPage === UI.ApplicationWindowContent.AvailablePages.CreateWalletPage ? "#33FFFFFF" : customMenuBar.Material.dialogColor
 
         onAboutRequested: {
             dialogAbout.open()
@@ -28,9 +31,15 @@ ApplicationWindow {
         onLicenseRequested: {
             dialogAboutLicense.open()
         }
+
+        onTestRequested: {
+            console.log("Test requested")
+            applicationWindowContent.testPage()
+        }
     }
 
-    Components.ApplicationWindowContent {
+    UI.ApplicationWindowContent {
+        id: applicationWindowContent
         width: parent.width
         height: parent.height
     }
@@ -45,20 +54,18 @@ ApplicationWindow {
         onTriggered: {
             if (applicationWindow.visibility !== Window.FullScreen) {
                 previous = applicationWindow.visibility
-            }
-            if (applicationWindow.visibility === Window.FullScreen) {
+                applicationWindow.showFullScreen()
+            } else {
                 applicationWindow.showNormal() // Cannot show maximized directly due to a bug in some X11 managers
                 if (previous === Window.Maximized) {
                     applicationWindow.showMaximized()
                 }
-            } else {
-                applicationWindow.showFullScreen()
             }
         }
     }
 
     // Input dialogs
-    Dialogs.DialogSimpleInput {
+    UI.DialogSimpleInput {
         id: dialogSimpleInput
 
         readonly property real singleItemHeight: applicationWindow.height > (promptMessage ? 220 : 200) ? (promptMessage ? 220 : 200) - 40 : applicationWindow.height - 40
@@ -74,7 +81,7 @@ ApplicationWindow {
     }
 
     // Other dialogs
-    Dialogs.DialogTransactionDetails {
+    UI.DialogTransactionDetails {
         id: dialogTransactionDetails
 
         x: (applicationWindow.width - width)/2
@@ -87,7 +94,7 @@ ApplicationWindow {
     }
 
     // Help dialogs
-    Dialogs.DialogAbout {
+    UI.DialogAbout {
         id: dialogAbout
 
         x: (applicationWindow.width - width)/2
@@ -103,7 +110,7 @@ ApplicationWindow {
         }
     }
 
-    Dialogs.DialogAboutQt {
+    UI.DialogAboutQt {
         id: dialogAboutQt
 
         x: (applicationWindow.width - width)/2
@@ -114,7 +121,7 @@ ApplicationWindow {
         modal: true
     }
 
-    Dialogs.DialogAboutLicense {
+    UI.DialogAboutLicense {
         id: dialogAboutLicense
 
         x: (applicationWindow.width - width)/2
