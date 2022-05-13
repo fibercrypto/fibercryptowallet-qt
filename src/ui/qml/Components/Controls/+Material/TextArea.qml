@@ -1,9 +1,8 @@
-import QtQuick 2.12
-import QtQuick.Templates 2.12 as T
-import QtQuick.Controls 2.12
-import QtQuick.Controls.impl 2.12
-import QtQuick.Controls.Material 2.12
-import QtQuick.Controls.Material.impl 2.12
+import QtQuick
+import QtQuick.Templates as T
+import QtQuick.Controls.impl
+import QtQuick.Controls.Material
+import QtQuick.Controls.Material.impl
 
 T.TextArea {
     id: control
@@ -30,8 +29,8 @@ T.TextArea {
         property bool floatPlaceholderText: !(!control.length && !control.preeditText && (!control.activeFocus || control.horizontalAlignment !== Qt.AlignHCenter))
         readonly property real placeholderTextScaleFactor: 0.9
 
-        x: (floatPlaceholderText ? 0 : control.leftPadding) - width * (1-scale)/2
-        y: floatPlaceholderText ? -control.topPadding*(1.05 - placeholderTextScaleFactor) : control.topPadding
+        x: ~~((floatPlaceholderText ? 0 : control.leftPadding) - width * (1-scale)/2)
+        y: ~~(floatPlaceholderText ? -control.topPadding*(1.05 - placeholderTextScaleFactor) : control.topPadding)
         Behavior on y { NumberAnimation { duration: 250; easing.type: Easing.OutQuint } }
         scale: floatPlaceholderText ? placeholderTextScaleFactor : 1
         Behavior on scale { NumberAnimation { duration: 250; easing.type: Easing.OutQuint } }
@@ -45,6 +44,8 @@ T.TextArea {
     }
 
     background: Rectangle {
+        id: rectangleBackground
+
         y: control.height - height - control.bottomPadding + 8
         implicitWidth: 120
         height: 1
@@ -76,7 +77,7 @@ T.TextArea {
 
                 target: accentRect
                 property: "width"
-                from: 0
+                from: 0.0
                 to: accentRect.parent.width
                 duration: 350
                 easing.type: Easing.OutQuint
@@ -115,14 +116,12 @@ T.TextArea {
         ItemDelegate { text: qsTr("Redo");       icon.source: "qrc:/images/icons/actions/content_redo.svg";          onClicked: { control.redo(); contextMenu.close() }      enabled: control.canRedo }
     }
 
-    MouseArea {
-        anchors.fill: parent
-        acceptedButtons: Qt.RightButton
-        cursorShape: Qt.IBeamCursor
-
-        onClicked: {
+    onPressed: function(event) {
+        if (event.button === Qt.RightButton) {
             control.focus = true
             contextMenu.popup()
+        } else {
+            console.log(control.focus)
         }
     }
 }
