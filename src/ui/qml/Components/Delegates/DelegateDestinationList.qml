@@ -102,11 +102,15 @@ Item {
         Behavior on opacity { NumberAnimation { duration: 100 } }
         visible: opacity > 0
         enabled: visible
-        onTextChanged: coinHours = text
         text: coinHours
         selectByMouse: true
         validator: DoubleValidator {
             notation: DoubleValidator.StandardNotation
+        }
+
+        onTextChanged: {
+            if (coinHours !== text)
+                coinHours = text
         }
     }
     Label {
