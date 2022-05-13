@@ -10,7 +10,7 @@ Item {
 
     signal qrCodeRequested(var data)
 
-    onQrCodeRequested: {
+    onQrCodeRequested: function(data) {
         genQR(data)
     }
 
