@@ -25,9 +25,10 @@ Page {
         width: parent.width
         height: parent.height
         currentIndex: tabBar.currentIndex
+        onCurrentIndexChanged: pageHistory.visible = true
 
         PageWallets { }
         PageSend { }
-        PageHistory { }
+        PageHistory { id: pageHistory; visible: false } // TODO: Remove after the bug is solved
     }
 }
