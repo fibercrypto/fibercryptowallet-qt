@@ -54,15 +54,18 @@ set(QML_SOURCES
     src/ui/qml/Components/Dialogs/DialogAboutLicense.qml
     src/ui/qml/Components/Dialogs/DialogSimpleInput.qml
     src/ui/qml/Components/Dialogs/DialogTransactionDetails.qml
+    src/ui/qml/Components/Dialogs/DialogSendTransaction.qml
     src/ui/qml/Components/Dialogs/DialogContent/ContentAbout.qml
     src/ui/qml/Components/Dialogs/DialogContent/ContentAboutQt.qml
     src/ui/qml/Components/Dialogs/DialogContent/ContentAboutLicense.qml
     src/ui/qml/Components/Dialogs/DialogContent/ContentTransactionDetails.qml
+    src/ui/qml/Components/Dialogs/DialogContent/ContentSimpleInput.qml
     src/ui/qml/Components/Custom/CustomMenuBar.qml
     src/ui/qml/Components/Custom/CustomMenuItem.qml
     src/ui/qml/Components/Custom/CustomScrollBar.qml
     src/ui/qml/Components/Custom/CustomComboBoxPopupFilter.qml
     src/ui/qml/Components/Custom/CustomSwitch.qml
+    src/ui/qml/Components/Utils/PasswordRequester.qml
     src/ui/qml/Components/Controls/TextArea.qml
     src/ui/qml/Components/Controls/TextField.qml
     src/ui/qml/Components/Controls/+Material/TextArea.qml
