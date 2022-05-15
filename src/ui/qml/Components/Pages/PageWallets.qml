@@ -2,9 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Controls.Material
 
-import "../Delegates" as Delegates
-import "../Dialogs" as Dialogs
-import "../Custom" as Custom
+import FiberCrypto.UI as UI
 
 ListView {
     id: walletList
@@ -49,7 +47,7 @@ ListView {
         }
     } // Pane (header)
 
-    delegate: Delegates.DelegateWallet {
+    delegate: UI.DelegateWallet {
         Connections {
             id: connectionAddAddress
             enabled: false
@@ -77,7 +75,7 @@ ListView {
             enabled: false
             target: dialogSimpleInput
             function onAccepted() {
-                if (dialogSimpleInput.inputType === Dialogs.DialogSimpleInput.InputType.Text) {
+                if (dialogSimpleInput.inputType === UI.DialogSimpleInput.InputType.Text) {
                     console.log("Disabling encryption")
                     // encryptionEnabled = walletManager.decryptWallet(fileName, dialogSimpleInput.textValue)
                 } else {
@@ -89,7 +87,7 @@ ListView {
         }
 
         onAddAddressesRequested: {
-            dialogSimpleInput.inputType = encryptionEnabled ? Dialogs.DialogSimpleInput.InputType.TextNumber : Dialogs.DialogSimpleInput.InputType.Number
+            dialogSimpleInput.inputType = encryptionEnabled ? UI.DialogSimpleInput.InputType.TextNumber : UI.DialogSimpleInput.InputType.Number
             dialogSimpleInput.promptMessage = qsTr("Enter number of addresses")
 
             dialogSimpleInput.numericValue = 1
@@ -103,7 +101,7 @@ ListView {
         }
 
         onEditWalletRequested: {
-            dialogSimpleInput.inputType = encryptionEnabled ? Dialogs.DialogSimpleInput.InputType.TextText : Dialogs.DialogSimpleInput.InputType.Text
+            dialogSimpleInput.inputType = encryptionEnabled ? UI.DialogSimpleInput.InputType.TextText : UI.DialogSimpleInput.InputType.Text
             dialogSimpleInput.promptMessage = ""
 
             dialogSimpleInput.textPlaceholder = encryptionEnabled ? qsTr("Password") : qsTr("Name")
@@ -120,7 +118,7 @@ ListView {
 
         onToggleEncryptionRequested: {
             if (encryptionEnabled) {
-                dialogSimpleInput.inputType = Dialogs.DialogSimpleInput.InputType.Text
+                dialogSimpleInput.inputType = UI.DialogSimpleInput.InputType.Text
 
                 dialogSimpleInput.promptMessage = ""
 
@@ -128,7 +126,7 @@ ListView {
                 dialogSimpleInput.textEchoMode = encryptionEnabled ? TextField.Password : dialogSimpleInput.textEchoMode
                 dialogSimpleInput.textValue = ""
             } else {
-                dialogSimpleInput.inputType = Dialogs.DialogSimpleInput.InputType.TextText
+                dialogSimpleInput.inputType = UI.DialogSimpleInput.InputType.TextText
                 dialogSimpleInput.promptMessage = qsTr("<b>Warning:</b> We suggest that you encrypt each one of your wallets with a password. If you forget your password, you can reset it with your seed. Make sure you have your seed saved somewhere safe before encrypting your wallet.")
 
                 dialogSimpleInput.textPlaceholder = qsTr("Set password")
@@ -178,7 +176,7 @@ ListView {
         ListElement { name: "My nineth wallet";  hasHardwareWallet: false; encryptionEnabled: true;  sky: 93;   coinHours: 381 }
     }
 
-    ScrollBar.vertical: Custom.CustomScrollBar {}
+    ScrollBar.vertical: UI.CustomScrollBar {}
 } // ListView
 
 //    DialogAddLoadWallet {

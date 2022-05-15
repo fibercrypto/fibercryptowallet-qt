@@ -3,6 +3,8 @@ import QtQuick.Controls
 import QtQuick.Controls.Material
 // import AddrsBookManager
 
+import FiberCrypto.UI as UI
+
 import "../"
 import "../Controls"
 import "../Dialogs"
@@ -75,7 +77,7 @@ Item {
         }
     }
 
-    TextField {
+    UI.TextField {
         id: textFieldDestinationAddress
 
         x: toolButtonQR.x + toolButtonQR.width + 8
@@ -91,7 +93,7 @@ Item {
         onTextChanged: address = text
     }
 
-    TextField {
+    UI.TextField {
         id: textFieldCoinHoursAmount
 
         x: textFieldDestinationAddress.x + textFieldDestinationAddress.width + 20

@@ -2,6 +2,8 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
+import FiberCrypto.UI as UI
+
 Popup {
 
     property ComboBox comboBox: null
@@ -23,7 +25,7 @@ Popup {
 
     contentItem: ColumnLayout {
 
-        TextField {
+        UI.TextField {
             id: textFieldFilter
 
             Layout.fillWidth: true
@@ -43,7 +45,7 @@ Popup {
             currentIndex: comboBox.highlightedIndex
             highlightMoveDuration: 0
 
-            ScrollIndicator.vertical: ScrollIndicator { }
+            ScrollBar.vertical: UI.CustomScrollBar {}
         }
     }
 }
