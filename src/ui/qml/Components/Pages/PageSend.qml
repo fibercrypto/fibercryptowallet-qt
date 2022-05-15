@@ -2,8 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Controls.Material
 
-import "../Dialogs" as Dialogs
-import "../Custom" as Custom
+import FiberCrypto.UI as UI
 
 Page {
     id: root
@@ -62,18 +61,18 @@ Page {
                     addrs[1].push(walletSelected)
                     txn = walletManager.sendTo(walletSelected, stackView.currentItem.simplePage.getDestinationAddress(), stackView.currentItem.simplePage.getAmount())
                 }
-                dialogSendTransaction.showPasswordField =  false//isEncrypted// get if the current wallet is encrypted
-                //dialogSendTransaction.previewDate = "2019-02-26 15:27"               
-                dialogSendTransaction.previewType = TransactionDetails.Type.Send
-                dialogSendTransaction.previewAmount = txn.amount
-                dialogSendTransaction.previewHoursReceived = txn.hoursTraspassed
-                dialogSendTransaction.previewHoursBurned = txn.hoursBurned
-                dialogSendTransaction.previewtransactionID = txn.transactionId
-                dialogSendTransaction.inputs = txn.inputs
-                dialogSendTransaction.outputs = txn.outputs
-                dialogSendTransaction.walletsAddresses = addrs
-                dialogSendTransaction.open()
                 */
+                dialogSendTransaction.showPasswordField = false // isEncrypted // get if the current wallet is encrypted
+                dialogSendTransaction.previewDate = "2019-02-26 15:27"
+                dialogSendTransaction.previewType = UI.ContentTransactionDetails.TransactionType.Send
+                dialogSendTransaction.previewAmount = 4.98
+                dialogSendTransaction.previewHoursReceived = 1534
+                dialogSendTransaction.previewHoursBurned = 976
+                dialogSendTransaction.previewtransactionID = "590b37a927f83a1c9"
+                dialogSendTransaction.inputs = []
+                dialogSendTransaction.outputs = []
+                dialogSendTransaction.walletsAddresses =["9285b393e8205a857f18046", "b2840e9283c8383a928f0f137a9"]
+                dialogSendTransaction.open()
             }
         }
     } // ToolBar (footer)
@@ -93,7 +92,7 @@ Page {
             text: qsTr("Advanced mode")
         }
 
-        PageSendSimple {
+        UI.PageSendSimple {
             id: pageSendSimple
 
             x: switchAdvancedMode.x + 6
@@ -102,7 +101,7 @@ Page {
             activated: !switchAdvancedMode.checked
         }
 
-        PageSendAdvanced {
+        UI.PageSendAdvanced {
             id: pageSendAdvanced
 
             x: switchAdvancedMode.x + 6
@@ -111,11 +110,10 @@ Page {
             activated: !pageSendSimple.activated
         }
 
-        ScrollBar.vertical: Custom.CustomScrollBar {}
+        ScrollBar.vertical: UI.CustomScrollBar {}
     } // Flickable
 
-    /*
-    DialogSendTransaction {
+    UI.DialogSendTransaction {
         id: dialogSendTransaction
         anchors.centerIn: Overlay.overlay
         property var walletsAddresses
@@ -127,11 +125,13 @@ Page {
         modal: true
         focus: true
 		onAccepted: {
-            signerSelected = stackView.currentItem.simplePage.getSignerSelected()
-            walletManager.signAndBroadcastTxnAsync(walletsAddresses[1], walletsAddresses[0],signerSelected, bridgeForPassword, [], txn)
+            console.log("Send transaction...")
+            //signerSelected = stackView.currentItem.simplePage.getSignerSelected()
+            //walletManager.signAndBroadcastTxnAsync(walletsAddresses[1], walletsAddresses[0],signerSelected, bridgeForPassword, [], txn)
         }
     }
 
+    /*
     DialogGetPassword{
         id: getPasswordDialog
         anchors.centerIn: Overlay.overlay

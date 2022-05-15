@@ -2,10 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Controls.Material
 
-import "../Delegates" as Delegates
-import "../Dialogs" as Dialogs
-import "../Controls" as Controls
-import "../Custom" as Custom
+import FiberCrypto.UI as UI
 
 Page {
     id: subPageSendAdvanced
@@ -58,7 +55,7 @@ Page {
             }
         }*/
 
-        popup: Custom.CustomComboBoxPopupFilter {
+        popup: UI.CustomComboBoxPopupFilter {
             id: filterPopupWallets
             comboBox: comboBoxWalletsSendFrom
             filterPlaceholderText: qsTr("Filter wallets by name")
@@ -156,7 +153,7 @@ Page {
         y: Math.max(labelAddresses.y + labelAddresses.height, toolButtonAddressPopupHelp.y + toolButtonAddressPopupHelp.height, checkBoxAllAddresses.y + checkBoxAllAddresses.height) - toolButtonAddressPopupHelp.bottomPadding
         width: parent.width - 2*x
 
-        popup: Custom.CustomComboBoxPopupFilter {
+        popup: UI.CustomComboBoxPopupFilter {
             id: filterPopupAddresses
             comboBox: comboBoxWalletsAddressesSendFrom
             filterPlaceholderText: qsTr("Filter Addresses")
@@ -285,7 +282,7 @@ Page {
             }
         }
 
-        popup: Custom.CustomComboBoxPopupFilter {
+        popup: UI.CustomComboBoxPopupFilter {
             id: filterPopupOutputs
             comboBox: comboBoxWalletsUnspentOutputsSendFrom
             filterPlaceholderText: qsTr("Filter outputs")
@@ -384,7 +381,7 @@ Page {
 
         model: listModelDestinations
 
-        delegate: Delegates.DelegateDestinationList {
+        delegate: UI.DelegateDestinationList {
             width: listViewDestinations.width
             automaticCoinHoursAllocation: checkBoxAutomaticCoinHoursAllocation.checked
 
@@ -434,7 +431,7 @@ Page {
         }
     }
 
-    Controls.TextField {
+    UI.TextField {
         id: textFieldCustomChangeAddress
 
         x: labelCustomChangeAddress.x

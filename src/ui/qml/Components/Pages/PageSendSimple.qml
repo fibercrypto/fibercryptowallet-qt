@@ -2,9 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Controls.Material
 
-import "../Dialogs" as Dialogs
-import "../Controls" as Controls
-import "../Custom" as Custom
+import FiberCrypto.UI as UI
 
 Page {
     id: pageSendSimple
@@ -65,7 +63,7 @@ Page {
         // displayText: comboBoxWalletsSendFrom.model.wallets && comboBoxWalletsSendFrom.model.wallets[comboBoxWalletsSendFrom.currentIndex] && comboBoxWalletsSendFrom.model.wallets[comboBoxWalletsSendFrom.currentIndex].sky ? comboBoxWalletsSendFrom.model.wallets[comboBoxWalletsSendFrom.currentIndex].name + " - " + comboBoxWalletsSendFrom.model.wallets[comboBoxWalletsSendFrom.currentIndex].sky + " SKY (" + comboBoxWalletsSendFrom.model.wallets[comboBoxWalletsSendFrom.currentIndex].coinHours + " CoinHours)" : qsTr("Select a wallet")
         model: listWallets
 
-        popup: Custom.CustomComboBoxPopupFilter {
+        popup: UI.CustomComboBoxPopupFilter {
             id: filterPopupWallets
             comboBox: comboBoxWalletsSendFrom
             filterPlaceholderText: qsTr("Filter wallets by name")
@@ -172,6 +170,12 @@ Page {
 
         onClicked: {
             console.log("Contacts requested")
+            dialogSimpleInput.inputType = UI.DialogSimpleInput.InputType.Text
+            dialogSimpleInput.textPlaceholder = qsTr("Address Book's password")
+            dialogSimpleInput.textEchoMode = TextField.Password
+            dialogSimpleInput.textValue = ""
+            connectionUnlockAddressBook.enabled = true
+            dialogSimpleInput.open()
             /*
             if (abm.getSecType() !== 2) { // need an enum here
                 abm.loadContacts()
@@ -181,9 +185,19 @@ Page {
             }
             */
         }
+
+        Connections {
+            id: connectionUnlockAddressBook
+            enabled: false
+            target: dialogSimpleInput
+
+            function onAccepted() {
+                console.log("Unlocking address book")
+            }
+        }
     }
 
-    Controls.TextField {
+    UI.TextField {
         id: textFieldDestinationAddress
 
         x: buttonSelectAddress.x + buttonSelectAddress.width + 6
@@ -198,7 +212,7 @@ Page {
         }
     }
 
-    Controls.TextField {
+    UI.TextField {
         id: textFieldAmount
 
         x: labelSendFrom.x
@@ -257,21 +271,6 @@ Page {
 
         onAccepted: {
             textFieldWalletsSendTo.text = selectedAddress
-        }
-    }
-
-    DialogGetPassword {
-        id: getpass
-
-        anchors.centerIn: Overlay.overlay
-        height: 180
-        onAccepted: {
-            if (!abm.authenticate(getpass.password)) {
-                getpass.open()
-            } else {
-                abm.loadContacts()
-                dialogSelectAddressByAddressBook.open()
-            }
         }
     }
     */
