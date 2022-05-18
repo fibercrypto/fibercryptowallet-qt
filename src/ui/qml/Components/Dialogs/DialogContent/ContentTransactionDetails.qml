@@ -149,10 +149,6 @@ Item {
         ListView {
             id: listViewInputs
 
-            ToolButton {
-                onClicked: console.log(listViewInputs.width, listViewInputs.contentWidth, listViewInputs.height, listViewInputs.contentHeight)
-            }
-
             y: labelInputs.height + 6
             width: ~~(parent.width/2 - 2)
             height: parent.height - y
