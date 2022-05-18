@@ -1,10 +1,10 @@
 import QtQuick
 import QtQuick.Controls
-import QtQuick.Layouts
 
 import FiberCrypto.UI as UI
 
 Popup {
+    id: customComboBoxPopupFilter
 
     property ComboBox comboBox: null
     property alias filterText: textFieldFilter.text
@@ -23,22 +23,26 @@ Popup {
         textFieldFilter.forceActiveFocus()
     }
 
-    contentItem: ColumnLayout {
+    contentItem: Item {
+        implicitWidth: customComboBoxPopupFilter.width
+        implicitHeight: textFieldFilter.height + listView.height
+        clip: true
 
         UI.TextField {
             id: textFieldFilter
 
-            Layout.fillWidth: true
-            Layout.leftMargin: 12
-            Layout.rightMargin: 12
+            x: 12
+            width: parent.width - 2*x
             placeholderText: qsTr("Filter")
             selectByMouse: true
             focus: true
         }
 
         ListView {
-            Layout.fillWidth: true
-            Layout.fillHeight: true
+            id: listView
+
+            y: textFieldFilter.height + 5
+            width: parent.width
             clip: true
             implicitHeight: contentHeight
             model: comboBox.delegateModel

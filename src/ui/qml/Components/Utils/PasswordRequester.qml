@@ -1,7 +1,5 @@
 import QtQuick
 import QtQuick.Controls
-import QtQuick.Controls.Material
-import QtQuick.Layouts
 
 import FiberCrypto.UI as UI
 
@@ -22,33 +20,30 @@ Item {
         textFieldPassword.clear()
     }
 
-    implicitHeight: textFieldPassword.implicitHeight + buttonForgot.implicitHeight
+    implicitHeight: textFieldPassword.implicitHeight + (allowPasswordRecovery ? buttonForgot.implicitHeight + 5 : 0)
 
-    ColumnLayout {
-        anchors.fill: parent
+    UI.TextField {
+        id: textFieldPassword
 
-        UI.TextField {
-            id: textFieldPassword
+        width: parent.width
+        placeholderText: qsTr("Password")
+        selectByMouse: true
+        echoMode: TextField.Password
+        focus: true
+    }
 
-            placeholderText: qsTr("Password")
-            selectByMouse: true
-            echoMode: TextField.Password
-            focus: true
-            Layout.alignment: Qt.AlignTop
-            Layout.fillWidth: true
-        }
+    Button {
+        id: buttonForgot
 
-        Button {
-            id: buttonForgot
-            text: qsTr("I forgot my password")
-            flat: true
-            highlighted: hovered
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-            Layout.fillWidth: true
-            
-            onClicked: {
-                passwordForgotten()
-            }
+        x: ~~((parent.width - width)/2)
+        y: textFieldPassword.height + 10
+        width: parent.width
+        text: qsTr("I forgot my password")
+        flat: true
+        highlighted: hovered
+
+        onClicked: {
+            passwordForgotten()
         }
     }
 }

@@ -1,7 +1,6 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Controls.Material
-import QtQuick.Layouts
 
 import FiberCrypto.UI as UI
 
@@ -38,52 +37,58 @@ Dialog {
         id: flickable
         anchors.fill: parent
         clip: true
-        contentHeight: columnLayoutRoot.height
+        contentHeight: itemRoot.height
 
-        ColumnLayout {
-            id: columnLayoutRoot
+        Item {
+            id: itemRoot
             width: parent.width
-            spacing: 20
+            height: transactionDetails.height + (itemPasswordField.visible ? itemPasswordField.height + 20 : 0) + 21
 
             UI.ContentTransactionDetails {
                 id: transactionDetails
 
-                Layout.fillWidth: true
+                width: parent.width
             }
 
             Rectangle {
-                visible: expanded
+                y: transactionDetails.height + 20
+                width: parent.width
                 height: 1
+                visible: expanded
                 color: Material.color(Material.Grey)
-                Layout.fillWidth: true
             }
 
-            ColumnLayout {
-                id: columnLayoutPasswordField
+            Item {
+                id: itemPasswordField
 
-                Layout.fillWidth: true
+                y: transactionDetails.height + (expanded ? 41 : 11)
+                width: parent.width
+                implicitHeight: labelMsgPassword.height + passwordRequester.height
                 opacity: showPasswordField ? 1.0 : 0.0
                 Behavior on opacity { NumberAnimation {} }
                 visible: opacity > 0
 
                 Label {
+                    id: labelMsgPassword
+                    width: parent.width
                     text: qsTr("Enter the password to confirm the transaction")
+                    wrapMode: Label.Wrap
                     font.bold: true
                 }
 
                 UI.PasswordRequester {
                     id: passwordRequester
 
-                    Layout.topMargin: -10
-                    Layout.fillWidth: true
+                    y: labelMsgPassword.height
+                    width: parent.width
 
                     onTextChanged: {
                         dialogSendTransaction.standardButton(Dialog.Ok).enabled = text !== "" || !showPasswordField
-						passwordText = text
+                        passwordText = text
                     }
                 }
-            } // ColumnLayout
-        } // ColumnLayout (root)
+            } // Item (password)
+        } // Item (root)
 
         ScrollBar.vertical: UI.CustomScrollBar { }
     } // Flickable
