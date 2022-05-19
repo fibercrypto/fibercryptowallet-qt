@@ -132,21 +132,6 @@ Page {
     }
 
     /*
-    DialogGetPassword{
-        id: getPasswordDialog
-        anchors.centerIn: Overlay.overlay
-        property int nAddress
-        width: applicationWindow.width > 540 ? 540 - 120 : applicationWindow.width - 40
-        height: applicationWindow.height > 570 ? 570 - 180 : applicationWindow.height - 40
-
-        focus: true
-        modal: true
-        onClosed:{
-            bridgeForPassword.setResult(getPasswordDialog.password)
-            bridgeForPassword.unlock()
-        }
-    }
-
     QBridge{
         id: bridgeForPassword
 
