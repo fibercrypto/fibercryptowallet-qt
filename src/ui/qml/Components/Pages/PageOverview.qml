@@ -1,6 +1,8 @@
 import QtQuick
 import QtQuick.Controls
 
+import FiberCrypto.UI as UI
+
 Page {
     id: pageOverview
 
@@ -27,8 +29,8 @@ Page {
         currentIndex: tabBar.currentIndex
         onCurrentIndexChanged: pageHistory.visible = true
 
-        PageWallets { }
-        PageSend { }
-        PageHistory { id: pageHistory; visible: false } // TODO: Remove after the bug is solved
+        UI.PageWallets { }
+        UI.PageSend { }
+        UI.PageHistory { id: pageHistory; visible: false } // TODO: Remove after the bug is solved
     }
 }
