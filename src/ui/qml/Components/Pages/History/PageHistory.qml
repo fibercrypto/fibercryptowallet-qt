@@ -37,7 +37,7 @@ Page {
 
         onClicked: {
             console.log("Opening filters...")
-            //toolTipFilters.open()
+            toolTipFilters.open()
         }
     }
 
@@ -82,13 +82,12 @@ Page {
         ListElement { date: "01-08-2021 15:00"; type: 0; status: 1; amount: 11; hoursTraspassed: 203; hoursBurned: 150; transactionID: "iuasduyw7eyuas"; addresses: "jskhdna7yuakss,ksahdkaw8yd,kashdkuwndu73d" }
     }
 
-    /*
     Dialog {
         id: toolTipFilters
 
         anchors.centerIn: Overlay.overlay
         width: applicationWindow.width > 440 ? 440 - 40 : applicationWindow.width - 40
-        height: Math.min(applicationWindow.height - 40, filter.contentHeight + header.height + footer.height + topPadding + bottomPadding)
+        height: Math.min(applicationWindow.height - 40, filter.implicitHeight + header.height + footer.height + topPadding + bottomPadding)
 
         modal: true
         standardButtons: Dialog.Close
@@ -96,20 +95,25 @@ Page {
         title: qsTr("Available filters")
 
         onClosed: {
-            modelTransactions.clear()
-            modelTransactions.addMultipleTransactions(historyManager.getTransactionsWithFilters())
+            console.log("Set filters")
+            //modelTransactions.clear()
+            //modelTransactions.addMultipleTransactions(historyManager.getTransactionsWithFilters())
         }
 
         onOpened:{
             filter.loadWallets()
         }
 
-        HistoryFilterList {
+        UI.PageHistoryFilter {
             id: filter
-            anchors.fill: parent
+
+            width: parent.width
+            height: parent.height
+            clip: true
         }
     } // Dialog
 
+    /*
     QTransactionList {
         id: modelTransactions
     }

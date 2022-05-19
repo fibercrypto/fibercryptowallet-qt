@@ -35,17 +35,20 @@ qt_add_qml_module(appFiberCryptoWallet
 # The UI
 set(QML_SOURCES
     src/ui/qml/Components/ApplicationWindowContent.qml
-    src/ui/qml/Components/Pages/PageCreateWallet.qml
     src/ui/qml/Components/Pages/PageOverview.qml
-    src/ui/qml/Components/Pages/PageWallets.qml
-    src/ui/qml/Components/Pages/PageSend.qml
-    src/ui/qml/Components/Pages/PageSendSimple.qml
-    src/ui/qml/Components/Pages/PageSendAdvanced.qml
-    src/ui/qml/Components/Pages/PageHistory.qml
+    src/ui/qml/Components/Pages/Wallets/PageCreateWallet.qml
+    src/ui/qml/Components/Pages/Wallets/PageWallets.qml
+    src/ui/qml/Components/Pages/Send/PageSend.qml
+    src/ui/qml/Components/Pages/Send/PageSendSimple.qml
+    src/ui/qml/Components/Pages/Send/PageSendAdvanced.qml
+    src/ui/qml/Components/Pages/History/PageHistory.qml
+    src/ui/qml/Components/Pages/History/PageHistoryFilter.qml
     src/ui/qml/Components/Pages/PageTest.qml
     src/ui/qml/Components/Delegates/DelegateWallet.qml
     src/ui/qml/Components/Delegates/DelegateWalletAddress.qml
     src/ui/qml/Components/Delegates/DelegateHistoryList.qml
+    src/ui/qml/Components/Delegates/DelegateHistoryFilter.qml
+    src/ui/qml/Components/Delegates/DelegateHistoryFilterAddress.qml
     src/ui/qml/Components/Delegates/DelegateTransactionAddress.qml
     src/ui/qml/Components/Delegates/DelegateInputOutput.qml
     src/ui/qml/Components/Delegates/DelegateDestinationList.qml
