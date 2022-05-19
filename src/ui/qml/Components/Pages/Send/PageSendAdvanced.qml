@@ -427,7 +427,7 @@ Page {
         onClicked: {
             console.log("Get addresses by wallet")
             // modelAddressesByWallet.loadModel(walletManager.getAllAddresses())
-            // dialogSelectAddressByWallet.open()
+            dialogSelectAddressByWallet.open()
         }
     }
 
@@ -491,17 +491,17 @@ Page {
 
     ListModel {
         id: listAddresses
-        ListElement { address: "llaksjdlkajsdyagwdh"; addressSky: 5;    addressCoinHours: 10 }
-        ListElement { address: "oeifhdskfjhkudsafja"; addressSky: 300;  addressCoinHours: 1049 }
-        ListElement { address: "rqiweladskhdflkdsft"; addressSky: 13;   addressCoinHours: 201 }
+        ListElement { address: "llaksjdlkajsdyagwdh"; wallet: "My first wallet";  addressSky: 5;    addressCoinHours: 10 }
+        ListElement { address: "oeifhdskfjhkudsafja"; wallet: "My first wallet";  addressSky: 300;  addressCoinHours: 1049 }
+        ListElement { address: "rqiweladskhdflkdsft"; wallet: "My first wallet";  addressSky: 13;   addressCoinHours: 201 }
 
-        ListElement { address: "mvkjsdnhuaydiauksjd"; addressSky: 3941; addressCoinHours: 6652 }
-        ListElement { address: "vscytafdhsdhjxhcdjs"; addressSky: 0;    addressCoinHours: 35448 }
-        ListElement { address: "dsjnhffaskdfhnkdjhu"; addressSky: 439;  addressCoinHours: 685 }
+        ListElement { address: "mvkjsdnhuaydiauksjd"; wallet: "My second wallet"; addressSky: 3941; addressCoinHours: 6652 }
+        ListElement { address: "vscytafdhsdhjxhcdjs"; wallet: "My second wallet"; addressSky: 0;    addressCoinHours: 35448 }
+        ListElement { address: "dsjnhffaskdfhnkdjhu"; wallet: "My third wallet";  addressSky: 439;  addressCoinHours: 685 }
 
-        ListElement { address: "zsdfjsdhcmhjsdkfhjs"; addressSky: 0;    addressCoinHours: 315 }
-        ListElement { address: "oidhfkusjdhfnhadgfe"; addressSky: 0;    addressCoinHours: 10628 }
-        ListElement { address: "eydsjjfndshgnjsdehd"; addressSky: 93;   addressCoinHours: 381 }
+        ListElement { address: "zsdfjsdhcmhjsdkfhjs"; wallet: "My fourth wallet"; addressSky: 0;    addressCoinHours: 315 }
+        ListElement { address: "oidhfkusjdhfnhadgfe"; wallet: "My fourth wallet"; addressSky: 0;    addressCoinHours: 10628 }
+        ListElement { address: "eydsjjfndshgnjsdehd"; wallet: "My fourth wallet"; addressSky: 93;   addressCoinHours: 381 }
     }
 
     ListModel {
@@ -524,15 +524,16 @@ Page {
     AddressModel {
         id: modelAddressesByWallet
     }
+    */
 
-    DialogSelectAddressByWallet {
+    UI.DialogSelectAddressByWallet {
         id: dialogSelectAddressByWallet
 
         anchors.centerIn: Overlay.overlay
         width: applicationWindow.width > 540 ? 540 - 40 : applicationWindow.width - 40
         height: applicationWindow.height - 40
 
-        model: modelAddressesByWallet
+        model: listAddresses//modelAddressesByWallet
 
         focus: true
         modal: true
@@ -541,7 +542,6 @@ Page {
             textFieldCustomChangeAddress.text = selectedAddress
         }
     }
-    */
 
     states: [
         State {

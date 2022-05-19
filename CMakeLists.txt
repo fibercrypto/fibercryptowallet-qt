@@ -58,6 +58,7 @@ set(QML_SOURCES
     src/ui/qml/Components/Dialogs/DialogSimpleInput.qml
     src/ui/qml/Components/Dialogs/DialogTransactionDetails.qml
     src/ui/qml/Components/Dialogs/DialogSendTransaction.qml
+    src/ui/qml/Components/Dialogs/DialogSelectAddressByWallet.qml
     src/ui/qml/Components/Dialogs/DialogContent/ContentAbout.qml
     src/ui/qml/Components/Dialogs/DialogContent/ContentAboutQt.qml
     src/ui/qml/Components/Dialogs/DialogContent/ContentAboutLicense.qml
