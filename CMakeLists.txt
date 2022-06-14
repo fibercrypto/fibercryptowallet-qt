@@ -24,13 +24,14 @@ qt_add_executable(appFiberCryptoWallet
     ${PROJECT_SOURCES}
 )
 
+
+# QML modules
+
 qt_add_qml_module(appFiberCryptoWallet
     URI FiberCryptoWallet
     VERSION 1.0
     QML_FILES src/ui/qml/splash.qml src/ui/qml/main.qml
 )
-
-# QML modules
 
 # The UI
 set(QML_SOURCES
@@ -97,6 +98,13 @@ qt_add_qml_module(FiberCryptoTestPlugin
     OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/FiberCrypto/TestPlugin
 )
 
+qt_add_qml_module(FiberCryptoWalletModelPlugin
+    URI "FiberCrypto.WalletModel"
+    VERSION 1.0
+    SOURCES src/models/Wallet/walletmodel.h src/models/Wallet/wallet.h src/models/Wallet/walletmodel.cpp src/models/Wallet/wallet.cpp
+    OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/FiberCrypto/WalletModel
+)
+
 # Include search paths for QML Type Registrations
 target_include_directories(FiberCryptoManagers PRIVATE
     src/core/WalletManager
@@ -104,6 +112,10 @@ target_include_directories(FiberCryptoManagers PRIVATE
 
 target_include_directories(FiberCryptoTestPlugin PRIVATE
     src/models/Template
+)
+
+target_include_directories(FiberCryptoWalletModelPlugin PRIVATE
+    src/models/Wallet
 )
 
 # Target properties

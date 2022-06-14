@@ -3,7 +3,7 @@ import QtQuick.Controls
 import QtQuick.Controls.Material
 //import QtGraphicalEffects
 
-import "../Dialogs/" as Dialogs
+import FiberCrypto.UI as UI
 
 Item {
     id: root
@@ -81,6 +81,7 @@ Item {
             width: 70
             horizontalAlignment: Text.AlignRight
             text: sky === qsTr("N/A") ? "" : sky // a role of the model
+            elide: Label.ElideRight
             color: Material.accent
 
             BusyIndicator {
@@ -89,6 +90,7 @@ Item {
                 implicitWidth: implicitHeight
                 implicitHeight: parent.height + 10
                 running: sky === qsTr("N/A") ? true : false
+                visible: running // fade effect?
             }
         }
 
@@ -99,7 +101,9 @@ Item {
             x: parent.width - width - 10
             width: 70
             horizontalAlignment: Text.AlignRight
+            leftPadding: 4
             text: coinHours // a role of the model
+            elide: Label.ElideRight
         }
 
         onReleased: {
@@ -190,7 +194,7 @@ Item {
             }
         }
 
-        delegate: DelegateWalletAddress {
+        delegate: UI.DelegateWalletAddress {
             width: parent.width
 
             Behavior on implicitHeight { NumberAnimation { duration: 250; easing.type: Easing.OutQuint } }
