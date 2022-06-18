@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QtQml>
 
+#include "addressmodel.h"
+
 class Wallet : public QObject
 {
     Q_OBJECT
@@ -17,6 +19,7 @@ class Wallet : public QObject
     Q_PROPERTY(bool encrypted READ getEncrypted WRITE setEncrypted NOTIFY encryptedChanged)
     Q_PROPERTY(bool hasHardwareWallet READ getHasHardwareWallet WRITE setHasHardwareWallet NOTIFY hasHardwareWalletChanged)
     Q_PROPERTY(bool expanded READ getExpanded WRITE setExpanded NOTIFY expandedChanged)
+    Q_PROPERTY(AddressModel* addressModel READ getAddressModel WRITE setAddressModel NOTIFY addressModelChanged)
 
 public:
     explicit Wallet(const QString &walletName = QString(), const QString &walletFileName = QString(), double walletSky = 0.0, double walletCoinHours = 0.0, bool walletEncryptionEnabled = false, bool walletEncrypted = false, bool walletHasHardwareWallet = false, bool walletExpanded = false, QObject *parent = nullptr);
@@ -45,6 +48,9 @@ public:
     bool getHasHardwareWallet() const;
     void setHasHardwareWallet(bool value);
 
+    AddressModel* getAddressModel() const;
+    void setAddressModel(AddressModel *value);
+
 signals:
     void nameChanged(const QString &value);
     void fileNameChanged(const QString &value);
@@ -54,6 +60,7 @@ signals:
     void encryptedChanged(bool value);
     void expandedChanged(bool value);
     void hasHardwareWalletChanged(bool value);
+    void addressModelChanged();
 
 private:
     QString name;
@@ -64,6 +71,7 @@ private:
     bool encrypted = false;
     bool hasHardwareWallet = false;
     bool expanded = false;
+    AddressModel *addressModel = new AddressModel();
 };
 
 #endif // WALLET_H

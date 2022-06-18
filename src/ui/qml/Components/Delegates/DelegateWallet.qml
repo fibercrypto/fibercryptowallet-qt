@@ -118,10 +118,10 @@ Item {
         y: itemDelegateMainButton.y + itemDelegateMainButton.height
         width: parent.width
         height: contentHeight
-        model: listAddresses
         opacity: expanded ? 1.0 : 0.0
         clip: true
         interactive: false
+        model: addressModel
 
         Behavior on implicitHeight { NumberAnimation { duration: 250; easing.type: Easing.OutQuint } }
         Behavior on opacity { NumberAnimation { duration: expanded ? 250 : 1000; easing.type: Easing.OutQuint } }

@@ -15,7 +15,8 @@ QHash<int, QByteArray> WalletModel::roleNames() const
         { CoinHoursRole, "coinHours" },
         { EncryptionEnabledRole, "encryptionEnabled" },
         { HasHardwareWalletRole, "hasHardwareWalletRole" },
-        { ExpandedRole, "expanded" }
+        { ExpandedRole, "expanded" },
+        { AddressModelRole, "addressModel" }
     };
 }
 
@@ -64,6 +65,8 @@ QVariant WalletModel::getModelData(int row, int role) const
         return walletData[row]->getHasHardwareWallet();
     case ExpandedRole:
         return walletData[row]->getExpanded();
+    case AddressModelRole:
+        return QVariant::fromValue(walletData[row]->getAddressModel());
     default:
         return QVariant();
     }
@@ -96,6 +99,9 @@ bool WalletModel::setModelData(int row, const QVariant &value, int role)
         break;
     case ExpandedRole:
         walletData[row]->setExpanded(value.toBool());
+        break;
+    case AddressModelRole:
+        walletData[row]->setAddressModel(value.value<AddressModel*>());
         break;
     default:
         break;

@@ -110,6 +110,7 @@ Item {
         width: visible ? 70 : 0
         height: visible ? implicitHeight : 0
         horizontalAlignment: Text.AlignRight
+        elide: Label.ElideRight
         visible: !showOnlyAddresses
         color: Material.accent
 
@@ -132,7 +133,9 @@ Item {
         width: visible ? 70 : 0
         height: visible ? implicitHeight : 0
         horizontalAlignment: Text.AlignRight
+        leftPadding: 4
         visible: !showOnlyAddresses
         text: addressCoinHours // a role of the model
+        elide: Label.ElideRight
     }
 }

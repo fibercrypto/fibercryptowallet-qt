@@ -101,7 +101,7 @@ qt_add_qml_module(FiberCryptoTestPlugin
 qt_add_qml_module(FiberCryptoWalletModelPlugin
     URI "FiberCrypto.WalletModel"
     VERSION 1.0
-    SOURCES src/models/Wallet/walletmodel.h src/models/Wallet/wallet.h src/models/Wallet/walletmodel.cpp src/models/Wallet/wallet.cpp
+    SOURCES src/models/Wallet/walletmodel.h src/models/Wallet/walletmodel.cpp src/models/Wallet/wallet.h src/models/Wallet/wallet.cpp src/models/Wallet/addressmodel.h src/models/Wallet/addressmodel.cpp src/models/Wallet/address.h src/models/Wallet/address.cpp
     OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/FiberCrypto/WalletModel
 )
 

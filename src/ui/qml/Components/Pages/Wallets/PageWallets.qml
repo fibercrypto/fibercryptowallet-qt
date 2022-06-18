@@ -49,6 +49,29 @@ ListView {
         }
     } // Pane (header)
 
+    // footer
+    footerPositioning: ListView.OverlayFooter
+    footer: ToolBar {
+        id: tabBarAddWallet
+
+        implicitWidth: parent.width
+        Material.theme: applicationWindow.Material.theme
+        Material.primary: applicationWindow.accentColor
+        Material.foreground: applicationWindow.Material.background
+        Material.elevation: 0
+
+        ToolButton {
+            id: buttonAddWallet
+            anchors.fill: parent
+            text: qsTr("Add wallet")
+            icon.source: "qrc:/images/icons/actions/add.svg"
+
+            onClicked: {
+                console.log("Add wallet")
+            }
+        }
+    } // Pane (footer)
+
     delegate: UI.DelegateWallet {
         Connections {
             id: connectionAddAddress

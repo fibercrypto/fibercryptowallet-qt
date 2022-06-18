@@ -109,3 +109,16 @@ void Wallet::setHasHardwareWallet(bool value)
         emit hasHardwareWalletChanged(value);
     }
 }
+
+AddressModel* Wallet::getAddressModel() const
+{
+    return addressModel;
+}
+
+void Wallet::setAddressModel(AddressModel *value)
+{
+    if (addressModel != value) {
+        addressModel = value;
+        emit addressModelChanged();
+    }
+}
