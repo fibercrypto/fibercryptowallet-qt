@@ -17,8 +17,8 @@ Item {
     property bool automaticCoinHoursAllocation: true
 
     signal appendRequested(var listElement)
-    signal removalRequested(var index)
-    signal qrCodeRequested(var data)
+    signal removalRequested(index: int)
+    signal qrCodeRequested(data: string)
 
     onQrCodeRequested: {
         console.log("QR code requested...")
@@ -73,7 +73,7 @@ Item {
         padding: 0
         icon.source: "qrc:/images/icons/actions/qr.svg"
         onClicked: {
-            qrCodeRequested()
+            qrCodeRequested(textFieldDestinationAddress.text)
         }
     }
 
