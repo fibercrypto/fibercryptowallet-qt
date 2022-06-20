@@ -6,12 +6,13 @@ import FiberCrypto.UI as UI
 import FiberCrypto.WalletModel as WalletModel
 
 ListView {
-    id: walletList
+    id: pageWallets
 
     property string statusIcon // an empty string for no icon
 
     clip: true
-    model: WalletModel.WalletModel {}
+    bottomMargin: 10
+    model: WalletModel.WalletModel { }
 
     // header
     headerPositioning: ListView.PullBackHeader
@@ -52,11 +53,10 @@ ListView {
     // footer
     footerPositioning: ListView.OverlayFooter
     footer: ToolBar {
-        id: tabBarAddWallet
-
+        z: 2
         implicitWidth: parent.width
         Material.theme: applicationWindow.Material.theme
-        Material.primary: applicationWindow.accentColor
+        Material.primary: applicationWindow.Material.accent
         Material.foreground: applicationWindow.Material.background
         Material.elevation: 0
 
@@ -68,6 +68,7 @@ ListView {
 
             onClicked: {
                 console.log("Add wallet")
+                dialogAddWallet.open()
             }
         }
     } // Pane (footer)
@@ -183,18 +184,8 @@ ListView {
         }
     }
 
-    ScrollBar.vertical: UI.CustomScrollBar {}
+    ScrollBar.vertical: UI.CustomScrollBar {
+        bottomInset: pageWallets.footerItem ? pageWallets.footerItem.height : 0
+        bottomPadding: bottomInset
+    }
 } // ListView
-
-//    DialogAddLoadWallet {
-//        id: dialogAddLoadWallet
-//        anchors.centerIn: Overlay.overlay
-
-//        modal: true
-//        focus: true
-
-//        width: applicationWindow.width > 540 ? 540 - 40 : applicationWindow.width - 40
-//        height: applicationWindow.height > 640 ? 640 - 40 : applicationWindow.height - 40
-//    }
-
-

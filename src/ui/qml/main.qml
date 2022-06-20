@@ -76,8 +76,20 @@ ApplicationWindow {
         width: applicationWindow.width > 300 ? 300 - 40 : applicationWindow.width - 40
         height: applicationWindow.height > implicitHeight + 40 ? implicitHeight : applicationWindow.height - 40
         //height: inputType <= Dialogs.DialogSimpleInput.InputType.Number ? singleItemHeight : doubleItemHeight
-        focus: visible
         modal: true
+        focus: visible
+    }
+
+    UI.DialogAddWallet {
+        id: dialogAddWallet
+
+        x: (applicationWindow.width - width)/2
+        y: (applicationWindow.height - height)/2 - menuBar.height
+        width: applicationWindow.width > 540 ? 540 - 40 : applicationWindow.width - 40
+        height: applicationWindow.height > 640 ? 640 - 40 : applicationWindow.height - 40
+
+        modal: true
+        focus: true
     }
 
     // Other dialogs
