@@ -32,7 +32,7 @@ T.TextField {
         readonly property real placeholderTextScaleFactor: 0.9
 
         x: ~~((floatPlaceholderText ? 0 : control.leftPadding) - width * (1-scale)/2)
-        y: ~~(floatPlaceholderText ? -control.topPadding*(1 - placeholderTextScaleFactor) : control.topPadding)
+        y: ~~(floatPlaceholderText ? -control.topPadding*(1.05 - placeholderTextScaleFactor) : control.topPadding)
         Behavior on y { NumberAnimation { duration: 250; easing.type: Easing.OutQuint } }
         scale: floatPlaceholderText ? placeholderTextScaleFactor : 1
         Behavior on scale { NumberAnimation { duration: 250; easing.type: Easing.OutQuint } }

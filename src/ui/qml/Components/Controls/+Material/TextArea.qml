@@ -14,8 +14,8 @@ T.TextArea {
                              implicitBackgroundHeight + topInset + bottomInset,
                              placeholder.implicitHeight + 1 + topPadding + bottomPadding)
 
-    topPadding: 16
-    bottomPadding: 9
+    topPadding: 12
+    padding: 4
 
     color: enabled ? Material.foreground : Material.hintTextColor
     selectionColor: Material.accentColor
@@ -29,8 +29,9 @@ T.TextArea {
         property bool floatPlaceholderText: !(!control.length && !control.preeditText && (!control.activeFocus || control.horizontalAlignment !== Qt.AlignHCenter))
         readonly property real placeholderTextScaleFactor: 0.9
 
-        x: ~~((floatPlaceholderText ? 0 : control.leftPadding) - width * (1-scale)/2)
-        y: ~~(floatPlaceholderText ? -control.topPadding*(1.05 - placeholderTextScaleFactor) : control.topPadding)
+        x: floatPlaceholderText ? 0 : control.leftPadding//~~((floatPlaceholderText ? 0 : control.leftPadding) - width * (1-scale)/2)
+        Behavior on x { NumberAnimation { duration: 250; easing.type: Easing.OutQuint } }
+        y: ~~(floatPlaceholderText ? -control.topPadding*(1.20 - placeholderTextScaleFactor) : control.topPadding)
         Behavior on y { NumberAnimation { duration: 250; easing.type: Easing.OutQuint } }
         scale: floatPlaceholderText ? placeholderTextScaleFactor : 1
         Behavior on scale { NumberAnimation { duration: 250; easing.type: Easing.OutQuint } }
@@ -44,70 +45,56 @@ T.TextArea {
     }
 
     background: Rectangle {
-        id: rectangleBackground
-
-        y: control.height - height - control.bottomPadding + 8
+        y: ~~(control.topPadding/2)
+        z: -2
+        width: control.width
+        height: control.height - y
         implicitWidth: 120
-        height: 1
-        color: control.hovered ? control.Material.primaryTextColor : control.Material.hintTextColor
-        Behavior on color { ColorAnimation {} }
+        color: control.Material.backgroundColor
 
-        Rectangle {
-            id: accentRect
-
-            readonly property bool controlHasActiveFocus: control.activeFocus
-
-            onControlHasActiveFocusChanged: {
-                if (controlHasActiveFocus) {
-                    animationOnActiveFocus.start()
-                } else {
-                    animationOnUnactiveFocus.start()
-                }
-            }
-
-            y: parent.y
-            implicitWidth: 120
-            width: control.activeFocus ? parent.width : 0
-            height: 2
-            anchors.centerIn: parent
-            color: control.Material.accentColor
-
-            NumberAnimation {
-                id: animationOnActiveFocus
-
-                target: accentRect
-                property: "width"
-                from: 0.0
-                to: accentRect.parent.width
-                duration: 350
-                easing.type: Easing.OutQuint
-            }
-
-            NumberAnimation {
-                id: animationOnUnactiveFocus
-
-                target: accentRect
-                property: "opacity"
-                from: 1.0
-                to: 0.0
-                duration: 350
-                easing.type: Easing.OutQuint
-
-                onFinished: {
-                    target.width = 0
-                    target.opacity = 1.0
-                }
-            }
+        Rectangle { // left
+            id: rectangleBackgroundLeft
+            width: 1
+            height: parent.height
+            border.width: 1
+            // there's a bug if the border's color is fully opaque
+            border.color: control.activeFocus ? Qt.alpha(control.Material.accent, 0.99) : control.hovered ? control.Material.primaryTextColor : Material.style === Material.Light ? "#FE9F9F9F" : "#FE7A7A7A"
+            Behavior on border.color { ColorAnimation {} }
         }
-    }
+        Rectangle { // bottom
+            y: parent.height - 1
+            width: parent.width
+            height: 1
+            border.width: 1
+            border.color: rectangleBackgroundLeft.border.color
+        }
+        Rectangle { // right
+            x: parent.width - 1
+            width: 1
+            height: parent.height
+            border.width: 1
+            border.color: rectangleBackgroundLeft.border.color
+        }
+        Rectangle { // top
+            y: 1
+            x: parent.width
+            width: parent.width - (placeholder.floatPlaceholderText ? placeholder.width : 0)
+            Behavior on width { NumberAnimation { duration: 250; easing.type: Easing.OutQuint } }
+            height: 1
+            transformOrigin: Item.TopLeft
+            rotation: 180
+            border.width: 1
+            border.color: rectangleBackgroundLeft.border.color
+        }
+    } // Rectangle (backgrouns)
 
     Menu {
         id: contextMenu
 
         focus: false
 
-        ItemDelegate { text: qsTr("Cut");        icon.source: "qrc:/images/icons/actions/content_cut.svg";           onClicked: { control.cut(); contextMenu.close() }       enabled: control.selectedText && control.echoMode === TextInput.Normal }
-        ItemDelegate { text: qsTr("Copy");       icon.source: "qrc:/images/icons/actions/content_copy.svg";          onClicked: { control.copy(); contextMenu.close() }      enabled: control.selectedText && control.echoMode === TextInput.Normal }
+        ItemDelegate { text: qsTr("Cut");        icon.source: "qrc:/images/icons/actions/content_cut.svg";           onClicked: { control.cut(); contextMenu.close() }       enabled: control.selectedText }
+        ItemDelegate { text: qsTr("Copy");       icon.source: "qrc:/images/icons/actions/content_copy.svg";          onClicked: { control.copy(); contextMenu.close() }      enabled: control.selectedText }
         ItemDelegate { text: qsTr("Paste");      icon.source: "qrc:/images/icons/actions/content_paste.svg";         onClicked: { control.paste(); contextMenu.close() }     enabled: control.canPaste }
         MenuSeparator {}
         ItemDelegate { text: qsTr("Select all"); icon.source: "qrc:/images/icons/actions/content_all_selection.svg"; onClicked: { control.selectAll(); contextMenu.close() } enabled: control.selectedText !== control.text }
@@ -120,8 +107,6 @@ T.TextArea {
         if (event.button === Qt.RightButton) {
             control.focus = true
             contextMenu.popup()
-        } else {
-            console.log(control.focus)
         }
     }
 }
