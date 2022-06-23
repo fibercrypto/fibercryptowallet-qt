@@ -90,6 +90,6 @@ Dialog {
             } // Item (password)
         } // Item (root)
 
-        ScrollBar.vertical: UI.CustomScrollBar { }
+        ScrollBar.vertical: UI.ScrollBar { }
     } // Flickable
 }

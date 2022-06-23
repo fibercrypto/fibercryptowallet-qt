@@ -37,14 +37,14 @@ Flickable {
         width: parent.width
         height: radioButtonCreateWallet.height + radioButtonLoadWallet.height
 
-        RadioButton {
+        UI.RadioButton {
             id: radioButtonCreateWallet
             width: parent.width
             text: qsTr("Create new wallet")
             checked: contentAddWallet.mode === ContentAddWallet.CreateWallet
             onCheckedChanged: contentAddWallet.mode = checked ? ContentAddWallet.CreateWallet : contentAddWallet.mode
         }
-        RadioButton {
+        UI.RadioButton {
             id: radioButtonLoadWallet
             y: radioButtonCreateWallet.y + radioButtonCreateWallet.height - 6
             width: parent.width
@@ -163,7 +163,7 @@ Flickable {
         text: qsTr("Wallet type")
     }
 
-    ComboBox {
+    UI.ComboBox {
         id: comboBoxWalletType
 
         x: 6
@@ -231,5 +231,5 @@ Flickable {
         }
     }
 
-    ScrollBar.vertical: UI.CustomScrollBar { }
+    ScrollBar.vertical: UI.ScrollBar { }
 } // Flickable

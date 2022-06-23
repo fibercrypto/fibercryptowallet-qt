@@ -184,7 +184,7 @@ ListView {
         }
     }
 
-    ScrollBar.vertical: UI.CustomScrollBar {
+    ScrollBar.vertical: UI.ScrollBar {
         bottomInset: pageWallets.footerItem ? pageWallets.footerItem.height : 0
         bottomPadding: bottomInset
     }

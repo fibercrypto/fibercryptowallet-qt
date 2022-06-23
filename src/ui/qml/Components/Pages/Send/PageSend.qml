@@ -5,7 +5,7 @@ import QtQuick.Controls.Material
 import FiberCrypto.UI as UI
 
 Page {
-    id: root
+    id: pageSend
 
     property alias advancedMode: switchAdvancedMode.checked
     property string walletSelected
@@ -110,7 +110,7 @@ Page {
             activated: !pageSendSimple.activated
         }
 
-        ScrollBar.vertical: UI.CustomScrollBar {}
+        ScrollBar.vertical: UI.ScrollBar {}
     } // Flickable
 
     UI.DialogSendTransaction {

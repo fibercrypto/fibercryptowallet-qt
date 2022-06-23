@@ -160,7 +160,7 @@ Item {
                 width: parent.width
             }
 
-            ScrollBar.vertical: UI.CustomScrollBar { }
+            ScrollBar.vertical: UI.ScrollBar { }
         }
 
         Label {
@@ -187,7 +187,7 @@ Item {
                 width: parent.width
             }
 
-            ScrollBar.vertical: UI.CustomScrollBar { }
+            ScrollBar.vertical: UI.ScrollBar { }
         }
     } // Item (inputs and outputs)
 

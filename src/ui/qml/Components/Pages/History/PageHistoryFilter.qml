@@ -36,7 +36,7 @@ Item {
         }
         */
 
-        ScrollBar.vertical: UI.CustomScrollBar {}
+        ScrollBar.vertical: UI.ScrollBar {}
     }
 
     ListModel {

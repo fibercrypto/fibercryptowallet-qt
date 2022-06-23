@@ -88,7 +88,7 @@ Dialog {
                 Behavior on color { ColorAnimation { duration: 150 } }
             }
 
-            ScrollBar.vertical: UI.CustomScrollBar {}
+            ScrollBar.vertical: UI.ScrollBar {}
         } // ListView
     } // Item
 }

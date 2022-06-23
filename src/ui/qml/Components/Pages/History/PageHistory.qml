@@ -68,7 +68,7 @@ Page {
             }
         }
 
-        ScrollBar.vertical: UI.CustomScrollBar {}
+        ScrollBar.vertical: UI.ScrollBar {}
     }
 
     // TODO: Implement in the backend

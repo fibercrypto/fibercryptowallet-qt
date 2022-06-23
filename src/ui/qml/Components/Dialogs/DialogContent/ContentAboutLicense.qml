@@ -18,7 +18,7 @@ Item {
         contentHeight: labelLicense.height
         clip: true
 
-        ScrollBar.vertical: UI.CustomScrollBar { }
+        ScrollBar.vertical: UI.ScrollBar { }
 
         Label {
             id: labelLicense

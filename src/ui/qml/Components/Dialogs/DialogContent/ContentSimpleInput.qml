@@ -74,5 +74,5 @@ Flickable {
         editable: true
     }
 
-    ScrollBar.vertical: UI.CustomScrollBar { }
+    ScrollBar.vertical: UI.ScrollBar { }
 } // Flickable

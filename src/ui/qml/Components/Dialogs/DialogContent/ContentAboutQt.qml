@@ -58,6 +58,6 @@ Item {
             } // Label
         } // Column
 
-        ScrollBar.vertical: UI.CustomScrollBar { }
+        ScrollBar.vertical: UI.ScrollBar { }
     } // Flickable
 }

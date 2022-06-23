@@ -49,7 +49,7 @@ Popup {
             currentIndex: comboBox.highlightedIndex
             highlightMoveDuration: 0
 
-            ScrollBar.vertical: UI.CustomScrollBar {}
+            ScrollBar.vertical: UI.ScrollBar {}
         }
     }
 }
