@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Controls.Material
+import Qt5Compat.GraphicalEffects
 
 import FiberCrypto.UI as UI
 
@@ -42,6 +43,16 @@ ApplicationWindow {
         id: applicationWindowContent
         width: parent.width
         height: parent.height
+    }
+
+    FastBlur {
+        id: fastBlurEffect
+        visible: radius > 0
+        width: applicationWindowContent.width
+        height: applicationWindowContent.height
+        source: applicationWindowContent
+
+        Behavior on radius { NumberAnimation {} }
     }
 
     //! Application-level actions and dialogs
