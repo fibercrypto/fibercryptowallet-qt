@@ -54,25 +54,22 @@ T.TextArea {
 
         Rectangle { // left
             id: rectangleBackgroundLeft
-            width: 1
+            width: 1 // use 2 but first we need to set up a behavior like the TextField
             height: parent.height
-            border.width: 1
             // there's a bug if the border's color is fully opaque
             border.color: control.activeFocus ? Qt.alpha(control.Material.accent, 0.99) : control.hovered ? control.Material.primaryTextColor : Material.style === Material.Light ? "#FE9F9F9F" : "#FE7A7A7A"
             Behavior on border.color { ColorAnimation {} }
         }
         Rectangle { // bottom
-            y: parent.height - 1
+            y: parent.height - height
             width: parent.width
-            height: 1
-            border.width: 1
+            height: rectangleBackgroundLeft.width
             border.color: rectangleBackgroundLeft.border.color
         }
         Rectangle { // right
-            x: parent.width - 1
-            width: 1
+            x: parent.width - width
+            width: rectangleBackgroundLeft.width
             height: parent.height
-            border.width: 1
             border.color: rectangleBackgroundLeft.border.color
         }
         Rectangle { // top
@@ -80,10 +77,9 @@ T.TextArea {
             x: parent.width
             width: parent.width - (placeholder.floatPlaceholderText ? placeholder.width : 0)
             Behavior on width { NumberAnimation { duration: 250; easing.type: Easing.OutQuint } }
-            height: 1
+            height: rectangleBackgroundLeft.width
             transformOrigin: Item.TopLeft
             rotation: 180
-            border.width: 1
             border.color: rectangleBackgroundLeft.border.color
         }
     } // Rectangle (backgrouns)

@@ -75,35 +75,37 @@ T.TextField {
             Rectangle {
                 id: rectangleAccentLeft
 
+                x: itemAccentBackground.centerX
+                y: 2
+                width: x
+                rotation: 180
+                transformOrigin: Qt.TopLeftCorner
                 height: 2
-                anchors.left: parent.left
-                anchors.leftMargin: itemAccentBackground.centerX
-                anchors.right: parent.right
-                anchors.rightMargin: parent.width - itemAccentBackground.centerX
                 color: control.Material.accentColor
+                opacity: 0
+                onVisibleChanged: if (control.activeFocus) opacity = 1 // ???
             } // Rectangle (left)
 
             Rectangle {
                 id: rectangleAccentRight
 
+                x: itemAccentBackground.centerX
+                width: parent.width - x
                 height: 2
-                anchors.left: parent.left
-                anchors.leftMargin: itemAccentBackground.centerX
-                anchors.right: parent.right
-                anchors.rightMargin: parent.width - itemAccentBackground.centerX
                 color: control.Material.accentColor
+                opacity: rectangleAccentLeft.opacity
             } // Rectangle (right)
 
             SequentialAnimation {
                 id: animationOnActiveFocusLeft
 
-                PropertyAction { target: rectangleAccentLeft; property: "anchors.rightMargin"; value: itemAccentBackground.width - itemAccentBackground.centerX }
+                PropertyAction { target: rectangleAccentLeft; property: "width"; value: 0 }
                 PropertyAction { target: rectangleAccentLeft; property: "opacity"; value: 1.0 }
                 NumberAnimation {
                     target: rectangleAccentLeft
-                    property: "anchors.leftMargin"
-                    from: itemAccentBackground.centerX
-                    to: 0
+                    property: "width"
+                    from: 0
+                    to: itemAccentBackground.centerX
                     duration: 350
                     easing.type: Easing.OutQuint
                 }
@@ -112,13 +114,13 @@ T.TextField {
             SequentialAnimation {
                 id: animationOnActiveFocusRight
 
-                PropertyAction { target: rectangleAccentRight; property: "anchors.leftMargin"; value: itemAccentBackground.centerX }
+                PropertyAction { target: rectangleAccentRight; property: "width"; value: 0 }
                 PropertyAction { target: rectangleAccentRight; property: "opacity"; value: 1.0 }
                 NumberAnimation {
                     target: rectangleAccentRight
-                    property: "anchors.rightMargin"
-                    from: itemAccentBackground.width - itemAccentBackground.centerX
-                    to: 0
+                    property: "width"
+                    from: 0
+                    to: itemAccentBackground.width - rectangleAccentRight.x
                     duration: 350
                     easing.type: Easing.OutQuint
                 }
@@ -127,7 +129,7 @@ T.TextField {
             NumberAnimation {
                 id: animationOnUnactiveFocus
 
-                targets: [rectangleAccentLeft, rectangleAccentRight]
+                target: rectangleAccentLeft
                 property: "opacity"
                 to: 0.0
                 duration: 200
@@ -159,7 +161,7 @@ T.TextField {
             control.focus = true
             contextMenu.popup()
         }
-        if (!control.focus) {
+        if (!control.activeFocus) {
             itemAccentBackground.centerX = event.x
         }
     }

@@ -10,10 +10,10 @@ MenuItem {
 
     Image {
         id: imageIcon
-        anchors.left: parent.left
-        anchors.leftMargin: parent.highlighted ? 6 : -width/2
-        Behavior on anchors.leftMargin { NumberAnimation { duration: 500; easing.type: Easing.OutQuint } }
-        anchors.verticalCenter: parent.verticalCenter
+
+        x: parent.highlighted ? 6 : -width/2
+        Behavior on x { NumberAnimation { duration: 500; easing.type: Easing.OutQuint } }
+        y: ~~((parent.height - height)/2)
         
         sourceSize: "24x24" // same as Qt.size(24, 24)
         fillMode: Image.PreserveAspectFit
