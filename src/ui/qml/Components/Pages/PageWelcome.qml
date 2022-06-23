@@ -1,0 +1,53 @@
+import QtQml
+import QtQuick
+import QtQuick.Controls
+
+Page {
+    id: pageWelcome
+
+    signal walletCreationRequested()
+    signal walletLoadingRequested()
+
+    // slideshow (a swipe view)?
+    Image {
+        id: imageWallpaper
+
+        y: -42
+        width: parent.width
+        height: ~~(parent.height * 0.4)
+
+        source: "qrc:/images/banners/1.jpg"
+        fillMode: Image.PreserveAspectCrop
+    }
+
+    Button {
+        id: buttonCreateWallet
+        x: ~~(parent.width - width)/2
+        y: imageWallpaper.y + imageWallpaper.height + ~~(parent.height - imageWallpaper.height - height)/2
+        width: parent.width > 540 ? 540 - 40 : parent.width - 40
+        height: implicitHeight * 2
+
+        text: qsTr("Create new wallet")
+        highlighted: true
+        Material.elevation: 0
+
+        onClicked: {
+            walletCreationRequested()
+        }
+    }
+
+    Button {
+        id: buttonLoadWallet
+        x: ~~(parent.width - width)/2
+        y: buttonCreateWallet.y + buttonCreateWallet.height + 10
+        width: parent.width > 540 ? 540 - 40 : parent.width - 40
+
+        text: qsTr("Load existing wallet")
+        flat: true
+        highlighted: true
+
+        onClicked: {
+            walletLoadingRequested()
+        }
+    }
+}

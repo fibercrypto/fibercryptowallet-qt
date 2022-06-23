@@ -36,9 +36,10 @@ qt_add_qml_module(appFiberCryptoWallet
 # The UI
 set(QML_SOURCES
     src/ui/qml/Components/ApplicationWindowContent.qml
+    src/ui/qml/Components/Pages/PageWelcome.qml
     src/ui/qml/Components/Pages/PageOverview.qml
-    src/ui/qml/Components/Pages/Wallets/PageCreateWallet.qml
     src/ui/qml/Components/Pages/Wallets/PageWallets.qml
+    src/ui/qml/Components/Pages/Wallets/PageCreateWallet.qml
     src/ui/qml/Components/Pages/Send/PageSend.qml
     src/ui/qml/Components/Pages/Send/PageSendSimple.qml
     src/ui/qml/Components/Pages/Send/PageSendAdvanced.qml
@@ -69,13 +70,19 @@ set(QML_SOURCES
     src/ui/qml/Components/Dialogs/DialogContent/ContentSimpleInput.qml
     src/ui/qml/Components/Custom/CustomMenuBar.qml
     src/ui/qml/Components/Custom/CustomMenuItem.qml
-    src/ui/qml/Components/Custom/CustomScrollBar.qml
     src/ui/qml/Components/Custom/CustomComboBoxPopupFilter.qml
-    src/ui/qml/Components/Custom/CustomSwitch.qml
+    src/ui/qml/Components/Custom/CustomCheckIndicator.qml
     src/ui/qml/Components/Utils/PasswordRequester.qml
     src/ui/qml/Components/Utils/SeedGenerator.qml
+    src/ui/qml/Components/Controls/ComboBox.qml
+    src/ui/qml/Components/Controls/RadioButton.qml
+    src/ui/qml/Components/Controls/ScrollBar.qml
     src/ui/qml/Components/Controls/TextArea.qml
     src/ui/qml/Components/Controls/TextField.qml
+    src/ui/qml/Components/Controls/+Material/ComboBox.qml
+    src/ui/qml/Components/Controls/+Material/RadioButton.qml
+    src/ui/qml/Components/Controls/+Material/RadioIndicator.qml
+    src/ui/qml/Components/Controls/+Material/ScrollBar.qml
     src/ui/qml/Components/Controls/+Material/TextArea.qml
     src/ui/qml/Components/Controls/+Material/TextField.qml
 )

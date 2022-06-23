@@ -23,32 +23,44 @@ Item {
         id: stackViewPages
         width: parent.width
         height: parent.height
-        initialItem: componentPageCreateWallet
+        initialItem: componentPageWelcome //componentPageOverview
     }
 
     Component {
-        id: componentPageCreateWallet
+        id: componentPageWelcome
 
         Item {
-            UI.PageCreateWallet {
-                id: pageCreateWallet
+            UI.PageWelcome {
+                id: pageWelcome
                 width: parent.width
                 height: parent.height
 
                 onWalletCreationRequested: {
-                    stackViewPages.replace(componentPageOverview)
+                    stackViewPages.replace(componentPageCreateWallet)
                     applicationWindowContent.currentPage = ApplicationWindowContent.AvailablePages.OverviewPage
-                    // walletManager.createUnencryptedWallet(pageCreateWallet.seed, pageCreateWallet.name, walletManager.getDefaultWalletType() ,0)
+                    // walletManager.createUnencryptedWallet(pageWelcome.seed, pageWelcome.name, walletManager.getDefaultWalletType() ,0)
                 }
 
                 onWalletLoadingRequested:{
                     stackViewPages.replace(componentPageOverview)
                     applicationWindowContent.currentPage = ApplicationWindowContent.AvailablePages.OverviewPage
-                    // walletManager.createUnencryptedWallet(pageCreateWallet.seed, pageCreateWallet.name, walletManager.getDefaultWalletType(), 10)
+                    // walletManager.createUnencryptedWallet(pageWelcome.seed, pageWelcome.name, walletManager.getDefaultWalletType(), 10)
                 }
             }
         }
-    } // Component (PageCreateWallet)
+    } // Component (PageWelcome)
+
+    Component {
+        id: componentPageCreateWallet
+
+        UI.PageCreateWallet {
+            id: pageCreateWallet
+
+            onFinished: {
+                stackViewPages.replace(componentPageOverview)
+            }
+        }
+    }
 
     Component {
         id: componentPageOverview
