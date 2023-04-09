@@ -18,13 +18,14 @@ ListView {
     header: Pane {
         z: 2
         width: parent.width
-        height: labelName.height
+        height: labelName.y + labelName.height
         padding: 0
 
         Label {
             id: labelName
 
             x: 20
+            y: 2
             width: labelSky.x
             text: qsTr("Name")
             font.pointSize: 9
@@ -33,6 +34,7 @@ ListView {
             id: labelSky
 
             x: labelCoinHours.x - width
+            y: labelName.y
             width: 70
             horizontalAlignment: Text.AlignRight
             text: qsTr("SKY")
@@ -42,6 +44,7 @@ ListView {
             id: labelCoinHours
 
             x: parent.width - width - 10
+            y: labelName.y
             width: 70
             horizontalAlignment: Text.AlignRight
             text: qsTr("Coin hours")
@@ -64,6 +67,7 @@ ListView {
             anchors.fill: parent
             text: qsTr("Add wallet")
             icon.source: "qrc:/images/icons/actions/add.svg"
+            contentItem.x: ~~contentItem.x
 
             onClicked: {
                 console.log("Add wallet")

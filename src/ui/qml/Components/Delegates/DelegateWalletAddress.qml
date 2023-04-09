@@ -1,5 +1,4 @@
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Controls.Material
 
 Item {
@@ -25,7 +24,7 @@ Item {
         id: labelNumber
 
         x: 10
-        y: (parent.height - height)/2
+        y: ~~((parent.height - height)/2)
         width: visible ? implicitWidth : 0
         height: visible ? implicitHeight : 0
         visible: !showOnlyAddresses
@@ -35,8 +34,8 @@ Item {
     ToolButton {
         id: toolButtonQR
 
-        x: labelNumber.x + ~~labelNumber.width // ~~ to avoid subpixel alignment
-        y: (parent.height - height)/2
+        x: ~~(labelNumber.x + labelNumber.width)
+        y: ~~((parent.height - height)/2)
         width: visible ? implicitWidth : 0
         height: visible ? implicitHeight : 0
         padding: 0
@@ -50,7 +49,7 @@ Item {
         id: textAddress
 
         x: toolButtonQR.width + 12
-        y: (parent.height - height)/2
+        y: ~~((parent.height - height)/2)
         width: !showOnlyAddresses ? toolButtonCopy.x - x : parent.width
         text: address // a role of the model
         readOnly: true
@@ -60,7 +59,7 @@ Item {
         id: toolButtonCopy
 
         x: labelAddressSky.x - 32
-        y: (parent.height - height)/2
+        y: ~~((parent.height - height)/2)
         width: visible ? implicitWidth : 0
         height: visible ? implicitHeight : 0
         visible: !showOnlyAddresses
@@ -72,8 +71,8 @@ Item {
         Image {
             id: imageCopied
 
-            x: (parent.width - width)/2
-            y: (parent.height - height)/2
+            x: ~~((parent.width - width)/2)
+            y: ~~((parent.height - height)/2)
             width: visible ? implicitWidth : 0
             height: visible ? implicitHeight : 0
             visible: !showOnlyAddresses
@@ -106,7 +105,7 @@ Item {
         id: labelAddressSky
 
         x: labelAddressCoinsHours.x - width
-        y: (parent.height - height)/2
+        y: ~~((parent.height - height)/2)
         width: visible ? 70 : 0
         height: visible ? implicitHeight : 0
         horizontalAlignment: Text.AlignRight
@@ -118,7 +117,7 @@ Item {
 
         BusyIndicator {
             x: parent.width - width
-            y: (parent.height - height)/2
+            y: ~~((parent.height - height)/2)
             implicitWidth: implicitHeight
             implicitHeight: parent.height + 10
             running: addressSky === qsTr("N/A") ? true : false
@@ -128,7 +127,7 @@ Item {
     Label {
         id: labelAddressCoinsHours
 
-        y: (parent.height - height)/2
+        y: ~~((parent.height - height)/2)
         x: parent.width - width - 10
         width: visible ? 70 : 0
         height: visible ? implicitHeight : 0

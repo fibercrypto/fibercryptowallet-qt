@@ -1,10 +1,9 @@
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Controls.Material
 
 CheckDelegate {
     id: root
-   
+
     text: ""// a role of the model
     font.family: "Code New Roman"
     leftPadding: 20

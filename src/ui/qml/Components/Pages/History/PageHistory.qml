@@ -29,7 +29,7 @@ Page {
         id: buttonFilters
 
         x: switchDelegateFilters.x + switchDelegateFilters.width + 10
-        y: switchDelegateFilters.y + (switchDelegateFilters.height - height)/2
+        y: ~~(switchDelegateFilters.y + (switchDelegateFilters.height - height)/2)
         enabled: switchDelegateFilters.checked
         flat: true
         highlighted: true
@@ -45,11 +45,12 @@ Page {
     ListView {
         id: listTransactions
 
-        y: switchDelegateFilters.y + switchDelegateFilters.height + 10
+        y: ~~(switchDelegateFilters.y + switchDelegateFilters.height + 10)
         width: parent.width
         height: parent.height - y
         clip: true
         model: modelTransactions
+        pixelAligned: true
 
         delegate: UI.DelegateHistoryList {
             width: parent ? parent.width : 0

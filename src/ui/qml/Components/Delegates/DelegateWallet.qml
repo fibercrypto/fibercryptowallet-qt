@@ -1,5 +1,4 @@
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Controls.Material
 //import QtGraphicalEffects
 
@@ -35,7 +34,7 @@ Item {
 
         Image {
             id: imageStatus
-            y: (parent.height - height)/2
+            y: ~~((parent.height - height)/2)
             width: 16
             source: statusIcon
             sourceSize: "16x16"
@@ -45,7 +44,7 @@ Item {
             id: labelWalletName
 
             x: imageStatus.width + 4
-            y: (parent.height - height)/2
+            y: ~~((parent.height - height)/2)
             width: itemImageLockIcon.x - x
             text: name // a role of the model
         }
@@ -53,8 +52,8 @@ Item {
         Item {
             id: itemImageLockIcon
 
-            x: labelSky.x - width
-            y: (parent.height - height)/2
+            x: ~~(labelSky.x - width)
+            y: ~~((parent.height - height)/2)
             width: lockIcon.width
             height: lockIcon.height
 
@@ -76,8 +75,8 @@ Item {
         Label {
             id: labelSky
 
-            x: labelCoinHours.x - width
-            y: (parent.height - height)/2
+            x: ~~(labelCoinHours.x - width)
+            y: ~~((parent.height - height)/2)
             width: 70
             horizontalAlignment: Text.AlignRight
             text: sky === qsTr("N/A") ? "" : sky // a role of the model
@@ -85,8 +84,8 @@ Item {
             color: Material.accent
 
             BusyIndicator {
-                x: parent.width - width
-                y: (parent.height - height)/2
+                x: ~~(parent.width - width)
+                y: ~~((parent.height - height)/2)
                 implicitWidth: implicitHeight
                 implicitHeight: parent.height + 10
                 running: sky === qsTr("N/A") ? true : false
@@ -97,8 +96,8 @@ Item {
         Label {
             id: labelCoinHours
 
-            y: (parent.height - height)/2
-            x: parent.width - width - 10
+            x: ~~(parent.width - width - 10)
+            y: ~~((parent.height - height)/2)
             width: 70
             horizontalAlignment: Text.AlignRight
             leftPadding: 4
@@ -115,12 +114,13 @@ Item {
     ListView {
         id: addressList
 
-        y: itemDelegateMainButton.y + itemDelegateMainButton.height
+        y: ~~(itemDelegateMainButton.y + itemDelegateMainButton.height)
         width: parent.width
         height: contentHeight
         opacity: expanded ? 1.0 : 0.0
         clip: true
         interactive: false
+        pixelAligned: true
         model: addressModel
 
         Behavior on implicitHeight { NumberAnimation { duration: 250; easing.type: Easing.OutQuint } }
@@ -128,15 +128,15 @@ Item {
 
         header: Pane {
             z: 2
-            width: parent.width
-            height: buttonAddAddress.height
+            width: ~~(parent.width)
+            height: ~~(buttonAddAddress.height)
             padding: 0
 
             ToolButton {
                 id: buttonAddAddress
 
                 x: 2
-                width: ~~(parent.width/4) + ~~(parent.width/4) % 2 // ~~ to avoid subpixel alignment
+                width: ~~(parent.width/4 + ~~parent.width/4 % 2)
                 text: qsTr("Add address")
                 icon.source: "qrc:/images/icons/actions/add.svg"
                 Material.accent: Material.Teal

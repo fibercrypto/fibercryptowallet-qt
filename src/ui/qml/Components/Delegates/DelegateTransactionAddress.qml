@@ -1,5 +1,5 @@
 import QtQuick
-import QtQuick.Controls
+import QtQuick.Controls.Material
 
 Item {
     id: root
@@ -20,7 +20,7 @@ Item {
 
     Label {
         x: toolButtonQR.width
-        y: (toolButtonQR.height - height)/2
+        y: ~~((toolButtonQR.height - height)/2)
         text: modelData//address // model's role
         font.family: "Code New Roman"
     }

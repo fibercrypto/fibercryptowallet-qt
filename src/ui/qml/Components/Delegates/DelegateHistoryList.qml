@@ -1,5 +1,4 @@
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Controls.Material
 
 import "../Delegates" as Delegates
@@ -55,23 +54,23 @@ ItemDelegate {
 
     Label {
         id: labelSendReceive
-        x: imageSendReceive.x + imageSendReceive.width + 20
-        y: imageSendReceive.y + (imageSendReceive.height - height)/2
+        x: ~~(imageSendReceive.x + imageSendReceive.width + 20)
+        y: ~~(imageSendReceive.y + (imageSendReceive.height - height)/2)
         font.bold: true
         text: (modelType === DelegateHistoryList.TransactionType.Receive ? qsTr("Received") : (modelType === DelegateHistoryList.TransactionType.Send ? qsTr("Sent") : qsTr("Internal"))) + " SKY"
     }
 
     Label {
         x: labelSendReceive.x + labelSendReceive.width + 20
-        y: labelSendReceive.y + (labelSendReceive.height - height)/2
+        y: ~~(labelSendReceive.y + (labelSendReceive.height - height)/2)
         Material.foreground: Material.Grey
         text: modelDate.toLocaleString("2000-01-01 00:00") // model's role
         font.pointSize: Qt.application.font.pointSize * 0.9
     }
 
     Label {
-        x: parent.width - width - 20
-        y: imageSendReceive.y
+        x: ~~(parent.width - width - 20)
+        y: ~~imageSendReceive.y
         text: (modelType === DelegateHistoryList.TransactionType.Receive ? "" : "-") + amount + " SKY" // model's role
         font.pointSize: Qt.application.font.pointSize * 1.25
         font.bold: true
@@ -81,7 +80,7 @@ ItemDelegate {
         id: listViewAddresses
 
         x: labelSendReceive.x
-        y: labelSendReceive.y + labelSendReceive.height + 10
+        y: ~~(labelSendReceive.y + labelSendReceive.height + 10)
         height: contentHeight
         width: parent.width
         spacing: -10

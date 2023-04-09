@@ -131,7 +131,7 @@ Page {
         id: checkBoxAllAddresses
 
         x: toolButtonAddressPopupHelp.x + toolButtonAddressPopupHelp.width
-        y: toolButtonAddressPopupHelp.y + (toolButtonAddressPopupHelp.height - height)/2
+        y: ~~(toolButtonAddressPopupHelp.y + (toolButtonAddressPopupHelp.height - height)/2)
         text: qsTr("All Addresses of the selected addresses")
         checked: true
         onClicked: {
@@ -232,7 +232,7 @@ Page {
         id: toolButtonUnspentOutputsPopupHelp
 
         x: labelUnspentOutputs.x + labelUnspentOutputs.width
-        y: labelUnspentOutputs.y + (labelUnspentOutputs.height - height)/2
+        y: ~~(labelUnspentOutputs.y + (labelUnspentOutputs.height - height)/2)
         icon.source: "qrc:/images/icons/actions/help.svg"
         icon.color: Material.color(Material.Grey)
     }
@@ -241,7 +241,7 @@ Page {
         id: checkBoxUnspentOutputsUseAllOutputs
 
         x: toolButtonUnspentOutputsPopupHelp.x + toolButtonUnspentOutputsPopupHelp.width
-        y: toolButtonUnspentOutputsPopupHelp.y + (toolButtonUnspentOutputsPopupHelp.height - height)/2
+        y: ~~(toolButtonUnspentOutputsPopupHelp.y + (toolButtonUnspentOutputsPopupHelp.height - height)/2)
         text: qsTr("All outputs of the selected addresses")
         checked: true
         onClicked: {
@@ -361,7 +361,7 @@ Page {
         id: toolButtonDestinationPopupHelp
 
         x: labelDestinations.x + labelDestinations.width
-        y: labelDestinations.y + (labelDestinations.height - height)/2
+        y: ~~(labelDestinations.y + (labelDestinations.height - height)/2)
         icon.source: "qrc:/images/icons/actions/help.svg"
         icon.color: Material.color(Material.Grey)
     }
@@ -403,7 +403,7 @@ Page {
         id: labelCustomChangeAddress
 
         x: listViewDestinations.x
-        y: listViewDestinations.y + listViewDestinations.height+ 10
+        y: listViewDestinations.y + listViewDestinations.height + 10
         text: qsTr("Custom change address")
     }
 
@@ -411,7 +411,7 @@ Page {
         id: toolButtonCustomChangeAddressPopupHelp
 
         x: labelCustomChangeAddress.x + labelCustomChangeAddress.width
-        y: labelCustomChangeAddress.y + (labelCustomChangeAddress.height - height)/2
+        y: ~~(labelCustomChangeAddress.y + (labelCustomChangeAddress.height - height)/2)
         icon.source: "qrc:/images/icons/actions/help.svg"
         icon.color: Material.color(Material.Grey)
     }
@@ -420,7 +420,7 @@ Page {
         id: buttonSelectCustomChangeAddress
 
         x: toolButtonCustomChangeAddressPopupHelp.x +  toolButtonCustomChangeAddressPopupHelp.width
-        y: toolButtonCustomChangeAddressPopupHelp.y + (toolButtonCustomChangeAddressPopupHelp.height - height)/2
+        y: ~~(toolButtonCustomChangeAddressPopupHelp.y + (toolButtonCustomChangeAddressPopupHelp.height - height)/2)
         text: qsTr("Select")
         flat: true
         highlighted: true
