@@ -1,5 +1,5 @@
 import QtQuick
-import QtQuick.Controls
+import QtQuick.Controls.Material
 
 import FiberCrypto.UI as UI
 
@@ -18,7 +18,7 @@ Item {
     readonly property bool generateSeed24: buttonSeed24.checked
     property Item nextTabItem: null
 
-    implicitHeight: buttonSeed12.height + textAreaSeed.height + 5
+    implicitHeight: buttonSeed12.height + textAreaSeed.contentHeight + 5
 
     ButtonGroup {
         buttons: [buttonSeed12, buttonSeed24]
@@ -55,17 +55,25 @@ Item {
         flat: true
     }
 
-    UI.TextArea {
-        id: textAreaSeed
+    Flickable {
+        id: flickableSeed
 
         y: buttonSeed12.y + buttonSeed12.height + 5
         width: parent.width
-        height: contentHeight + topPadding + bottomPadding
-        wrapMode: TextArea.Wrap
-        clip: true
-        selectByMouse: true
-        placeholderText: qsTr("Secret recovery phrase")
-        KeyNavigation.priority: KeyNavigation.BeforeItem
-        KeyNavigation.tab: nextTabItem
+        height: parent.height - y + 26
+        onContentXChanged: console.log("Content X (bug?):", contentX)
+        flickableDirection: Flickable.VerticalFlick
+
+        TextArea.flickable: UI.TextArea {
+            id: textAreaSeed
+
+            wrapMode: TextArea.Wrap
+            selectByMouse: true
+            placeholderText: qsTr("Secret recovery phrase")
+            KeyNavigation.priority: KeyNavigation.BeforeItem
+            KeyNavigation.tab: nextTabItem
+        }
+
+        ScrollBar.vertical: UI.ScrollBar { }
     }
 }

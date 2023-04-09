@@ -14,7 +14,7 @@ Item {
         }
     }
 
-    implicitWidth: Math.max(imageAppIcon.width + labelAbout.implicitWidth > 400 ? 400 : imageAppIcon.width + labelAbout.implicitWidth)
+    implicitWidth: imageAppIcon.width + labelAbout.implicitWidth > 400 ? 400 : imageAppIcon.width + labelAbout.implicitWidth
     implicitHeight: flickable.contentHeight
 
     Flickable {

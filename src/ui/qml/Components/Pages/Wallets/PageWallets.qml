@@ -1,5 +1,4 @@
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Controls.Material
 
 import FiberCrypto.UI as UI
@@ -113,6 +112,7 @@ ListView {
         }
 
         onAddAddressesRequested: {
+            dialogSimpleInput.title = qsTr("Add address")
             dialogSimpleInput.inputType = encryptionEnabled ? UI.DialogSimpleInput.InputType.TextNumber : UI.DialogSimpleInput.InputType.Number
             dialogSimpleInput.promptMessage = qsTr("Enter number of addresses")
 
@@ -127,6 +127,7 @@ ListView {
         }
 
         onEditWalletRequested: {
+            dialogSimpleInput.title = qsTr("Edit wallet")
             dialogSimpleInput.inputType = encryptionEnabled ? UI.DialogSimpleInput.InputType.TextText : UI.DialogSimpleInput.InputType.Text
             dialogSimpleInput.promptMessage = ""
 
@@ -144,6 +145,7 @@ ListView {
 
         onToggleEncryptionRequested: {
             if (encryptionEnabled) {
+                dialogSimpleInput.title = qsTr("Disable encryption")
                 dialogSimpleInput.inputType = UI.DialogSimpleInput.InputType.Text
 
                 dialogSimpleInput.promptMessage = ""
@@ -152,6 +154,7 @@ ListView {
                 dialogSimpleInput.textEchoMode = encryptionEnabled ? TextField.Password : dialogSimpleInput.textEchoMode
                 dialogSimpleInput.textValue = ""
             } else {
+                dialogSimpleInput.title = qsTr("Enable encryption")
                 dialogSimpleInput.inputType = UI.DialogSimpleInput.InputType.TextText
                 dialogSimpleInput.promptMessage = qsTr("<b>Warning:</b> We suggest that you encrypt each one of your wallets with a password. If you forget your password, you can reset it with your seed. Make sure you have your seed saved somewhere safe before encrypting your wallet.")
 

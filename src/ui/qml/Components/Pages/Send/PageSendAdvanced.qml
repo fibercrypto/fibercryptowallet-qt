@@ -1,5 +1,4 @@
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Controls.Material
 
 import FiberCrypto.UI as UI
@@ -15,7 +14,7 @@ Page {
 
     visible: opacity > 0
     enabled: visible
-    implicitHeight: Math.max(labelWallet.height, toolButtonWalletPopupHelp.height) + comboBoxWalletsSendFrom.height + Math.max(labelAddresses.height, toolButtonAddressPopupHelp.height) + comboBoxWalletsAddressesSendFrom.height + Math.max(labelUnspentOutputs.height + toolButtonUnspentOutputsPopupHelp.height, checkBoxUnspentOutputsUseAllOutputs.height) + comboBoxWalletsUnspentOutputsSendFrom.height + Math.max(labelDestinations.height, toolButtonDestinationPopupHelp.height) + listViewDestinations.height + Math.max(labelCustomChangeAddress.height, toolButtonCustomChangeAddressPopupHelp.height, buttonSelectCustomChangeAddress.height) + textFieldCustomChangeAddress.height + checkBoxAutomaticCoinHoursAllocation.height + sliderCoinHoursShareFactor.height + 80
+    implicitHeight: sliderCoinHoursShareFactor.y + sliderCoinHoursShareFactor.height + 30
 
     //! WALLETS
 
@@ -44,7 +43,7 @@ Page {
         property alias filterString: filterPopupWallets.filterText
 
         x: labelWallet.x
-        y: Math.max(labelWallet.y + labelWallet.height, toolButtonWalletPopupHelp.y + toolButtonWalletPopupHelp.height) - toolButtonWalletPopupHelp.bottomPadding
+        y: ~~(Math.max(labelWallet.y + labelWallet.height, toolButtonWalletPopupHelp.y + toolButtonWalletPopupHelp.height) - toolButtonWalletPopupHelp.bottomPadding)
         width: parent.width - 2*x
 
         textRole: "name"
@@ -116,7 +115,7 @@ Page {
         id: labelAddresses
 
         x: labelWallet.x
-        y: comboBoxWalletsSendFrom.y + comboBoxWalletsSendFrom.height + height+ 10
+        y: comboBoxWalletsSendFrom.y + comboBoxWalletsSendFrom.height + 20
         text: qsTr("Address")
     }
 
@@ -150,7 +149,7 @@ Page {
         property alias filterString: filterPopupAddresses.filterText
 
         x: labelAddresses.x
-        y: Math.max(labelAddresses.y + labelAddresses.height, toolButtonAddressPopupHelp.y + toolButtonAddressPopupHelp.height, checkBoxAllAddresses.y + checkBoxAllAddresses.height) - toolButtonAddressPopupHelp.bottomPadding
+        y: ~~(Math.max(labelAddresses.y + labelAddresses.height, toolButtonAddressPopupHelp.y + toolButtonAddressPopupHelp.height, checkBoxAllAddresses.y + checkBoxAllAddresses.height) - toolButtonAddressPopupHelp.bottomPadding)
         width: parent.width - 2*x
 
         popup: UI.CustomComboBoxPopupFilter {
@@ -225,7 +224,7 @@ Page {
         id: labelUnspentOutputs
 
         x: labelAddresses.x
-        y: comboBoxWalletsAddressesSendFrom.y + comboBoxWalletsAddressesSendFrom.height + height+ 10
+        y: comboBoxWalletsAddressesSendFrom.y + comboBoxWalletsAddressesSendFrom.height + 20
         text: qsTr("Unspent outputs")
     }
 
@@ -263,7 +262,7 @@ Page {
         property alias filterString: filterPopupOutputs.filterText
 
         x: labelUnspentOutputs.x
-        y: Math.max(labelUnspentOutputs.y + labelUnspentOutputs.height, toolButtonUnspentOutputsPopupHelp.y + toolButtonUnspentOutputsPopupHelp.height, checkBoxUnspentOutputsUseAllOutputs.y + checkBoxUnspentOutputsUseAllOutputs.height) - toolButtonUnspentOutputsPopupHelp.bottomPadding
+        y: ~~(Math.max(labelUnspentOutputs.y + labelUnspentOutputs.height, toolButtonUnspentOutputsPopupHelp.y + toolButtonUnspentOutputsPopupHelp.height, checkBoxUnspentOutputsUseAllOutputs.y + checkBoxUnspentOutputsUseAllOutputs.height) - toolButtonUnspentOutputsPopupHelp.bottomPadding)
         width: parent.width - 2*x
 
         textRole: "outputID"
@@ -354,7 +353,7 @@ Page {
         id: labelDestinations
 
         x: labelResume.x
-        y: labelResume.y + labelResume.height + 10
+        y: labelResume.y + labelResume.height + 20
         text: qsTr("Destinations")
     }
 
@@ -371,13 +370,15 @@ Page {
         id: listViewDestinations
 
         x: labelDestinations.x
-        y: Math.max(labelDestinations.y + labelDestinations.height, toolButtonDestinationPopupHelp.y + toolButtonDestinationPopupHelp.height)
+        y: ~~(Math.max(labelDestinations.y + labelDestinations.height, toolButtonDestinationPopupHelp.y + toolButtonDestinationPopupHelp.height) - topMargin - bottomMargin)
         width: parent.width - 2*x
-        implicitHeight: contentItem.height
+        implicitHeight: contentItem.height + topMargin + bottomMargin
         Behavior on implicitHeight { NumberAnimation { duration: 250; easing.type: Easing.OutQuint } }
+        topMargin: 6
 
         interactive: false
         clip: true
+        spacing: 6
 
         model: listModelDestinations
 
@@ -435,7 +436,7 @@ Page {
         id: textFieldCustomChangeAddress
 
         x: labelCustomChangeAddress.x
-        y: Math.max(toolButtonCustomChangeAddressPopupHelp.y + toolButtonCustomChangeAddressPopupHelp.height, buttonSelectCustomChangeAddress.y + buttonSelectCustomChangeAddress.height) - toolButtonCustomChangeAddressPopupHelp.bottomPadding
+        y: ~~(Math.max(toolButtonCustomChangeAddressPopupHelp.y + toolButtonCustomChangeAddressPopupHelp.height, buttonSelectCustomChangeAddress.y + buttonSelectCustomChangeAddress.height) - toolButtonCustomChangeAddressPopupHelp.bottomPadding)
         width: parent.width - 2*x
         placeholderText: qsTr("Address to receive change")
         selectByMouse: true
@@ -455,7 +456,7 @@ Page {
         id: sliderCoinHoursShareFactor
 
         x: checkBoxAutomaticCoinHoursAllocation.x
-        y: checkBoxAutomaticCoinHoursAllocation.y + checkBoxAutomaticCoinHoursAllocation.height
+        y: checkBoxAutomaticCoinHoursAllocation.y + checkBoxAutomaticCoinHoursAllocation.height - 10
         width: parent.width - 2*x
 
         opacity: checkBoxAutomaticCoinHoursAllocation.checked ? 1.0 : 0.0

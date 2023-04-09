@@ -1,5 +1,4 @@
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Controls.Material
 
 import FiberCrypto.UI as UI
@@ -83,6 +82,7 @@ Page {
         width: parent.width
         height: parent.height
         contentHeight: switchAdvancedMode.implicitHeight + (switchAdvancedMode.checked ? pageSendAdvanced.implicitHeight : pageSendSimple.implicitHeight)
+        pixelAligned: true
 
         SwitchDelegate {
             id: switchAdvancedMode

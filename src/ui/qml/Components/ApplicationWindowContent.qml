@@ -1,5 +1,5 @@
 import QtQuick
-import QtQuick.Controls
+import QtQuick.Controls.Material
 
 import FiberCrypto.UI as UI
 
@@ -41,7 +41,7 @@ Item {
                     // walletManager.createUnencryptedWallet(pageWelcome.seed, pageWelcome.name, walletManager.getDefaultWalletType() ,0)
                 }
 
-                onWalletLoadingRequested:{
+                onWalletLoadingRequested: {
                     stackViewPages.replace(componentPageOverview)
                     applicationWindowContent.currentPage = ApplicationWindowContent.AvailablePages.OverviewPage
                     // walletManager.createUnencryptedWallet(pageWelcome.seed, pageWelcome.name, walletManager.getDefaultWalletType(), 10)

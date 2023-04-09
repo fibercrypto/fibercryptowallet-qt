@@ -1,4 +1,3 @@
-import QtQml
 import QtQuick
 import QtQuick.Controls
 
@@ -22,8 +21,9 @@ Page {
 
     Button {
         id: buttonCreateWallet
-        x: ~~(parent.width - width)/2
-        y: imageWallpaper.y + imageWallpaper.height + ~~(parent.height - imageWallpaper.height - height)/2
+
+        x: ~~((parent.width - width)/2)
+        y: ~~(imageWallpaper.y + imageWallpaper.height + (parent.height - imageWallpaper.height - height)/2)
         width: parent.width > 540 ? 540 - 40 : parent.width - 40
         height: implicitHeight * 2
 
@@ -38,8 +38,9 @@ Page {
 
     Button {
         id: buttonLoadWallet
-        x: ~~(parent.width - width)/2
-        y: buttonCreateWallet.y + buttonCreateWallet.height + 10
+
+        x: ~~((parent.width - width)/2)
+        y: ~~(buttonCreateWallet.y + buttonCreateWallet.height + 10)
         width: parent.width > 540 ? 540 - 40 : parent.width - 40
 
         text: qsTr("Load existing wallet")

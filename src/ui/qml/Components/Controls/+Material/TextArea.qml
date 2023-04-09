@@ -1,3 +1,5 @@
+// Qt 6.5.0
+
 import QtQuick
 import QtQuick.Templates as T
 import QtQuick.Controls.impl
@@ -11,78 +13,61 @@ T.TextArea {
                             implicitBackgroundWidth + leftInset + rightInset,
                             placeholder.implicitWidth + leftPadding + rightPadding)
     implicitHeight: Math.max(contentHeight + topPadding + bottomPadding,
-                             implicitBackgroundHeight + topInset + bottomInset,
-                             placeholder.implicitHeight + 1 + topPadding + bottomPadding)
+                             implicitBackgroundHeight + topInset + bottomInset)
 
-    topPadding: 12
-    padding: 4
+    leftPadding: Material.textFieldHorizontalPadding
+    rightPadding: Material.textFieldHorizontalPadding
+    // Need to account for the placeholder text when it's sitting on top.
+    topPadding: Material.containerStyle === Material.Filled && placeholderText.length > 0 && (activeFocus || length > 0)
+        ? Material.textFieldVerticalPadding + placeholder.largestHeight
+        // When the condition above is not met, the text should always sit in the middle
+        // of a default-height TextArea, which is just near the top for a higher-than-default one.
+        : (implicitBackgroundHeight - placeholder.largestHeight) / 2
+    bottomPadding: Material.textFieldVerticalPadding
 
     color: enabled ? Material.foreground : Material.hintTextColor
     selectionColor: Material.accentColor
     selectedTextColor: Material.primaryHighlightedTextColor
     placeholderTextColor: Material.hintTextColor
+
+    Material.containerStyle: Material.Outlined
+
     cursorDelegate: CursorDelegate { }
 
-    PlaceholderText {
+    FloatingPlaceholderText {
         id: placeholder
-
-        property bool floatPlaceholderText: !(!control.length && !control.preeditText && (!control.activeFocus || control.horizontalAlignment !== Qt.AlignHCenter))
-        readonly property real placeholderTextScaleFactor: 0.9
-
-        x: floatPlaceholderText ? 0 : control.leftPadding//~~((floatPlaceholderText ? 0 : control.leftPadding) - width * (1-scale)/2)
-        Behavior on x { NumberAnimation { duration: 250; easing.type: Easing.OutQuint } }
-        y: ~~(floatPlaceholderText ? -control.topPadding*(1.20 - placeholderTextScaleFactor) : control.topPadding)
-        Behavior on y { NumberAnimation { duration: 250; easing.type: Easing.OutQuint } }
-        scale: floatPlaceholderText ? placeholderTextScaleFactor : 1
-        Behavior on scale { NumberAnimation { duration: 250; easing.type: Easing.OutQuint } }
-        height: control.height - (control.topPadding + control.bottomPadding)
+        x: control.leftPadding
+        width: control.width - (control.leftPadding + control.rightPadding)
         text: control.placeholderText
-        color: floatPlaceholderText && control.activeFocus ? control.Material.accentColor : control.placeholderTextColor
-        Behavior on color { ColorAnimation { duration: 250 } }
-        verticalAlignment: control.verticalAlignment
+        font: control.font
+        color: control.placeholderTextColor
         elide: Text.ElideRight
         renderType: control.renderType
+
+        filled: control.Material.containerStyle === Material.Filled
+        verticalPadding: control.Material.textFieldVerticalPadding
+        controlHasActiveFocus: control.activeFocus
+        controlHasText: control.length > 0
+        controlImplicitBackgroundHeight: control.implicitBackgroundHeight
+        controlHeight: control.height
     }
 
-    background: Rectangle {
-        y: ~~(control.topPadding/2)
-        z: -2
-        width: control.width
-        height: control.height - y
+    background: MaterialTextContainer {
         implicitWidth: 120
-        color: control.Material.backgroundColor
+        implicitHeight: control.Material.textFieldHeight
 
-        Rectangle { // left
-            id: rectangleBackgroundLeft
-            width: 1 // use 2 but first we need to set up a behavior like the TextField
-            height: parent.height
-            // there's a bug if the border's color is fully opaque
-            border.color: control.activeFocus ? Qt.alpha(control.Material.accent, 0.99) : control.hovered ? control.Material.primaryTextColor : Material.style === Material.Light ? "#FE9F9F9F" : "#FE7A7A7A"
-            Behavior on border.color { ColorAnimation {} }
-        }
-        Rectangle { // bottom
-            y: parent.height - height
-            width: parent.width
-            height: rectangleBackgroundLeft.width
-            border.color: rectangleBackgroundLeft.border.color
-        }
-        Rectangle { // right
-            x: parent.width - width
-            width: rectangleBackgroundLeft.width
-            height: parent.height
-            border.color: rectangleBackgroundLeft.border.color
-        }
-        Rectangle { // top
-            y: 1
-            x: parent.width
-            width: parent.width - (placeholder.floatPlaceholderText ? placeholder.width : 0)
-            Behavior on width { NumberAnimation { duration: 250; easing.type: Easing.OutQuint } }
-            height: rectangleBackgroundLeft.width
-            transformOrigin: Item.TopLeft
-            rotation: 180
-            border.color: rectangleBackgroundLeft.border.color
-        }
-    } // Rectangle (backgrouns)
+        filled: control.Material.containerStyle === Material.Filled
+        fillColor: control.Material.textFieldFilledContainerColor
+        outlineColor: (enabled && control.hovered) ? control.Material.primaryTextColor : control.Material.hintTextColor
+        focusedOutlineColor: control.Material.accentColor
+        // When the control's size is set larger than its implicit size, use whatever size is smaller
+        // so that the gap isn't too big.
+        placeholderTextWidth: Math.min(placeholder.width, placeholder.implicitWidth) * placeholder.scale
+        controlHasActiveFocus: control.activeFocus
+        controlHasText: control.length > 0
+        placeholderHasText: placeholder.text.length > 0
+        horizontalPadding: control.Material.textFieldHorizontalPadding
+    }
 
     Menu {
         id: contextMenu

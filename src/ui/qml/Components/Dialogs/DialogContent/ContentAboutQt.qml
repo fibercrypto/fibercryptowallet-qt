@@ -6,9 +6,9 @@ import FiberCrypto.UI as UI
 Item {
     id: aboutQt
 
-    readonly property string qtVersionString: "6.3.0"
+    readonly property string qtVersionString: "6.5.0"
 
-    implicitWidth: Math.max(imageQtLogo.width + labelAboutQt.implicitWidth > 400 ? 400 : imageQtLogo.width + labelAboutQt.implicitWidth)
+    implicitWidth: imageQtLogo.width + labelAboutQt.implicitWidth > 400 ? 400 : imageQtLogo.width + labelAboutQt.implicitWidth
     implicitHeight: flickable.contentHeight
 
     Flickable {

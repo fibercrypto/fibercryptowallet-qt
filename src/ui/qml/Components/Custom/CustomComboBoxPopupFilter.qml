@@ -1,5 +1,5 @@
 import QtQuick
-import QtQuick.Controls
+import QtQuick.Controls.Material
 
 import FiberCrypto.UI as UI
 
@@ -10,7 +10,7 @@ Popup {
     property alias filterText: textFieldFilter.text
     property alias filterPlaceholderText: textFieldFilter.placeholderText
 
-    y: comboBox.editable ? comboBox.height - 5 : 0
+    y: comboBox.editable ? comboBox.height - 6 : 0
     width: comboBox.width
     height: Math.min(contentItem.implicitHeight + topPadding + bottomPadding, Overlay.overlay.height - topMargin - bottomMargin)
     transformOrigin: Item.Top
@@ -32,6 +32,7 @@ Popup {
             id: textFieldFilter
 
             x: 12
+            y: 6
             width: parent.width - 2*x
             placeholderText: qsTr("Filter")
             selectByMouse: true
@@ -41,7 +42,7 @@ Popup {
         ListView {
             id: listView
 
-            y: textFieldFilter.height + 5
+            y: textFieldFilter.y + textFieldFilter.height + 6
             width: parent.width
             clip: true
             implicitHeight: contentHeight

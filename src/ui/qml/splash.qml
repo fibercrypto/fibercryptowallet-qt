@@ -1,30 +1,32 @@
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Controls.Material
 import QtQuick.Window
-
-// Qt Labs
-import Qt.labs.settings 1.0 as QtLabsSettings
+import QtCore
 
 Window {
     id: windowSplash
 
-    x: (Screen.width - width)/2
-    y: (Screen.height - height)/2
     width: dialogSplash.width + 100
     height: dialogSplash.height + 140
     visible: true
-    flags: Qt.SplashScreen | Qt.BypassWindowManagerHint | Qt.CustomizeWindowHint | Qt.WindowStaysOnTopHint
-    color: "transparent"
+    flags: Qt.SplashScreen | Qt.WindowStaysOnTopHint
+    color: "transparent" // this doesn't work in Qt 6.5.0
     Material.theme: ~~settings.value("style/theme", Material.Light)
 
-    QtLabsSettings.Settings {
+    Settings {
         id: settings
     }
 
     Dialog {
         id: dialogSplash
-        anchors.centerIn: Overlay.overlay
+
+        x: ~~((windowSplash.width - width)/2)
+        y: ~~((windowSplash.height - height)/2)
+        width: implicitWidth + implicitWidth % 2
+        height: implicitHeight + implicitHeight % 2
+        contentWidth: labelApplicationDescription.width
+        contentHeight: imageLogo.height + labelApplicationName.height + labelApplicationDescription.height + busyIndicatorLoading.height - 7
+
         visible: true
         closePolicy: Dialog.NoAutoClose
         standardButtons: Dialog.Abort
@@ -36,11 +38,6 @@ Window {
 
         onRejected: Qt.exit(-1)
         onClosed: windowSplash.visible = false
-
-        contentWidth: labelApplicationDescription.width
-        contentHeight: imageLogo.height + labelApplicationName.height + labelApplicationDescription.height + busyIndicatorLoading.height - 7
-        width: implicitWidth + implicitWidth % 2
-        height: implicitHeight + implicitHeight % 2
 
         SequentialAnimation {
             running: true

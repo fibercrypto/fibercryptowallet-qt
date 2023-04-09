@@ -1,7 +1,6 @@
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Controls.Material
-import Qt5Compat.GraphicalEffects
+import QtQuick.Effects
 
 import FiberCrypto.UI as UI
 
@@ -45,14 +44,18 @@ ApplicationWindow {
         height: parent.height
     }
 
-    FastBlur {
-        id: fastBlurEffect
-        visible: radius > 0
+    MultiEffect {
+        id: multiEffect
+
         width: applicationWindowContent.width
         height: applicationWindowContent.height
         source: applicationWindowContent
 
-        Behavior on radius { NumberAnimation {} }
+        blurEnabled: blur > 0
+        blurMax: 128
+        autoPaddingEnabled: false
+
+        Behavior on blur { NumberAnimation {} }
     }
 
     //! Application-level actions and dialogs
@@ -82,8 +85,8 @@ ApplicationWindow {
         readonly property real singleItemHeight: applicationWindow.height > (promptMessage ? 220 : 200) ? (promptMessage ? 220 : 200) - 40 : applicationWindow.height - 40
         readonly property real doubleItemHeight: applicationWindow.height > (promptMessage ? 280 : 250) ? (promptMessage ? 280 : 250) - 40 : applicationWindow.height - 40
 
-        x: (applicationWindow.width - width)/2
-        y: (applicationWindow.height - height)/2 - menuBar.height
+        x: ~~((applicationWindow.width - width)/2)
+        y: ~~((applicationWindow.height - height)/2 - menuBar.height)
         width: applicationWindow.width > 300 ? 300 - 40 : applicationWindow.width - 40
         height: applicationWindow.height > implicitHeight + 40 ? implicitHeight : applicationWindow.height - 40
         //height: inputType <= Dialogs.DialogSimpleInput.InputType.Number ? singleItemHeight : doubleItemHeight
@@ -94,8 +97,8 @@ ApplicationWindow {
     UI.DialogAddWallet {
         id: dialogAddWallet
 
-        x: (applicationWindow.width - width)/2
-        y: (applicationWindow.height - height)/2 - menuBar.height
+        x: ~~((applicationWindow.width - width)/2)
+        y: ~~((applicationWindow.height - height)/2 - menuBar.height)
         width: applicationWindow.width > 540 ? 540 - 40 : applicationWindow.width - 40
         height: applicationWindow.height > 640 ? 640 - 40 : applicationWindow.height - 40
 
@@ -107,8 +110,8 @@ ApplicationWindow {
     UI.DialogTransactionDetails {
         id: dialogTransactionDetails
 
-        x: (applicationWindow.width - width)/2
-        y: (applicationWindow.height - height)/2 - menuBar.height
+        x: ~~((applicationWindow.width - width)/2)
+        y: ~~((applicationWindow.height - height)/2 - menuBar.height)
         width: applicationWindow.width > 640 ? 640 - 40 : applicationWindow.width - 40
         height: applicationWindow.height > implicitHeight + 40 ? implicitHeight : applicationWindow.height - 40
 
@@ -120,8 +123,8 @@ ApplicationWindow {
     UI.DialogAbout {
         id: dialogAbout
 
-        x: (applicationWindow.width - width)/2
-        y: (applicationWindow.height - height)/2 - menuBar.height
+        x: ~~((applicationWindow.width - width)/2)
+        y: ~~((applicationWindow.height - height)/2 - menuBar.height)
         width: applicationWindow.width > 540 ? 540 - 40 : applicationWindow.width - 40
         height: applicationWindow.height > 640 ? 640 - 40 : applicationWindow.height - 40
         focus: visible
@@ -136,8 +139,8 @@ ApplicationWindow {
     UI.DialogAboutQt {
         id: dialogAboutQt
 
-        x: (applicationWindow.width - width)/2
-        y: (applicationWindow.height - height)/2 - menuBar.height
+        x: ~~((applicationWindow.width - width)/2)
+        y: ~~((applicationWindow.height - height)/2 - menuBar.height)
         width: applicationWindow.width > 540 ? 540 - 40 : applicationWindow.width - 40
         height: applicationWindow.height > 640 ? 640 - 40 : applicationWindow.height - 40
         focus: visible
@@ -147,8 +150,8 @@ ApplicationWindow {
     UI.DialogAboutLicense {
         id: dialogAboutLicense
 
-        x: (applicationWindow.width - width)/2
-        y: (applicationWindow.height - height)/2 - menuBar.height
+        x: ~~((applicationWindow.width - width)/2)
+        y: ~~((applicationWindow.height - height)/2 - menuBar.height)
         width: applicationWindow.width - 40
         height: applicationWindow.height - 40
         focus: visible

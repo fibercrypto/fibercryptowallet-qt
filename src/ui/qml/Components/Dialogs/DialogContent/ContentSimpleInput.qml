@@ -25,7 +25,7 @@ Flickable {
     property alias numericStepSize: spinBox.stepSize
 
     contentWidth: width
-    contentHeight: labelPrompt.height + textField.height + textField2.height + spinBox.height + 12
+    contentHeight: labelPrompt.height + (textField.height ? textField.height + 12 : 4) + (textField2.height ? textField2.height + 12 : 4) + spinBox.height
     implicitWidth: contentWidth
     implicitHeight: contentHeight
     clip: true
@@ -34,14 +34,14 @@ Flickable {
         id: labelPrompt
 
         width: parent.width
-        height: text ? implicitHeight : 0
+        height: text ? contentHeight : 0
         wrapMode: Label.Wrap
     }
 
     UI.TextField {
         id: textField
 
-        y: inputType === UI.DialogSimpleInput.InputType.NumberText ? spinBox.y + spinBox.height + 4 : labelPrompt.y + labelPrompt.height + 4
+        y: inputType === UI.DialogSimpleInput.InputType.NumberText ? spinBox.y + spinBox.height + 12 : labelPrompt.y + (labelPrompt.height ? labelPrompt.height + 12 : 4)
         width: visible ? parent.width : 0
         height: visible ? implicitHeight : 0
         visible: inputType !== UI.DialogSimpleInput.InputType.Number
@@ -52,7 +52,7 @@ Flickable {
     UI.TextField {
         id: textField2
 
-        y: textField.y + textField.height + 4
+        y: textField.y + textField.height + 12
         width: visible ? parent.width : 0
         height: visible ? implicitHeight : 0
         visible: inputType === UI.DialogSimpleInput.InputType.TextText
@@ -63,7 +63,7 @@ Flickable {
     SpinBox {
         id: spinBox
 
-        y: inputType === UI.DialogSimpleInput.InputType.TextNumber ? textField.y + textField.height + 4 : labelPrompt.y + labelPrompt.height + 4
+        y: inputType === UI.DialogSimpleInput.InputType.TextNumber ? textField.y + textField.height + 6 : labelPrompt.y + labelPrompt.height + 6
         width: visible ? parent.width : 0
         height: visible ? implicitHeight : 0
         visible: inputType !== UI.DialogSimpleInput.InputType.Text && inputType !== UI.DialogSimpleInput.InputType.TextText

@@ -1,5 +1,4 @@
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Controls.Material
 
 import FiberCrypto.UI as UI
@@ -43,7 +42,7 @@ Page {
 
     visible: opacity > 0
     enabled: visible
-    implicitHeight: labelSendFrom.height + comboBoxWalletsSendFrom.height + comboBoxChangeSigner.height + labelSendTo.height + textFieldDestinationAddress.height + textFieldAmount.height + 80
+    implicitHeight: textFieldAmount.y + textFieldAmount.height + 40
 
     Label {
         id: labelSendFrom
@@ -56,7 +55,7 @@ Page {
 
         property alias filterString: filterPopupWallets.filterText
 
-        y: labelSendFrom.y + labelSendFrom.height + 6
+        y: ~~(labelSendFrom.y + labelSendFrom.height + 6)
         width: parent.width
         textRole: "name"
         displayText: currentIndex >= 0 && currentIndex < count && model.get(comboBoxWalletsSendFrom.currentIndex).sky ? model.get(comboBoxWalletsSendFrom.currentIndex).name + " - " + model.get(comboBoxWalletsSendFrom.currentIndex).sky + " SKY (" + model.get(comboBoxWalletsSendFrom.currentIndex).coinHours + " CoinHours)" : qsTr("Select a wallet")
@@ -170,6 +169,7 @@ Page {
 
         onClicked: {
             console.log("Contacts requested")
+            dialogSimpleInput.title = qsTr("Address book")
             dialogSimpleInput.inputType = UI.DialogSimpleInput.InputType.Text
             dialogSimpleInput.textPlaceholder = qsTr("Address Book's password")
             dialogSimpleInput.textEchoMode = TextField.Password
@@ -216,7 +216,7 @@ Page {
         id: textFieldAmount
 
         x: labelSendFrom.x
-        y: textFieldDestinationAddress.y + textFieldDestinationAddress.height + 6
+        y: textFieldDestinationAddress.y + textFieldDestinationAddress.height + 12
         width: parent.width - x
         placeholderText: qsTr("Amount to send")
         selectByMouse: true
