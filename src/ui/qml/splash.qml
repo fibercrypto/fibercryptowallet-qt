@@ -10,8 +10,8 @@ Window {
     height: dialogSplash.height + 140
     visible: true
     flags: Qt.SplashScreen | Qt.WindowStaysOnTopHint
-    color: "transparent" // this doesn't work in Qt 6.5.0
-    Material.theme: ~~settings.value("style/theme", Material.Light)
+    color: "transparent" // this doesn't work in Qt 6.5.0, will be fixed in Qt 6.5.1
+    Material.theme: ~~settings.value("style/theme", Material.System)
 
     Settings {
         id: settings
@@ -145,6 +145,7 @@ Window {
         }
 
         onLoaded: {
+            item.Material.theme = parent.Material.theme
             dialogSplash.standardButton(Dialog.Abort).enabled = false
         }
     }
