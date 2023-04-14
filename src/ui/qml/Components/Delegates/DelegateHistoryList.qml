@@ -39,23 +39,28 @@ ItemDelegate {
         console.log("QR code requested...")
     }
 
-    implicitHeight: 20 + Math.max(labelSendReceive.height + 20 + listViewAddresses.height, imageSendReceive.height) + 10
+    implicitHeight: 20 + Math.max(labelSendReceive.height + 20 + listViewAddresses.height, toolButtonSendReceive.height) + 10
 
 
-    Image {
-        id: imageSendReceive
+    ToolButton {
+        id: toolButtonSendReceive
 
         x: 20
         y: 20
-        source: "qrc:/images/icons/actions/send.svg"
-        sourceSize: "32x32"
-        mirror: modelType === DelegateHistoryList.TransactionType.Receive
+
+        enabled: false
+        background: null
+        icon.source: "qrc:/images/icons/actions/send.svg"
+        icon.width: 32
+        icon.height: 32
+        icon.color: Material.foreground
+        rotation: modelType === DelegateHistoryList.TransactionType.Receive ? 180 : 0
     }
 
     Label {
         id: labelSendReceive
-        x: ~~(imageSendReceive.x + imageSendReceive.width + 20)
-        y: ~~(imageSendReceive.y + (imageSendReceive.height - height)/2)
+        x: ~~(toolButtonSendReceive.x + toolButtonSendReceive.width + 20)
+        y: ~~(toolButtonSendReceive.y + (toolButtonSendReceive.height - height)/2)
         font.bold: true
         text: (modelType === DelegateHistoryList.TransactionType.Receive ? qsTr("Received") : (modelType === DelegateHistoryList.TransactionType.Send ? qsTr("Sent") : qsTr("Internal"))) + " SKY"
     }
@@ -70,7 +75,7 @@ ItemDelegate {
 
     Label {
         x: ~~(parent.width - width - 20)
-        y: ~~imageSendReceive.y
+        y: ~~toolButtonSendReceive.y
         text: (modelType === DelegateHistoryList.TransactionType.Receive ? "" : "-") + amount + " SKY" // model's role
         font.pointSize: Qt.application.font.pointSize * 1.25
         font.bold: true

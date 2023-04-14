@@ -1,5 +1,5 @@
 import QtQuick
-import QtQuick.Controls
+import QtQuick.Controls.Material
 
 Page {
     id: pageWelcome
@@ -28,8 +28,8 @@ Page {
         height: implicitHeight * 2
 
         text: qsTr("Create new wallet")
-        highlighted: true
-        Material.elevation: 0
+        Material.background: Material.accent
+        Material.foreground: pageWelcome.Material.background
 
         onClicked: {
             walletCreationRequested()

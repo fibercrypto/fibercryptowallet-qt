@@ -45,16 +45,24 @@ Item {
         }
     }
 
-    TextInput {
-        id: textAddress
+    Label {
+        id: labelAddress
 
         x: toolButtonQR.width + 12
         y: ~~((parent.height - height)/2)
         width: !showOnlyAddresses ? toolButtonCopy.x - x : parent.width
         text: address // a role of the model
-        readOnly: true
         font.family: "Code New Roman"
     }
+
+    TextInput {
+        id: textAddress
+
+        readOnly: true
+        visible: false
+        text: labelAddress.text
+    }
+
     ToolButton {
         id: toolButtonCopy
 
@@ -68,18 +76,21 @@ Item {
         ToolTip.visible: hovered // TODO: pressed when mobile?
         ToolTip.delay: Qt.styleHints.mousePressAndHoldInterval
 
-        Image {
-            id: imageCopied
+        ToolButton {
+            id: toolButtonAddressCopied
 
             x: ~~((parent.width - width)/2)
             y: ~~((parent.height - height)/2)
-            width: visible ? implicitWidth : 0
-            height: visible ? implicitHeight : 0
-            visible: !showOnlyAddresses
-            source: "qrc:/images/icons/actions/done.svg"
-            fillMode: Image.PreserveAspectFit
-            sourceSize: Qt.size(toolButtonCopy.icon.width*1.5, toolButtonCopy.icon.height*1.5)
+
+            enabled: false
+            background: null
             opacity: 0.0
+            visible: !showOnlyAddresses
+            Material.accent: Material.Teal
+            icon.source: "qrc:/images/icons/actions/done.svg"
+            icon.width: ~~toolButtonCopy.width
+            icon.height: ~~toolButtonCopy.height
+            icon.color: Material.accentColor
         }
 
         onClicked: {
@@ -95,9 +106,9 @@ Item {
 
         SequentialAnimation {
             id: copyAnimation
-            NumberAnimation { target: imageCopied; property: "opacity"; to: 1.0; easing.type: Easing.OutCubic }
+            NumberAnimation { target: toolButtonAddressCopied; property: "opacity"; to: 1.0; easing.type: Easing.OutCubic }
             PauseAnimation { duration: 1000 }
-            NumberAnimation { target: imageCopied; property: "opacity"; to: 0.0; easing.type: Easing.OutCubic }
+            NumberAnimation { target: toolButtonAddressCopied; property: "opacity"; to: 0.0; easing.type: Easing.OutCubic }
         }
     } // ToolButton
 

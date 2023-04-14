@@ -1,5 +1,4 @@
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Controls.Material
 
 import FiberCrypto.UI as UI
@@ -89,19 +88,28 @@ Item {
         text: transactionID
     }
 
-    Image {
-        id: imageTransactionType
+    ToolButton {
+        id: toolButtonTransactionType
 
         x: parent.width - Math.max(width, labelTransactionType.width)
-        source: "qrc:/images/icons/actions/send.svg"
-        sourceSize: "72x72"
-        mirror: type === ContentTransactionDetails.TransactionType.Receive
+        y: -8
+        padding: 0
+        topInset: 0
+
+        enabled: false
+        background: null
+        icon.source: "qrc:/images/icons/actions/send.svg"
+        icon.width: 72
+        icon.height: 72
+        icon.color: Material.foreground
+        rotation: type === ContentTransactionDetails.TransactionType.Receive ? 180 : 0
     }
+
     Label {
         id: labelTransactionType
 
-        x: imageTransactionType.x + (imageTransactionType.width - width)/2
-        y: imageTransactionType.y + imageTransactionType.height + 10
+        x: toolButtonTransactionType.x + (toolButtonTransactionType.width - width)/2
+        y: toolButtonTransactionType.y + toolButtonTransactionType.height + 10
         text: (type === ContentTransactionDetails.TransactionType.Receive ? qsTr("Receive") : qsTr("Send")) + ' ' + amount + ' ' + qsTr("SKY")
         font.bold: true
         font.pointSize: Qt.application.font.pointSize * 1.15

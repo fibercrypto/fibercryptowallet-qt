@@ -9,6 +9,7 @@ Page {
     header: TabBar {
         id: tabBar
         currentIndex: swipeView.currentIndex
+        Material.background: pageOverview.Material.dialogColor
 
         TabButton {
             text: qsTr("Wallets")

@@ -1,6 +1,5 @@
 import QtQuick
 import QtQuick.Controls.Material
-//import QtGraphicalEffects
 
 import FiberCrypto.UI as UI
 
@@ -45,31 +44,21 @@ Item {
 
             x: imageStatus.width + 4
             y: ~~((parent.height - height)/2)
-            width: itemImageLockIcon.x - x
+            width: toolButtonLockIcon.x - x
             text: name // a role of the model
         }
 
-        Item {
-            id: itemImageLockIcon
+        ToolButton {
+            id: toolButtonLockIcon
 
-            x: ~~(labelSky.x - width)
+            x: labelSky.x - 32 // same as toolButtonCopy in DelegateWalletAddress
             y: ~~((parent.height - height)/2)
-            width: lockIcon.width
-            height: lockIcon.height
 
-            Image {
-                id: lockIcon
-                source: "qrc:/images/icons/toggle/lock_" + (encryptionEnabled ? "on" : "off") + ".svg"
-                sourceSize: "24x24"
-            }
+            icon.source: "qrc:/images/icons/toggle/lock_" + (encryptionEnabled ? "on" : "off") + ".svg"
 
-            /*
-            ColorOverlay {
-                anchors.fill: lockIcon
-                source: lockIcon
-                color: Material.theme === Material.Dark ? Material.foreground : "undefined"
+            onClicked: {
+                toggleEncryptionRequested()
             }
-            */
         }
 
         Label {
