@@ -1,5 +1,4 @@
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Controls.Material
 
 import FiberCrypto.UI as UI
@@ -7,7 +6,7 @@ import FiberCrypto.UI as UI
 Dialog {
     id: dialogSelectAddressByWallet
 
-    property alias model: listView.model
+    property alias model: listViewWalletsAddresses.model
     property alias filterString: textFieldFilterWallet.text
     property string selectedAddress
 
@@ -22,7 +21,7 @@ Dialog {
 
     Item {
         implicitWidth: 300
-        implicitHeight: textFieldFilterWallet.height + 5 + listView.contentHeight
+        implicitHeight: listViewWalletsAddresses.y + listViewWalletsAddresses.height
         width: parent.width
         height: parent.height
 
@@ -30,6 +29,7 @@ Dialog {
             id: textFieldFilterWallet
 
             x: 10
+            y: 20
             width: parent.width - 2*x
             placeholderText: qsTr("Filter by wallet name")
             focus: true
@@ -37,11 +37,11 @@ Dialog {
         }
 
         ListView {
-            id: listView
+            id: listViewWalletsAddresses
 
-            y: textFieldFilterWallet.height + 5
+            y: textFieldFilterWallet.y + textFieldFilterWallet.height + 6
             width: parent.width
-            height: parent.height
+            height: parent.height - y
             clip: true
             currentIndex: -1
 
@@ -49,13 +49,13 @@ Dialog {
                 readonly property string parentWallet: wallet
                 readonly property bool matchFilter: !filterString || wallet.toLowerCase().includes(filterString.toLowerCase())
 
-                width: parent.width
+                width: parent ? parent.width : 0
                 height: matchFilter ? implicitHeight : 0
                 Behavior on height { NumberAnimation { easing.type: Easing.OutQuint } }
                 focusPolicy: Qt.NoFocus
                 text: address
                 font.family: "Code New Roman"
-                Material.foreground: hovered ? parent.Material.accent : parent.Material.foreground
+                Material.foreground: parent ? (hovered ? parent.Material.accent : parent.Material.foreground) : Material.foreground
                 highlighted: hovered
                 leftPadding: highlighted ? 2*padding : padding // added
                 Behavior on leftPadding { NumberAnimation { duration: 500; easing.type: Easing.OutQuint } } // added
@@ -76,7 +76,7 @@ Dialog {
                 readonly property color textColor: Material.foreground//BUGGY: (ListView.view.currentItem && ListView.view.currentItem.parentWallet === text) ? Material.accent : Material.foreground
                 readonly property bool matchFilter: !filterString || section.toLowerCase().includes(filterString.toLowerCase())
 
-                height: matchFilter ? contentHeight * 1.5 : 0
+                height: matchFilter ? implicitHeight * 1.5 : 0
                 Behavior on height { NumberAnimation { easing.type: Easing.OutQuint } }
                 verticalAlignment: Text.AlignBottom
                 text: section
