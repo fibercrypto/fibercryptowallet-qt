@@ -4,10 +4,6 @@ import QtQuick.Controls.Material
 
 import FiberCrypto.UI as UI
 
-import "../"
-import "../Controls"
-import "../Dialogs"
-
 Item {
     id: root
 
@@ -88,7 +84,7 @@ Item {
         placeholderText: qsTr("Destination address")
         text: address
         selectByMouse: true
-        Material.accent: text/*abm.addressIsValid(text)*/ ? parent.Material.accent : Material.color(Material.Red)
+        Material.accent: text/*abm.addressIsValid(text)*/ ? parent.Material.accent : parent.Material.Red
         onTextChanged: address = text
     }
 
