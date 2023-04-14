@@ -3,15 +3,16 @@ import QtQuick.Controls.Material
 
 Rectangle {
     id: indicatorItem
-    implicitWidth: 18
-    implicitHeight: 18
-    color: "transparent"
-    border.color: !control.enabled ? control.Material.hintTextColor : checked ? "transparent" : applicationWindow.Material.primaryHighlightedTextColor
-    border.width: checked ? width / 2 : 2
-    radius: 2
 
     property Item control
     property bool checked: control.checked
+
+    implicitWidth: 18
+    implicitHeight: 18
+    radius: width / 2
+    border.width: checked ? width / 2 : 2
+    border.color: !control.enabled ? control.Material.hintTextColor : applicationWindow.Material.backgroundColor
+    color: "transparent"
 
     Behavior on border.width {
         NumberAnimation {
@@ -28,15 +29,19 @@ Rectangle {
     }
 
     // TODO: This needs to be transparent
-    Image {
+    ToolButton {
         id: checkImage
-        x: (parent.width - width) / 2
-        y: (parent.height - height) / 2
-        width: 14
-        height: 14
-        source: "qrc:/qt-project.org/imports/QtQuick/Controls/Material/images/check.png"
-        fillMode: Image.PreserveAspectFit
 
+        x: ~~((parent.width - width) / 2)
+        y: ~~((parent.height - height) / 2)
+
+        icon.width: 14
+        icon.height: 14
+        icon.source: "qrc:/qt-project.org/imports/QtQuick/Controls/Material/images/check.png"
+        icon.color: Material.accent
+
+        enabled: false
+        background: null
         scale: indicatorItem.checked ? 1 : 0
         Behavior on scale { NumberAnimation { duration: 100 } }
     }

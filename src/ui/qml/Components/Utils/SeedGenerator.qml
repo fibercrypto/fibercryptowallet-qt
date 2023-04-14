@@ -61,8 +61,9 @@ Item {
         y: buttonSeed12.y + buttonSeed12.height + 5
         width: parent.width
         height: parent.height - y + 26
-        onContentXChanged: console.log("Content X (bug?):", contentX)
         flickableDirection: Flickable.VerticalFlick
+
+        Component.onCompleted: contentX = 0 // because contentX is set to -12 due to a bug?
 
         TextArea.flickable: UI.TextArea {
             id: textAreaSeed

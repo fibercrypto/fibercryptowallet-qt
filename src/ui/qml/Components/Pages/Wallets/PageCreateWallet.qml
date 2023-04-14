@@ -180,9 +180,8 @@ Page {
                 y: seedGenerator.y + seedGenerator.height + 26
 
                 text: qsTr("Confirm secret recovery phrase")
-                highlighted: true
-                Material.foreground: applicationWindow.Material.dialogColor
-                Material.background: Material.accentColor
+                Material.foreground: pageCreateWallet.Material.dialogColor
+                Material.background: pageCreateWallet.Material.accentColor
                 checkable: true
 
                 contentItem: Label {
@@ -191,6 +190,8 @@ Page {
 
                     UI.CustomCheckIndicator {
                         id: customCheckIndicatorConfirmSeed
+                        x: -4
+                        y: ~~((parent.height - height)/2)
                         control: buttonConfirmSeed
                     }
                 }
