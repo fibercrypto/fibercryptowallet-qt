@@ -378,7 +378,7 @@ Page {
 
         interactive: false
         clip: true
-        spacing: 6
+        spacing: 8
 
         model: listModelDestinations
 
@@ -403,7 +403,7 @@ Page {
         id: labelCustomChangeAddress
 
         x: listViewDestinations.x
-        y: listViewDestinations.y + listViewDestinations.height + 10
+        y: listViewDestinations.y + listViewDestinations.height + 20
         text: qsTr("Custom change address")
     }
 
@@ -436,7 +436,7 @@ Page {
         id: textFieldCustomChangeAddress
 
         x: labelCustomChangeAddress.x
-        y: ~~(Math.max(toolButtonCustomChangeAddressPopupHelp.y + toolButtonCustomChangeAddressPopupHelp.height, buttonSelectCustomChangeAddress.y + buttonSelectCustomChangeAddress.height) - toolButtonCustomChangeAddressPopupHelp.bottomPadding)
+        y: ~~Math.max(toolButtonCustomChangeAddressPopupHelp.y + toolButtonCustomChangeAddressPopupHelp.height, buttonSelectCustomChangeAddress.y + buttonSelectCustomChangeAddress.height)
         width: parent.width - 2*x
         placeholderText: qsTr("Address to receive change")
         selectByMouse: true

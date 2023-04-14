@@ -64,10 +64,13 @@ ListView {
 
         ToolButton {
             id: buttonAddWallet
-            anchors.fill: parent
+
+            width: parent.width
+            height: parent.height
+            contentItem.x: ~~contentItem.x
+
             text: qsTr("Add wallet")
             icon.source: "qrc:/images/icons/actions/add.svg"
-            contentItem.x: ~~contentItem.x
 
             onClicked: {
                 console.log("Add wallet")
