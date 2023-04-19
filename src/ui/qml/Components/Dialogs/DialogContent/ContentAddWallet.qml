@@ -1,5 +1,4 @@
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Controls.Material
 
 import FiberCrypto.UI as UI
@@ -14,9 +13,7 @@ Flickable {
     property alias encrypt: checkBoxEncryptWallet.checked
 
     contentWidth: width
-    contentHeight: labelMode.height + itemMode.height + textFieldWalletName.height + seedGenerator.height
-                   + textAreaSeedConfirmation.height + rectangleSeedWarning.height + labelWalletType.height
-                   + comboBoxWalletType.height + checkBoxEncryptWallet.height + labelEncryptWalletWarning.height + textFieldWalletPassword.height + textFieldConfirmWalletPassword.height + 50
+    contentHeight: textFieldConfirmWalletPassword.y + textFieldConfirmWalletPassword.height + 10
     implicitWidth: contentWidth
     implicitHeight: contentHeight
     clip: true
@@ -32,23 +29,21 @@ Flickable {
     Item {
         id: itemMode
 
-        x: 6
+        x: ~~((parent.width - width)/2)
         y: labelMode.y + labelMode.height
-        width: parent.width
-        height: radioButtonCreateWallet.height + radioButtonLoadWallet.height
+        width: radioButtonCreateWallet.width + radioButtonLoadWallet.width
+        height: radioButtonCreateWallet.height
 
         UI.RadioButton {
             id: radioButtonCreateWallet
-            width: parent.width
-            text: qsTr("Create new wallet")
+            text: qsTr("New wallet")
             checked: contentAddWallet.mode === ContentAddWallet.CreateWallet
             onCheckedChanged: contentAddWallet.mode = checked ? ContentAddWallet.CreateWallet : contentAddWallet.mode
         }
         UI.RadioButton {
             id: radioButtonLoadWallet
-            y: radioButtonCreateWallet.y + radioButtonCreateWallet.height - 6
-            width: parent.width
-            text: qsTr("Load existing wallet")
+            x: radioButtonCreateWallet.x + radioButtonCreateWallet.width
+            text: qsTr("Load wallet")
             checked: contentAddWallet.mode === ContentAddWallet.LoadWallet
             onCheckedChanged: contentAddWallet.mode = checked ? ContentAddWallet.LoadWallet : contentAddWallet.mode
         }
@@ -70,7 +65,6 @@ Flickable {
         y: textFieldWalletName.y + textFieldWalletName.height + 5
         width: parent.width
 
-        clip: true
         showModeButtons: radioButtonCreateWallet.checked
         nextTabItem: textAreaSeedConfirmation
     }
@@ -78,9 +72,9 @@ Flickable {
     UI.TextArea {
         id: textAreaSeedConfirmation
 
-        y: seedGenerator.y + seedGenerator.height + 5
+        y: seedGenerator.y + seedGenerator.height + 40
         width: parent.width
-        height: radioButtonCreateWallet.checked ? contentHeight + topPadding + bottomPadding : 0
+        height: radioButtonCreateWallet.checked ? implicitHeight : 0
         Behavior on height { NumberAnimation { easing.type: Easing.OutQuint } }
 
         placeholderText: qsTr("Confirm secret recovery phrase")
@@ -89,7 +83,6 @@ Flickable {
 
         wrapMode: TextArea.Wrap
         selectByMouse: true
-        clip: true
         KeyNavigation.priority: KeyNavigation.BeforeItem
         KeyNavigation.tab: checkBoxContinueWithSeedWarning
     }
@@ -105,56 +98,62 @@ Flickable {
         implicitHeight: labelWarning.height + labelWarningText.height + checkBoxContinueWithSeedWarning.height + 8
         Behavior on height { NumberAnimation { duration: 500; easing.type: Easing.OutQuint } }
 
-        color: Qt.alpha(Material.accentColor, 0.25)
-        opacity: warn ? 1 : 0
+        color: checkBoxContinueWithSeedWarning.Material.accentColor
+        opacity: warn ? 0.25 : 0
         Behavior on opacity { NumberAnimation { } }
         clip: true
-
-        Material.foreground: Material.Pink
-        Material.accent: Material.Pink
-
-        Label {
-            id: labelWarning
-
-            x: 6
-            y: 4
-            width: parent.width - 2*x
-
-            text: qsTr("Warning")
-            font.pointSize: 14
-            font.bold: true
-            wrapMode: Text.Wrap
-        }
-
-        Label {
-            id: labelWarningText
-
-            x: 6
-            y: labelWarning.height + 5
-            width: parent.width - 2*x
-
-            text: qsTr("You introduced an unconventional secret recovery phrase. "
-                     + "If you did it for any special reason, "
-                     + "you can continue (only recommended for advanced users). "
-                     + "However, if your intention is to use a normal system phrase, "
-                     + "you must delete all the additional text and special characters.")
-            wrapMode: Text.Wrap
-        }
-
-        CheckBox {
-            id: checkBoxContinueWithSeedWarning
-
-            x: 6
-            y: labelWarningText.y + labelWarningText.height - 1
-            width: parent.width - 2*x
-
-            text: qsTr("Continue with the unconventional phrase")
-
-            onCheckedChanged: {
-                //updateAcceptButtonStatus()
-            }
-        }
     } // Rectangle (seed warning)
+
+    Label {
+        id: labelWarning
+
+        x: 6
+        y: rectangleSeedWarning.y + 4
+        width: rectangleSeedWarning.width - 2*x
+
+        opacity: rectangleSeedWarning.opacity * 4
+        Material.foreground: Material.accent
+        Material.accent: Material.Pink
+        text: qsTr("Warning")
+        font.pointSize: 14
+        font.bold: true
+        wrapMode: Label.Wrap
+    }
+
+    Label {
+        id: labelWarningText
+
+        x: 6
+        y: labelWarning.y + labelWarning.height + 5
+        width: rectangleSeedWarning.width - 2*x
+
+        opacity: rectangleSeedWarning.opacity * 4
+        Material.foreground: Material.accent
+        Material.accent: Material.Pink
+        text: qsTr("You introduced an unconventional secret recovery phrase. "
+                 + "If you did it for any special reason, "
+                 + "you can continue (only recommended for advanced users). "
+                 + "However, if your intention is to use a normal system phrase, "
+                 + "you must delete all the additional text and special characters.")
+        wrapMode: Label.Wrap
+    }
+
+    CheckBox {
+        id: checkBoxContinueWithSeedWarning
+
+        x: 6
+        y: labelWarningText.y + labelWarningText.height - 1
+        width: rectangleSeedWarning.width - 2*x
+
+        opacity: rectangleSeedWarning.opacity * 4
+        Material.foreground: Material.accent
+        Material.accent: Material.Pink
+        text: qsTr("Continue with the unconventional phrase")
+
+        onCheckedChanged: {
+            //updateAcceptButtonStatus()
+        }
+    }
 
     Label {
         id: labelWalletType
@@ -205,7 +204,7 @@ Flickable {
     UI.TextField {
         id: textFieldWalletPassword
 
-        y: labelEncryptWalletWarning.y + labelEncryptWalletWarning.height + 5
+        y: labelEncryptWalletWarning.y + labelEncryptWalletWarning.height + 12
         width: parent.width
 
         placeholderText: qsTr("Password")
@@ -216,10 +215,11 @@ Flickable {
             //updateAcceptButtonStatus()
         }
     }
+
     UI.TextField {
         id: textFieldConfirmWalletPassword
 
-        y: textFieldWalletPassword.y + textFieldWalletPassword.height + 5
+        y: textFieldWalletPassword.y + textFieldWalletPassword.height + 12
         width: parent.width
 
         placeholderText: qsTr("Confirm password")
