@@ -22,8 +22,6 @@ T.ComboBox {
     leftPadding: padding + (!control.mirrored || !indicator || !indicator.visible ? 0 : indicator.width + spacing)
     rightPadding: padding + (control.mirrored || !indicator || !indicator.visible ? 0 : indicator.width + spacing)
 
-    Material.elevation: flat ? control.pressed || control.hovered ? 2 : 0
-                             : control.pressed ? 8 : 2
     Material.background: flat ? "transparent" : undefined
     Material.foreground: flat ? undefined : Material.primaryTextColor
 
@@ -43,9 +41,9 @@ T.ComboBox {
     }
 
     contentItem: T.TextField {
-        padding: 6
-        leftPadding: control.editable ? 2 : control.mirrored ? 0 : 12
-        rightPadding: control.editable ? 2 : control.mirrored ? 12 : 0
+        leftPadding: Material.textFieldHorizontalPadding
+        topPadding: Material.textFieldVerticalPadding
+        bottomPadding: Material.textFieldVerticalPadding
 
         text: control.editable ? control.editText : control.displayText
 
@@ -56,7 +54,6 @@ T.ComboBox {
         validator: control.validator
         selectByMouse: control.selectTextByMouse
 
-        font: control.font
         color: control.enabled ? control.Material.foreground : control.Material.hintTextColor
         selectionColor: control.Material.accentColor
         selectedTextColor: control.Material.primaryHighlightedTextColor
@@ -65,43 +62,21 @@ T.ComboBox {
         cursorDelegate: CursorDelegate { }
     }
 
-    background: Rectangle {
+    background: MaterialTextContainer {
         implicitWidth: 120
-        implicitHeight: control.Material.buttonHeight
+        implicitHeight: control.Material.textFieldHeight
 
-        radius: control.flat ? 0 : 2
-        color: !control.editable ? control.Material.dialogColor : "transparent"
-
-        layer.enabled: control.enabled && !control.editable && control.Material.background.a > 0
-        layer.effect: ElevationEffect {
-            elevation: control.Material.elevation
-        }
-
-        Rectangle {
-            visible: control.editable
-            y: parent.y + control.baselineOffset
-            width: parent.width
-            height: control.activeFocus ? 2 : 1
-            color: control.editable && control.activeFocus ? control.Material.accentColor : control.Material.hintTextColor
-        }
-
-        Ripple {
-            clip: control.flat
-            clipRadius: control.flat ? 0 : 2
-            x: control.editable && control.indicator ? control.indicator.x : 0
-            width: control.editable && control.indicator ? control.indicator.width : parent.width
-            height: parent.height
-            pressed: control.pressed
-            anchor: control.editable && control.indicator ? control.indicator : control
-            active: control.pressed || control.visualFocus || control.hovered
-            color: control.Material.rippleColor
-        }
+        outlineColor: (enabled && control.hovered) ? control.Material.primaryTextColor : control.Material.hintTextColor
+        focusedOutlineColor: control.Material.accentColor
+        controlHasActiveFocus: control.activeFocus
+        controlHasText: true
+        horizontalPadding: control.Material.textFieldHorizontalPadding
     }
 
     popup: T.Popup {
         y: control.editable ? control.height - 5 : 0
         width: control.width
-        height: Math.min(contentItem.implicitHeight, control.Window.height - topMargin - bottomMargin)
+        height: Math.min(contentItem.implicitHeight + verticalPadding * 2, control.Window.height - topMargin - bottomMargin)
         transformOrigin: Item.Top
         topMargin: 12
         bottomMargin: 12
@@ -133,12 +108,13 @@ T.ComboBox {
         }
 
         background: Rectangle {
-            radius: 2
+            radius: 4
             color: parent.Material.dialogColor
 
             layer.enabled: control.enabled
-            layer.effect: ElevationEffect {
-                elevation: 8
+            layer.effect: RoundedElevationEffect {
+                elevation: 4
+                roundedScale: Material.ExtraSmallScale
             }
         }
     }
