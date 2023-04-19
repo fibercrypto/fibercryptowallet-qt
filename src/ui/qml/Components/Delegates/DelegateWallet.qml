@@ -4,7 +4,7 @@ import QtQuick.Controls.Material
 import FiberCrypto.UI as UI
 
 Item {
-    id: root
+    id: delegateWallet
 
     property bool emptyAddressVisible: true
     property bool expanded: false
@@ -20,7 +20,7 @@ Item {
     states: State {
         name: "expanded"
         when: expanded
-        PropertyChanges { target: root; height: itemDelegateMainButton.height + addressList.height }
+        PropertyChanges { target: delegateWallet; height: itemDelegateMainButton.height + addressList.height }
     }
     transitions: Transition {
         NumberAnimation { property: "height"; duration: 250; easing.type: Easing.OutQuint }
@@ -124,8 +124,7 @@ Item {
             ToolButton {
                 id: buttonAddAddress
 
-                x: 2
-                width: ~~(parent.width/4 + ~~parent.width/4 % 2)
+                width: ~~(parent.width/4) + ~~(parent.width/4) % 2
                 text: qsTr("Add address")
                 icon.source: "qrc:/images/icons/actions/add.svg"
                 Material.accent: Material.Teal
@@ -171,7 +170,7 @@ Item {
                 id: buttonEdit
 
                 x: buttonToggleEncryption.x + buttonToggleEncryption.width
-                width: buttonAddAddress.width
+                width: buttonAddAddress.width + 1 // this button's icon has a subpixel alignment issue when width is even
                 text: qsTr("Edit wallet")
                 icon.source: "qrc:/images/icons/actions/edit.svg"
                 Material.accent: Material.Blue

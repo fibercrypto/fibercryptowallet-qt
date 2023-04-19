@@ -23,7 +23,12 @@ Page {
 
         ToolButton {
             id: buttonSend
-            anchors.fill: parent
+
+            // this button's icon has a subpixel alignment issue when width is even
+            x: -1
+            width: parent.width + parent.width % 2 + 1
+            height: parent.height
+
             text: qsTr("Send")
             icon.source: "qrc:/images/icons/actions/send.svg"
 
