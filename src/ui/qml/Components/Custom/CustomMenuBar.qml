@@ -9,6 +9,7 @@ Rectangle {
     property color foregroundColor: Material.foregroundColor
     property color backgroundColor: Material.dialogColor
     property alias toolButtonTheme: toolButtonTheme
+    property bool showTestButton: false
 
     signal aboutRequested()
     signal aboutQtRequested()
@@ -30,6 +31,7 @@ Rectangle {
 
         Menu {
             title: qsTr("Help")
+            verticalPadding: 0
 
             UI.CustomMenuItem {
                 text: qsTr("About")
@@ -59,6 +61,9 @@ Rectangle {
             UI.CustomMenuItem {
                 text: qsTr("Tests")
                 iconSource: "qrc:/images/icons/menu/bug_report.svg"
+                visible: showTestButton
+                enabled: visible
+                height: visible ? implicitHeight : 0
 
                 onTriggered: testRequested()
             }
