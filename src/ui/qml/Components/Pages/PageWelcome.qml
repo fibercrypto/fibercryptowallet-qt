@@ -28,6 +28,7 @@ Page {
         height: implicitHeight * 2
 
         text: qsTr("Create new wallet")
+        font.pixelSize: Qt.application.font.pixelSize * 2
         Material.background: Material.accent
         Material.foreground: pageWelcome.Material.background
 
