@@ -18,10 +18,7 @@ Popup {
     bottomMargin: 12
     padding: 0
     topPadding: 6
-
-    onAboutToShow: {
-        textFieldFilter.forceActiveFocus()
-    }
+    focus: visible
 
     contentItem: Item {
         implicitWidth: customComboBoxPopupFilter.width
@@ -36,7 +33,7 @@ Popup {
             width: parent.width - 2*x
             placeholderText: qsTr("Filter")
             selectByMouse: true
-            focus: true
+            focus: customComboBoxPopupFilter.focus
         }
 
         ListView {

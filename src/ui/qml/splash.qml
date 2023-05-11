@@ -11,10 +11,12 @@ Window {
     visible: true
     flags: Qt.SplashScreen | Qt.WindowStaysOnTopHint
     color: "transparent" // this doesn't work in Qt 6.5.0, will be fixed in Qt 6.5.1
-    Material.theme: ~~settings.value("style/theme", Material.System)
+    Material.theme: settings.theme
 
     Settings {
         id: settings
+
+        property int theme: windowSplash.Material.theme
     }
 
     Dialog {
@@ -141,12 +143,15 @@ Window {
 
         Connections {
             target: loader.item
-            function onAfterAnimating() { dialogSplash.close(); loader.item.opacity = 1 }
+            // moved to onLoaded
+            // function onAfterAnimating() { dialogSplash.close(); loader.item.opacity = 1 }
         }
 
         onLoaded: {
             item.Material.theme = parent.Material.theme
             dialogSplash.standardButton(Dialog.Abort).enabled = false
+            dialogSplash.close()
+            loader.item.opacity = 1
         }
     }
 }

@@ -11,13 +11,11 @@ Rectangle {
     border.width: 2
     border.color: !control.enabled ? control.Material.hintTextColor
         : control.checked || control.down ? control.Material.accentColor : control.Material.secondaryTextColor
-    Behavior on border.color { ColorAnimation { } }
     color: "transparent"
 
     property T.AbstractButton control
 
     Rectangle {
-        id: rectangleInnerCircle
         x: (parent.width - width) / 2
         y: (parent.height - height) / 2
         width: indicator.control.checked ? 10 : 0

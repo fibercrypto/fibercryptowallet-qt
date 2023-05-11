@@ -15,7 +15,7 @@ Page {
         width: parent.width
         height: ~~(parent.height * 0.4)
 
-        source: "qrc:/images/banners/1.jpg"
+        source: "qrc:/images/banners/1" + (Material.theme === Material.Dark ? "-dark" : "") + ".jpg"
         fillMode: Image.PreserveAspectCrop
     }
 

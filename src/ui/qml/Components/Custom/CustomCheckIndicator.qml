@@ -7,8 +7,8 @@ Rectangle {
     property Item control
     property bool checked: control.checked
 
-    implicitWidth: 18
-    implicitHeight: 18
+    implicitWidth: 20
+    implicitHeight: 20
     radius: width / 2
     border.width: checked ? width / 2 : 2
     border.color: !control.enabled ? control.Material.hintTextColor : applicationWindow.Material.backgroundColor

@@ -7,6 +7,11 @@
 
 int main(int argc, char *argv[])
 {
+#ifdef Q_OS_ANDROID // debug only. allow full file access
+    freopen("/storage/emulated/0/fibercrypto-log.txt", "w", stdout);
+    freopen("/storage/emulated/0/fibercrypto-err.txt", "w", stderr);
+#endif
+
     QGuiApplication app(argc, argv);
     app.setOrganizationName("Simelo.Tech");
     app.setOrganizationDomain("simelo.tech");
@@ -28,7 +33,11 @@ int main(int argc, char *argv[])
     }
 
     QQmlApplicationEngine engine;
+#ifdef Q_OS_ANDROID
+const QUrl url(u"qrc:/FiberCryptoWallet/src/ui/qml/main.qml"_qs);
+#else
     const QUrl url(u"qrc:/FiberCryptoWallet/src/ui/qml/splash.qml"_qs);
+#endif
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
         if (!obj && url == objUrl)

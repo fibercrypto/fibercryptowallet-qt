@@ -25,7 +25,7 @@ Flickable {
     property alias numericStepSize: spinBox.stepSize
 
     contentWidth: width
-    contentHeight: labelPrompt.height + (textField.height ? textField.height + 12 : 4) + (textField2.height ? textField2.height + 12 : 4) + spinBox.height
+    contentHeight: Math.max(textField2.y + textField2.height, spinBox.y + spinBox.height) + 6
     implicitWidth: contentWidth
     implicitHeight: contentHeight
     clip: true
@@ -63,7 +63,7 @@ Flickable {
     SpinBox {
         id: spinBox
 
-        y: inputType === UI.DialogSimpleInput.InputType.TextNumber ? textField.y + textField.height + 6 : labelPrompt.y + labelPrompt.height + 6
+        y: inputType === UI.DialogSimpleInput.InputType.TextNumber ? textField.y + textField.height + 10 : labelPrompt.y + labelPrompt.height + 10
         width: visible ? parent.width : 0
         height: visible ? implicitHeight : 0
         visible: inputType !== UI.DialogSimpleInput.InputType.Text && inputType !== UI.DialogSimpleInput.InputType.TextText

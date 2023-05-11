@@ -1,3 +1,4 @@
+import QtCore
 import QtQuick
 import QtQuick.Controls.Material
 import QtQuick.Effects
@@ -12,9 +13,17 @@ ApplicationWindow {
     height: 580
     visible: true
     title: Qt.application.name
+    Material.theme: settings.theme
+    Material.accent: settings.accent
+
+    Settings {
+        id: settings
+
+        property int theme: Material.System
+        property int accent: Material.Blue
+    }
 
     onClosing: {
-        settings.setValue("style/theme", Material.theme)
         Qt.quit() // Why the app does not close without this?
     }
 
@@ -44,6 +53,10 @@ ApplicationWindow {
         onThemeChangeRequested: {
             popupThemeChange.visible = true
         }
+
+        onAccentColorChangeRequested: function (accentColor) {
+            settings.accent = accentColor
+        }
     }
 
     UI.ApplicationWindowContent {
@@ -60,7 +73,7 @@ ApplicationWindow {
         source: applicationWindowContent
 
         blurEnabled: blur > 0
-        blurMax: 150
+        blurMax: 128
         autoPaddingEnabled: false
 
         Behavior on blur { NumberAnimation {} }
@@ -114,6 +127,25 @@ ApplicationWindow {
         focus: true
     }
 
+    UI.DialogConfirmSeed {
+        id: dialogConfirmSeed
+
+        x: ~~((applicationWindow.width - width)/2)
+        y: ~~((applicationWindow.height - height)/2 - applicationWindow.menuBar.height)
+        width: applicationWindow.width > implicitWidth + 40 ? implicitWidth : applicationWindow.width - 40
+        height: applicationWindow.height > implicitHeight + 40 ? implicitHeight : applicationWindow.height - 40
+
+        dim: false
+
+        onAboutToShow: {
+            multiEffect.blur = 1
+        }
+
+        onAboutToHide: {
+            multiEffect.blur = 0
+        }
+    } // Dialog (confirm seed)
+
     // Other dialogs
     UI.DialogTransactionDetails {
         id: dialogTransactionDetails
@@ -121,6 +153,18 @@ ApplicationWindow {
         x: ~~((applicationWindow.width - width)/2)
         y: ~~((applicationWindow.height - height)/2 - menuBar.height)
         width: applicationWindow.width > 640 ? 640 - 40 : applicationWindow.width - 40
+        height: applicationWindow.height > implicitHeight + 40 ? implicitHeight : applicationWindow.height - 40
+
+        modal: true
+        focus: visible
+    }
+
+    UI.DialogQrCode {
+        id: dialogQrCode
+
+        x: ~~((applicationWindow.width - width)/2)
+        y: ~~((applicationWindow.height - height)/2 - menuBar.height)
+        width: applicationWindow.width > 240 ? 240 - 40 : applicationWindow.width - 40
         height: applicationWindow.height > implicitHeight + 40 ? implicitHeight : applicationWindow.height - 40
 
         modal: true
@@ -173,6 +217,7 @@ ApplicationWindow {
         z: dialogAboutLicense.z + 1 // above everything
 
         onAboutToShow: shaderThemeMask.scheduleUpdate()
+        onAboutToHide: settings.theme = applicationWindow.Material.theme
 
         padding: 0
         enter: null

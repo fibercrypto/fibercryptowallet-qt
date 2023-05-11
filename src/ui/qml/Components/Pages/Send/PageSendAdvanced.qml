@@ -4,7 +4,7 @@ import QtQuick.Controls.Material
 import FiberCrypto.UI as UI
 
 Page {
-    id: subPageSendAdvanced
+    id: pageSendAdvanced
 
     property bool activated: true
 
@@ -31,7 +31,7 @@ Page {
         x: labelWallet.x + labelWallet.width
         y: labelWallet.y + (labelWallet.height - height)/2
         icon.source: "qrc:/images/icons/actions/help.svg"
-        //icon.color: Material.color(Material.Grey)
+        opacity: comboBoxWalletsSendFrom.enabled ? 1.0 : 0.5
     }
 
     ComboBox {
@@ -125,7 +125,7 @@ Page {
         x: labelAddresses.x + labelAddresses.width
         y: labelAddresses.y + (labelAddresses.height - height)/2
         icon.source: "qrc:/images/icons/actions/help.svg"
-        icon.color: Material.color(Material.Grey)
+        opacity: comboBoxWalletsAddressesSendFrom.enabled ? 1.0 : 0.5
     }
     CheckBox {
         id: checkBoxAllAddresses
@@ -136,7 +136,7 @@ Page {
         checked: true
         onClicked: {
             console.log("Update here")
-            //subPageSendAdvanced.updateInfo()
+            //pageSendAdvanced.updateInfo()
         }
     }
 
@@ -234,7 +234,7 @@ Page {
         x: labelUnspentOutputs.x + labelUnspentOutputs.width
         y: ~~(labelUnspentOutputs.y + (labelUnspentOutputs.height - height)/2)
         icon.source: "qrc:/images/icons/actions/help.svg"
-        icon.color: Material.color(Material.Grey)
+        opacity: comboBoxWalletsUnspentOutputsSendFrom.enabled ? 1.0 : 0.5
     }
 
     CheckBox {
@@ -246,7 +246,7 @@ Page {
         checked: true
         onClicked: {
             console.log("Update here")
-            //subPageSendAdvanced.updateInfo()
+            //pageSendAdvanced.updateInfo()
         }
     }
 
@@ -341,7 +341,7 @@ Page {
         y: comboBoxWalletsUnspentOutputsSendFrom.y + comboBoxWalletsUnspentOutputsSendFrom.height + 10
         width: parent.width - 2*x
 
-        text: qsTr("With your current selection you can send up to <b>%1 SKY</b> and <b>%2 Coin Hours</b> (at least <b>%3 Coin Hours</b> must be used for the transaction fee)").arg(subPageSendAdvanced.upperCoinBound).arg(subPageSendAdvanced.upperAltCointBound).arg(subPageSendAdvanced.minFeeAmount)
+        text: qsTr("With your current selection you can send up to <b>%1 SKY</b> and <b>%2 Coin Hours</b> (at least <b>%3 Coin Hours</b> must be used for the transaction fee)").arg(pageSendAdvanced.upperCoinBound).arg(pageSendAdvanced.upperAltCointBound).arg(pageSendAdvanced.minFeeAmount)
         wrapMode: Text.Wrap
         horizontalAlignment: Text.AlignHCenter
     }
@@ -363,7 +363,7 @@ Page {
         x: labelDestinations.x + labelDestinations.width
         y: ~~(labelDestinations.y + (labelDestinations.height - height)/2)
         icon.source: "qrc:/images/icons/actions/help.svg"
-        icon.color: Material.color(Material.Grey)
+        opacity: listViewDestinations.enabled ? 1.0 : 0.5
     }
 
     ListView {
@@ -413,7 +413,7 @@ Page {
         x: labelCustomChangeAddress.x + labelCustomChangeAddress.width
         y: ~~(labelCustomChangeAddress.y + (labelCustomChangeAddress.height - height)/2)
         icon.source: "qrc:/images/icons/actions/help.svg"
-        icon.color: Material.color(Material.Grey)
+        opacity: buttonSelectCustomChangeAddress.enabled ? 1.0 : 0.5
     }
 
     Button {

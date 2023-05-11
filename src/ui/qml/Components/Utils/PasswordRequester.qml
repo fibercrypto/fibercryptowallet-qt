@@ -12,10 +12,6 @@ Item {
 
     signal passwordForgotten()
 
-    function forceTextFocus() {
-        textFieldPassword.forceActiveFocus()
-    }
-
     function clear() {
         textFieldPassword.clear()
     }
@@ -29,7 +25,7 @@ Item {
         placeholderText: qsTr("Password")
         selectByMouse: true
         echoMode: TextField.Password
-        focus: true
+        focus: parent.focus
     }
 
     Button {

@@ -203,10 +203,11 @@ Page {
         x: buttonSelectAddress.x + buttonSelectAddress.width + 6
         y: buttonSelectAddress.y + (buttonSelectAddress.height - height)/2
         width: parent.width - x
+
         font.family: "Code New Roman"
         placeholderText: qsTr("Destination address")
         selectByMouse: true
-        //Material.accent: abm.addressIsValid(text) ? parent.Material.accent : Material.color(Material.Red)
+        Material.accent: text/*abm.addressIsValid(text)*/ ? parent.Material.accent : (settings.accent === Material.Red ? "#ff0000" : parent.Material.Red)
         onTextChanged: {
             pageSendSimple.destinationAddress = text
         }

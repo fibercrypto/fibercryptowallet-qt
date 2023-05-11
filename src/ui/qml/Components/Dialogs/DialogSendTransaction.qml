@@ -22,10 +22,9 @@ Dialog {
 
     title: qsTr("Confirm transaction")
     standardButtons: Dialog.Ok | Dialog.Cancel
+    focus: visible
 
     onOpened: {
-        forceActiveFocus()
-        passwordRequester.forceTextFocus()
         standardButton(Dialog.Ok).enabled = passwordRequester.text !== "" || !showPasswordField
     }
 
@@ -38,6 +37,7 @@ Dialog {
         anchors.fill: parent
         clip: true
         contentHeight: itemRoot.height
+        focus: dialogSendTransaction.focus
 
         Item {
             id: itemRoot
@@ -81,6 +81,7 @@ Dialog {
 
                     y: labelMsgPassword.height
                     width: parent.width
+                    focus: parent.focus
 
                     onTextChanged: {
                         dialogSendTransaction.standardButton(Dialog.Ok).enabled = text !== "" || !showPasswordField

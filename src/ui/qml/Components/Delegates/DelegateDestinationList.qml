@@ -84,7 +84,7 @@ Item {
         placeholderText: qsTr("Destination address")
         text: address
         selectByMouse: true
-        Material.accent: text/*abm.addressIsValid(text)*/ ? parent.Material.accent : parent.Material.Red
+        Material.accent: text/*abm.addressIsValid(text)*/ ? parent.Material.accent : (settings.accent === Material.Red ? "#ff0000" : parent.Material.Red)
         onTextChanged: address = text
     }
 

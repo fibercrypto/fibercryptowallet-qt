@@ -75,6 +75,8 @@
         <file>icons/arrows/arrow_downward.svg</file>
         <file>icons/arrows/arrow_forward.svg</file>
         <file>icons/arrows/arrow_upward.svg</file>
+        <file>icons/arrows/arrow_drop_down.svg</file>
+        <file>icons/arrows/arrow_drop_up.svg</file>
         <file>icons/arrows/chevron_left.svg</file>
         <file>icons/arrows/chevron_less.svg</file>
         <file>icons/arrows/chevron_more.svg</file>
@@ -162,5 +164,6 @@
         <file>icons/new_release_available.svg</file>
         <file>icons/night_mode.svg</file>
         <file>banners/1.jpg</file>
+        <file>banners/1-dark.jpg</file>
     </qresource>
 </RCC>

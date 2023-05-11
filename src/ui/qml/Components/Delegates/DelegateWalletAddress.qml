@@ -10,11 +10,8 @@ Item {
     signal qrCodeRequested(var data)
 
     onQrCodeRequested: function(data) {
-        genQR(data)
-    }
-
-    function genQR(data) {
-        console.log("QR requested...")
+        dialogQrCode.dataToEncode = data
+        dialogQrCode.open()
     }
 
     implicitHeight: itemVisible ? 30 : 0
@@ -51,6 +48,7 @@ Item {
         x: toolButtonQR.width + 12
         y: ~~((parent.height - height)/2)
         width: !showOnlyAddresses ? toolButtonCopy.x - x : parent.width
+        elide: Label.ElideRight
         text: address // a role of the model
         font.family: "Code New Roman"
     }

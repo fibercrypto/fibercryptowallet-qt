@@ -13,7 +13,7 @@ Flickable {
     property alias encrypt: checkBoxEncryptWallet.checked
 
     contentWidth: width
-    contentHeight: textFieldConfirmWalletPassword.y + textFieldConfirmWalletPassword.height + 10
+    contentHeight: textFieldConfirmWalletPassword.y + textFieldConfirmWalletPassword.height + 14
     implicitWidth: contentWidth
     implicitHeight: contentHeight
     clip: true

@@ -46,6 +46,7 @@ Item {
             y: ~~((parent.height - height)/2)
             width: toolButtonLockIcon.x - x
             text: name // a role of the model
+            elide: Label.ElideRight
         }
 
         ToolButton {
@@ -127,6 +128,7 @@ Item {
                 width: ~~(parent.width/4) + ~~(parent.width/4) % 2
                 text: qsTr("Add address")
                 icon.source: "qrc:/images/icons/actions/add.svg"
+                display: buttonToggleEncryption.display
                 Material.accent: Material.Teal
                 Material.foreground: Material.accent
 
@@ -143,6 +145,7 @@ Item {
                 checkable: true
                 checked: emptyAddressVisible
                 icon.source: "qrc:/images/icons/toggle/visibility_" + (checked ? "on" : "off") + ".svg"
+                display: buttonToggleEncryption.display
                 Material.accent: Material.Indigo
                 Material.foreground: Material.Grey
 
@@ -159,6 +162,7 @@ Item {
                 checkable: true
                 checked: encryptionEnabled
                 icon.source: "qrc:/images/icons/toggle/lock_" + (checked ? "on" : "off") + ".svg"
+                display: width < 160 ? ToolButton.TextUnderIcon : ToolButton.TextBesideIcon
                 Material.accent: Material.Amber
                 Material.foreground: Material.Grey
 
@@ -173,6 +177,7 @@ Item {
                 width: buttonAddAddress.width + 1 // this button's icon has a subpixel alignment issue when width is even
                 text: qsTr("Edit wallet")
                 icon.source: "qrc:/images/icons/actions/edit.svg"
+                display: buttonToggleEncryption.display
                 Material.accent: Material.Blue
                 Material.foreground: Material.accent
 

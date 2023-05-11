@@ -75,7 +75,7 @@ Item {
                 width: parent.width
                 text: "<p><b>" + Qt.application.name + ' v' + Qt.application.version + "</b><br>"
                     + "<i>" + qsTr("Multi-coin cryptocurrency wallet") + "</i><br>"
-                    + "Copyright © 2022 " + Qt.application.organization + "</p><br>"
+                    + "Copyright © 2023 " + Qt.application.organization + "</p><br>"
 
                     + qsTr("<p><b>License terms and disclaimer</b><br>"
                     + "This program is free software; you can redistribute it and/or modify "

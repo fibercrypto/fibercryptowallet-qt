@@ -1,12 +1,13 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.19)
 
 project(FiberCryptoWallet VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(QT_ANDROID_BUILD_ALL_ABIS ON)
 
-find_package(Qt6 6.2 COMPONENTS Quick REQUIRED)
+find_package(Qt6 6.5 COMPONENTS Gui Quick Svg REQUIRED)
 
 # The C/C++ source files
 set(PROJECT_SOURCES
@@ -58,10 +59,12 @@ set(QML_SOURCES
     src/ui/qml/Components/Dialogs/DialogAboutQt.qml
     src/ui/qml/Components/Dialogs/DialogAboutLicense.qml
     src/ui/qml/Components/Dialogs/DialogAddWallet.qml
+    src/ui/qml/Components/Dialogs/DialogQrCode.qml
     src/ui/qml/Components/Dialogs/DialogSimpleInput.qml
-    src/ui/qml/Components/Dialogs/DialogTransactionDetails.qml
     src/ui/qml/Components/Dialogs/DialogSendTransaction.qml
+    src/ui/qml/Components/Dialogs/DialogTransactionDetails.qml
     src/ui/qml/Components/Dialogs/DialogSelectAddressByWallet.qml
+    src/ui/qml/Components/Dialogs/DialogConfirmSeed.qml
     src/ui/qml/Components/Dialogs/DialogContent/ContentAbout.qml
     src/ui/qml/Components/Dialogs/DialogContent/ContentAboutQt.qml
     src/ui/qml/Components/Dialogs/DialogContent/ContentAboutLicense.qml
@@ -128,6 +131,7 @@ target_include_directories(FiberCryptoWalletModelPlugin PRIVATE
     src/models/Wallet
 )
 
+
 # Target properties
 set_target_properties(appFiberCryptoWallet PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER simelo.fibercryptowallet.com
@@ -135,10 +139,21 @@ set_target_properties(appFiberCryptoWallet PROPERTIES
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
     MACOSX_BUNDLE TRUE
     WIN32_EXECUTABLE TRUE
+    QT_ANDROID_PACKAGE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/android
 )
+
+if (ANDROID)
+    include(${ANDROID_SDK_ROOT}/android_openssl/CMakeLists.txt)
+    set_target_properties(appFiberCryptoWallet PROPERTIES QT_ANDROID_EXTRA_LIBS "${ANDROID_EXTRA_LIBS}")
+endif()
 
 # Compile definitions
 target_compile_definitions(appFiberCryptoWallet
     PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 target_link_libraries(appFiberCryptoWallet
-    PRIVATE Qt6::Quick)
+    PRIVATE Qt6::Gui Qt6::Quick Qt6::Svg)
+
+install(TARGETS appFiberCryptoWallet
+    BUNDLE DESTINATION .
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+)

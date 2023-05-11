@@ -15,11 +15,10 @@ Dialog {
     standardButtons: Dialog.Cancel
 
     closePolicy: Dialog.CloseOnPressOutside
-    onAboutToShow: {
-        textFieldFilterWallet.forceActiveFocus()
-    }
+    focus: visible
 
     Item {
+        id: itemContent
         implicitWidth: 300
         implicitHeight: listViewWalletsAddresses.y + listViewWalletsAddresses.height
         width: parent.width
@@ -32,7 +31,7 @@ Dialog {
             y: 20
             width: parent.width - 2*x
             placeholderText: qsTr("Filter by wallet name")
-            focus: true
+            focus: dialogSelectAddressByWallet.focus
             selectByMouse: true
         }
 

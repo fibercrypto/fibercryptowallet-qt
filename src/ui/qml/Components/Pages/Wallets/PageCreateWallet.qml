@@ -26,6 +26,7 @@ Page {
     }
 
     signal finished()
+    signal cancelled()
 
     Shortcut {
         sequences: [StandardKey.Forward, "Enter", "Return"]
@@ -54,15 +55,17 @@ Page {
             bottomInset: 0
 
             text: qsTr("Back")
-            enabled: stackViewWalletCreationWizard.depth > 1
             layer.enabled: false
             Material.elevation: 0
             Material.roundedScale: Material.NotRounded
             Material.background: Material.accentColor
 
             onClicked: {
-                console.log("Previous wizard page")
-                stackViewWalletCreationWizard.pop()
+                if (stackViewWalletCreationWizard.depth > 1) {
+                    stackViewWalletCreationWizard.pop()
+                } else {
+                    pageCreateWallet.cancelled()
+                }
             }
         }
 
@@ -80,10 +83,9 @@ Page {
             layer.enabled: false
             Material.elevation: 0
             Material.roundedScale: Material.NotRounded
-            Material.background: stackViewWalletCreationWizard.currentItem.warnCurrentInput ? Material.Red : Material.accentColor
+            Material.background: stackViewWalletCreationWizard.currentItem.warnCurrentInput ? (settings.theme === Material.Red ? "#ff0000" : Material.Red) : Material.accentColor
 
             onClicked: {
-                console.log("Next wizard page")
                 if (stackViewWalletCreationWizard.depth < 3) {
                     stackViewWalletCreationWizard.push([componentWizardPage1, componentWizardPage2, componentWizardPage3][stackViewWalletCreationWizard.depth])
                 } else {
@@ -196,100 +198,27 @@ Page {
                     }
                 }
 
+                Connections {
+                    target: dialogConfirmSeed
+
+                    function onAccepted() {
+                        buttonConfirmSeed.checked = true
+                    }
+
+                    function onRejected() {
+                        buttonConfirmSeed.checked = false
+                    }
+                }
+
                 onClicked: {
                     checked = false
-                    multiEffect.blur = 1
+                    dialogConfirmSeed.word1Number = seedGenerator.generateSeed12 ? 2  :  4
+                    dialogConfirmSeed.word2Number = seedGenerator.generateSeed12 ? 5  : 10
+                    dialogConfirmSeed.word3Number = seedGenerator.generateSeed12 ? 9  : 17
+                    dialogConfirmSeed.word4Number = seedGenerator.generateSeed12 ? 11 : 23
                     dialogConfirmSeed.open()
                 }
             } // Button (confirm seed)
-
-            Dialog {
-                id: dialogConfirmSeed
-
-                x: ~~((applicationWindow.width - width)/2)
-                y: ~~((applicationWindow.height - height)/2 - applicationWindow.menuBar.height)
-                width: applicationWindow.width > implicitWidth + 40 ? implicitWidth : applicationWindow.width - 40
-                height: applicationWindow.height > implicitHeight + 40 ? implicitHeight : applicationWindow.height - 40
-                title: qsTr("Confirm secret recovery phrase")
-                standardButtons: Dialog.Ok | Dialog.Cancel
-                dim: false
-
-                Binding {
-                    target: { dialogConfirmSeed.visible; return dialogConfirmSeed.standardButton(Dialog.Ok) }
-                    property: "enabled"
-                    value: textFieldTopLeft.text === seedGenerator.seed.split(' ')[textFieldTopLeft.wordIndex]
-                    && textFieldTopRight.text === seedGenerator.seed.split(' ')[textFieldTopRight.wordIndex]
-                    && textFieldBottomLeft.text === seedGenerator.seed.split(' ')[textFieldBottomLeft.wordIndex]
-                    && textFieldBottomRight.text === seedGenerator.seed.split(' ')[textFieldBottomRight.wordIndex]
-                }
-
-                onAccepted: {
-                    buttonConfirmSeed.checked = true
-                }
-
-                onRejected: {
-                    buttonConfirmSeed.checked = false
-                }
-
-                onAboutToShow: {
-                    textFieldTopLeft.forceActiveFocus()
-                }
-
-                onAboutToHide: {
-                    multiEffect.blur = 0
-                }
-
-                Item {
-                    id: itemConfirmSeed
-
-                    implicitWidth: seedGenerator.width
-                    implicitHeight: textFieldTopLeft.height * 2 + 6
-
-                    UI.TextField {
-                        id: textFieldTopLeft
-
-                        property int wordIndex: seedGenerator.generateSeed12 ? 1 : 3
-
-                        width: ~~(parent.width/2) - 5
-
-                        placeholderText: qsTr("Word #") + (wordIndex + 1)
-                    }
-
-                    UI.TextField {
-                        id: textFieldTopRight
-
-                        property int wordIndex: seedGenerator.generateSeed12 ? 4 : 9
-
-                        x: parent.width - textFieldTopLeft.width
-                        width: textFieldTopLeft.width
-
-                        placeholderText: qsTr("Word #") + (wordIndex + 1)
-                    }
-
-                    UI.TextField {
-                        id: textFieldBottomLeft
-
-                        property int wordIndex: seedGenerator.generateSeed12 ? 8 : 16
-
-                        y: textFieldTopLeft.y + textFieldTopLeft.height + 6
-                        width: textFieldTopLeft.width
-
-                        placeholderText: qsTr("Word #") + (wordIndex + 1)
-                    }
-
-                    UI.TextField {
-                        id: textFieldBottomRight
-
-                        property int wordIndex: seedGenerator.generateSeed12 ? 10 : 22
-
-                        x: textFieldTopRight.x
-                        y: textFieldBottomLeft.y
-                        width: textFieldTopLeft.width
-
-                        placeholderText: qsTr("Word #") + (wordIndex + 1)
-                    }
-                } // Item (confirm seed)
-            } // Dialog (confirm seed)
         } // Item (wizard page 2)
     } // Component (wizard page 2)
 
@@ -366,8 +295,7 @@ Page {
                 selectByMouse: true
                 echoMode: TextField.Password
                 enabled: radioButtonYes.checked
-                opacity: enabled ? 1 : 0.5
-                Behavior on opacity { NumberAnimation {} }
+                opacity: 1 - labelEncryptWalletWarning.opacity
 
                 onAccepted: {
                     textFieldConfirmWalletPassword.forceActiveFocus()

@@ -59,6 +59,10 @@ Item {
             onFinished: {
                 stackViewPages.replace(componentPageOverview)
             }
+
+            onCancelled: {
+                stackViewPages.replace(componentPageWelcome)
+            }
         }
     }
 
