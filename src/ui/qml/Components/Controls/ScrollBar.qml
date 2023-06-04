@@ -1,3 +1,6 @@
+// Copyright (C) 2017 The Qt Company Ltd.
+// SPDX-License-Identifier: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+
 import QtQuick
 import QtQuick.Controls.impl
 import QtQuick.Templates as T
@@ -15,8 +18,8 @@ T.ScrollBar {
     minimumSize: orientation === Qt.Horizontal ? height / width : width / height
 
     contentItem: Rectangle {
-        implicitWidth: 6
-        implicitHeight: 6
+        implicitWidth: 6 // modified
+        implicitHeight: 6 // modified
 
         radius: width / 2
         color: control.pressed ? control.palette.dark : control.palette.mid

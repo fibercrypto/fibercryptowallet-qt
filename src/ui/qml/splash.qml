@@ -30,8 +30,10 @@ Window {
         contentHeight: imageLogo.height + labelApplicationName.height + labelApplicationDescription.height + busyIndicatorLoading.height - 7
 
         visible: true
+        dim: false
         closePolicy: Dialog.NoAutoClose
         standardButtons: Dialog.Abort
+        Material.elevation: 20
 
         Component.onCompleted: {
             standardButton(Dialog.Abort).Material.accent = Material.Red

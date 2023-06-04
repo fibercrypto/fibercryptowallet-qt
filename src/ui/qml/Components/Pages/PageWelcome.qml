@@ -29,6 +29,7 @@ Page {
 
         text: qsTr("Create new wallet")
         font.pixelSize: Qt.application.font.pixelSize * 2
+        font.capitalization: Font.AllUppercase
         Material.background: Material.accent
         Material.foreground: pageWelcome.Material.background
 
@@ -45,6 +46,7 @@ Page {
         width: parent.width > 540 ? 540 - 40 : parent.width - 40
 
         text: qsTr("Load existing wallet")
+        font.capitalization: Font.AllUppercase
         flat: true
         highlighted: true
 

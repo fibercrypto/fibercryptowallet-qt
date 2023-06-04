@@ -1,3 +1,6 @@
+// Copyright (C) 2017 The Qt Company Ltd.
+// SPDX-License-Identifier: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+
 import QtQuick
 import QtQuick.Window
 import QtQuick.Controls.impl
@@ -5,7 +8,7 @@ import QtQuick.Templates as T
 import QtQuick.Controls.Material
 import QtQuick.Controls.Material.impl
 
-import FiberCrypto.UI as UI
+import FiberCrypto.UI as UI // added. consider permanently adding a custom MenuItem instead
 
 T.ComboBox {
     id: control
@@ -80,6 +83,7 @@ T.ComboBox {
         transformOrigin: Item.Top
         topMargin: 12
         bottomMargin: 12
+        verticalPadding: 8
 
         Material.theme: control.Material.theme
         Material.accent: control.Material.accent
