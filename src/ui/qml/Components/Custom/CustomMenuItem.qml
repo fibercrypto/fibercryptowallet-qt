@@ -1,5 +1,5 @@
 import QtQuick
-import QtQuick.Controls
+import QtQuick.Controls.Material
 
 MenuItem {
     property alias iconSource: imageIcon.source

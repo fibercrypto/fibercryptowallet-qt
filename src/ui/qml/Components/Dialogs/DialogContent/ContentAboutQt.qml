@@ -1,12 +1,12 @@
 import QtQuick
-import QtQuick.Controls
+import QtQuick.Controls.Material
 
 import FiberCrypto.UI as UI
 
 Item {
     id: aboutQt
 
-    readonly property string qtVersionString: "6.5.0"
+    readonly property string qtVersionString: "6.5.1"
 
     implicitWidth: imageQtLogo.width + labelAboutQt.implicitWidth > 400 ? 400 : imageQtLogo.width + labelAboutQt.implicitWidth
     implicitHeight: flickable.contentHeight

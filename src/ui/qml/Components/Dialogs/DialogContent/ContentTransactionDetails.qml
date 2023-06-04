@@ -165,7 +165,7 @@ Item {
             Material.foreground: Material.Grey
             model: listModelInputs
             delegate: UI.DelegateInputOutput {
-                width: parent.width
+                width: listViewInputs.width
             }
 
             ScrollBar.vertical: UI.ScrollBar { }
@@ -192,7 +192,7 @@ Item {
             Material.foreground: Material.Grey
             model: listModelOutputs
             delegate: UI.DelegateInputOutput {
-                width: parent.width
+                width: listViewOutputs.width
             }
 
             ScrollBar.vertical: UI.ScrollBar { }
