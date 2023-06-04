@@ -174,7 +174,7 @@ Item {
                 id: buttonEdit
 
                 x: buttonToggleEncryption.x + buttonToggleEncryption.width
-                width: buttonAddAddress.width + 1 // this button's icon has a subpixel alignment issue when width is even
+                width: buttonAddAddress.width
                 text: qsTr("Edit wallet")
                 icon.source: "qrc:/images/icons/actions/edit.svg"
                 display: buttonToggleEncryption.display

@@ -65,16 +65,13 @@ ListView {
         ToolButton {
             id: buttonAddWallet
 
-            // this button's icon has a subpixel alignment issue when width is even
-            x: -1
-            width: parent.width + parent.width % 2 + 1
+            width: parent.width + parent.width % 2
             height: parent.height
 
             text: qsTr("Add wallet")
             icon.source: "qrc:/images/icons/actions/add.svg"
 
             onClicked: {
-                console.log("Add wallet")
                 dialogAddWallet.open()
             }
         }
