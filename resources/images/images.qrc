@@ -127,14 +127,13 @@
         <file>icons/menu/more_horizontal.svg</file>
         <file>icons/menu/more_vertical.svg</file>
         <file>icons/menu/settings.svg</file>
-        <file>icons/status/status_error_dark.svg</file>
-        <file>icons/status/status_error_light.svg</file>
-        <file>icons/status/status_help_dark.svg</file>
-        <file>icons/status/status_help_light.svg</file>
-        <file>icons/status/status_info_dark.svg</file>
-        <file>icons/status/status_info_light.svg</file>
-        <file>icons/status/status_warn_dark.svg</file>
-        <file>icons/status/status_warn_light.svg</file>
+        <file>icons/status/status_debug.svg</file>
+        <file>icons/status/status_error.svg</file>
+        <file>icons/status/status_fatal.svg</file>
+        <file>icons/status/status_help.svg</file>
+        <file>icons/status/status_info.svg</file>
+        <file>icons/status/status_panic.svg</file>
+        <file>icons/status/status_warn.svg</file>
         <file>icons/toggle/checkbox_off.svg</file>
         <file>icons/toggle/checkbox_on.svg</file>
         <file>icons/toggle/flag.svg</file>

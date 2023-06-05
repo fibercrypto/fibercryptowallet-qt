@@ -33,6 +33,9 @@ ApplicationWindow {
         foregroundColor: applicationWindowContent.currentPage === UI.ApplicationWindowContent.AvailablePages.CreateWalletPage ? "#ffffff" : applicationWindow.Material.foreground
         backgroundColor: applicationWindowContent.currentPage === UI.ApplicationWindowContent.AvailablePages.CreateWalletPage ? Qt.alpha(customMenuBar.Material.dialogColor, 0.2) : customMenuBar.Material.dialogColor
 
+        onPreferencesRequested: {
+            applicationWindowContent.openPreferences()
+        }
         onAboutRequested: {
             dialogAbout.open()
         }

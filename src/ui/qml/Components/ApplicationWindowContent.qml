@@ -6,9 +6,18 @@ import FiberCrypto.UI as UI
 Item {
     id: applicationWindowContent
 
-    enum AvailablePages { CreateWalletPage,  OverviewPage, TestPage }
+    enum AvailablePages { CreateWalletPage,  OverviewPage, PreferencesPage, TestPage }
 
     property int currentPage: ApplicationWindowContent.AvailablePages.CreateWalletPage
+
+    function openPreferences() {
+        if (currentPage === ApplicationWindowContent.AvailablePages.TestPage) {
+            stackViewPages.pop()
+        } else {
+            applicationWindowContent.currentPage = ApplicationWindowContent.AvailablePages.PreferencesPage
+            stackViewPages.push(componentPagePreferences)
+        }
+    }
 
     function testPage() {
         if (stackViewPages.depth > 1) {
@@ -71,6 +80,14 @@ Item {
 
         UI.PageOverview {
             id: pageOverview
+        }
+    }
+
+    Component {
+        id: componentPagePreferences
+
+        UI.PagePreferences {
+            id: pagePreferences
         }
     }
 

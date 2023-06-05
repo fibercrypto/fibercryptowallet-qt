@@ -11,6 +11,7 @@ Rectangle {
     property alias toolButtonTheme: toolButtonTheme
     property bool showTestButton: false
 
+    signal preferencesRequested()
     signal aboutRequested()
     signal aboutQtRequested()
     signal licenseRequested()
@@ -32,6 +33,19 @@ Rectangle {
         Menu {
             title: qsTr("Help")
             verticalPadding: 0
+
+            UI.CustomMenuItem {
+                text: qsTr("Preferences")
+                iconSource: "qrc:/images/icons/menu/settings.svg" // svg
+
+                onTriggered: preferencesRequested()
+                Shortcut {
+                    sequence: StandardKey.Preferences
+                    onActivated: preferencesRequested()
+                }
+            }
+
+            MenuSeparator { }
 
             UI.CustomMenuItem {
                 text: qsTr("About")
@@ -189,7 +203,7 @@ Rectangle {
                 } // Item (delegate)
 
                 ScrollBar.vertical: UI.ScrollBar {}
-            } // GridView
-        } // Popup
-    }
+            } // GridView (accent)
+        } // Popup (accent)
+    } // Button (theme)
 }

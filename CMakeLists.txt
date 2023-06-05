@@ -39,6 +39,7 @@ set(QML_SOURCES
     src/ui/qml/Components/ApplicationWindowContent.qml
     src/ui/qml/Components/Pages/PageWelcome.qml
     src/ui/qml/Components/Pages/PageOverview.qml
+    src/ui/qml/Components/Pages/PagePreferences.qml
     src/ui/qml/Components/Pages/Wallets/PageWallets.qml
     src/ui/qml/Components/Pages/Wallets/PageCreateWallet.qml
     src/ui/qml/Components/Pages/Send/PageSend.qml
