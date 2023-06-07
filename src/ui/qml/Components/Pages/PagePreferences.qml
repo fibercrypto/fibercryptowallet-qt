@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls.Material
+import QtCore
 
 import FiberCrypto.UI as UI
 
@@ -12,27 +13,30 @@ Page {
     // BUG: About the wallet path: What happens on Windows?
     // TODO: Consider using `QtCore.StandardPaths.standardLocations(StandardPaths.AppDataLocation)`
 
+    // This file requires access to `settings` item in the `ApplicationWindow` object,
+    // which is provided for being its child
+
     // These are defaults. Will be restored when the "DEFAULT" button is clicked
-    readonly property string defaultWalletPath: ""//configManager.getDefaultValue("skycoin/walletSource/1/Source")
-    readonly property bool defaultIsLocalWalletEnv: true//configManager.getDefaultValue("skycoin/walletSource/1/SourceType") === "local"
-    readonly property string defaultNodeUrl: ""//configManager.getDefaultValue("skycoin/node/address")
-    readonly property int defaultLogLevel: 0//~~configManager.getDefaultValue("skycoin/log/level")
-    readonly property int defaultLogOutput: 0//~~configManager.getDefaultValue("skycoin/log/output")
-    readonly property string defaultLogOutputFile: ""//configManager.getDefaultValue("skycoin/log/outputFile")
-    readonly property int defaultCacheLifeTime: 10000//configManager.getDefaultValue("global/cache/lifeTime")
-    readonly property int defaultCacheUpdateTime: 1000//configManager.getDefaultValue("global/cache/updateTime")
+    readonly property string defaultWalletPath: ""
+    readonly property bool defaultIsLocalWalletEnv: true
+    readonly property string defaultNodeUrl: ""
+    readonly property int defaultLogLevel: 0
+    readonly property int defaultLogOutput: 0
+    readonly property string defaultLogOutputFile: ""
+    readonly property int defaultCacheLifeTime: 10000
+    readonly property int defaultCacheUpdateTime: 1000
 
     // These are the saved settings, must be applied when the settings are opened or when
     // the user clicks "RESET" and updated when the user clicks "APPLY"
     // TODO: This should be **binded** to backend properties
-    property string savedWalletPath: ""//configManager.getValue("skycoin/walletSource/1/Source")
-    property bool savedIsLocalWalletEnv: true//configManager.getValue("skycoin/walletSource/1/SourceType") === "local"
-    property url savedNodeUrl: ""//configManager.getValue("skycoin/node/address")
-    property int savedLogLevel: 0//~~configManager.getValue("skycoin/log/level")
-    property int savedLogOutput: 0//~~configManager.getValue("skycoin/log/output")
-    property string savedLogOutputFile: ""//configManager.getDefaultValue("skycoin/log/outputFile")
-    property int savedLifeTime: 10000//configManager.getValue("global/cache/lifeTime")
-    property int savedUpdateTime: 1000//configManager.getValue("global/cache/updateTime")
+    property string savedWalletPath: settings.value("skycoin/walletSource/1/Source", "")
+    property bool savedIsLocalWalletEnv: settings.value("skycoin/walletSource/1/SourceType", "local") === "local"
+    property url savedNodeUrl: settings.value("skycoin/node/address", "")
+    property int savedLogLevel: ~~settings.value("skycoin/log/level", 0)
+    property int savedLogOutput: ~~settings.value("skycoin/log/output", 0)
+    property string savedLogOutputFile: settings.value("skycoin/log/outputFile", "")
+    property int savedLifeTime: settings.value("global/cache/lifeTime", 10000)
+    property int savedUpdateTime: ~~~~settings.value("global/cache/updateTime", 1000)
 
     // QtObject{
     //     id: logLevel
@@ -56,32 +60,27 @@ Page {
     }
 
     function saveCurrentSettings() {
-        /*
-        configManager.setValue("skycoin/walletSource/1/Source", walletPath)
-        configManager.setValue("skycoin/walletSource/1/SourceType", isLocalWalletEnv ? "local" : "remote")
-        configManager.setValue("skycoin/node/address", nodeUrl)
-        configManager.setValue("skycoin/log/level", logLevel)
-        configManager.setValue("skycoin/log/output", logOutput)
-        configManager.setValue("global/cache/updateTime", cacheUpdateTime)
-        configManager.setValue("skycoin/log/outputFile", logOutputFile)
-        configManager.setValue("global/cache/lifeTime", cacheLifeTime)
-        */
+        settings.setValue("skycoin/walletSource/1/Source", walletPath)
+        settings.setValue("skycoin/walletSource/1/SourceType", isLocalWalletEnv ? "local" : "remote")
+        settings.setValue("skycoin/node/address", nodeUrl)
+        settings.setValue("skycoin/log/level", logLevel)
+        settings.setValue("skycoin/log/output", logOutput)
+        settings.setValue("global/cache/updateTime", cacheUpdateTime)
+        settings.setValue("skycoin/log/outputFile", logOutputFile)
+        settings.setValue("global/cache/lifeTime", cacheLifeTime)
         loadSavedSettings()
     }
 
     function loadSavedSettings() {
-        /*
-        walletPath = savedWalletPath = configManager.getValue("skycoin/walletSource/1/Source")
-        isLocalWalletEnv = savedIsLocalWalletEnv = configManager.getValue("skycoin/walletSource/1/SourceType") === "local"
-        nodeUrl = savedNodeUrl = configManager.getValue("skycoin/node/address")
-        logLevel = savedLogLevel = ~~configManager.getValue("skycoin/log/level")
-        logOutput = savedLogOutput = ~~configManager.getValue("skycoin/log/output")
-        logOutputFile = savedLogOutputFile = configManager.getValue("skycoin/log/outputFile")
-        cacheLifeTime = savedLifeTime = configManager.getValue("global/cache/lifeTime")
-        cacheUpdateTime = savedUpdateTime = configManager.getValue("global/cache/updateTime")
+        walletPath = savedWalletPath = settings.value("skycoin/walletSource/1/Source", "")
+        isLocalWalletEnv = savedIsLocalWalletEnv = settings.value("skycoin/walletSource/1/SourceType", "local") === "local"
+        nodeUrl = savedNodeUrl = settings.value("skycoin/node/address", "")
+        logLevel = savedLogLevel = ~~settings.value("skycoin/log/level", 0)
+        logOutput = savedLogOutput = ~~settings.value("skycoin/log/output", 0)
+        logOutputFile = savedLogOutputFile = settings.value("skycoin/log/outputFile", "")
+        cacheLifeTime = savedLifeTime = ~~settings.value("global/cache/lifeTime", 10000)
+        cacheUpdateTime = savedUpdateTime = ~~settings.value("global/cache/updateTime", 1000)
 
-        walletManager.updateAll()
-        */
         updateFooterButtonsStatus()
     }
 
